@@ -1,0 +1,14 @@
+<?php
+
+class BicicletaModel{
+    public $enlace;
+
+   
+    public function __construct() {
+        
+        $this->enlace=new MySqlConnect();
+       
+    }
+    
+}
+?>
