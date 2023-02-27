@@ -10,16 +10,11 @@
 require_once "models/MySQLConnect.php";
 
 //Agregar todos los modelos
-require_once "models/CategoriaModel.php";
-require_once "models/TallaModel.php";
-require_once "models/UsuarioModel.php";
-require_once "models/BicicletaModel.php";
-require_once "models/AlquilerModel.php";
+require_once "models/DoctorsModel.php";
 
 
 //Agregar todos los controladores
-require_once "controllers/BicicletaController.php";
-require_once "controllers/AlquilerController.php";
+require_once "controllers/DoctorsController.php";
     
     require_once "controllers/RoutesController.php";
     $index=new RoutesController();
