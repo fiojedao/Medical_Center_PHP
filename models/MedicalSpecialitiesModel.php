@@ -1,16 +1,16 @@
 <?php
 
-class DoctorsModel{
+class MedicalSpecialitiesModels{
     public $enlace;
     public function __construct() {
         $this->enlace=new MySqlConnect();
     }
 
-    /*list */
+    /*List*/
     public function all(){
         try {
             //Consulta sql
-            $vSql = "SELECT * FROM doctors;";
+            $vSql = "SELECT * FROM medical_specialities;";
             $this->enlace->connect();
             //Ejecutar la consulta
             $vResultado = $this->enlace->ExecuteSQL($vSql);
@@ -22,11 +22,11 @@ class DoctorsModel{
         }
     }
 
-    /*get by id*/
+    /*Get bt id*/
     public function get($id)
     {
         try {
-            $vSql = "SELECT * FROM doctors WHERE doctor_id=$id";
+            $vSql = "SELECT * FROM medical_specialities WHERE id=$id";
             $this->enlace->connect();
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
 
@@ -36,12 +36,12 @@ class DoctorsModel{
         }
     }
 
-    /* Crear doctors */
+    /* Crear medical_specialities */
     public function create($objeto) {
         try {
             $this->enlace->connect();
-			$sql = "INSERT INTO doctors (doctor_id, name, specialty_code)
-            VALUES('$objeto->doctor_id','$objeto->name','$objeto->specialty_code')";
+			$sql = "INSERT INTO medical_specialities (code, name, description)
+            VALUES('$objeto->code','$objeto->name','$objeto->description')";
 			
 			$vResultado = $this->enlace->executeSQL_DML_last($sql);
 
@@ -51,11 +51,11 @@ class DoctorsModel{
 		}
     }
 
-    /* Update doctors */
+    /* Update medical_specialities */
     public function update($id, $objeto) {
         try {
             $this->enlace->connect();
-			$sql = "UPDATE doctors SET name ='$objeto->name',specialty_code ='$objeto->specialty_code',updated_date = CURRENT_TIMESTAMP() Where doctor_id=$id";
+			$sql = "UPDATE medical_specialities SET code ='$objeto->code',name ='$objeto->name',description ='$objeto->description',updated_date = CURRENT_TIMESTAMP() Where id=$id";
 			
 			$cResults = $this->enlace->executeSQL_DML($sql);
 
