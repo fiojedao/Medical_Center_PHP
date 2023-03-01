@@ -63,55 +63,57 @@ CREATE TABLE user_preferences (
 );
 
 CREATE TABLE medical_specialities (
-  id INT NOT NULL AUTO_INCREMENT,
-  code VARCHAR(50) NOT NULL,
+  code_id VARCHAR(20) NOT NULL,
   name VARCHAR(50) NOT NULL,
   description VARCHAR(250) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id, code)
+  PRIMARY KEY (code_id)
 );
 
 -- Tabla para gestionar los médicos
 CREATE TABLE doctors (
   doctor_id VARCHAR(45) NOT NULL,
   name VARCHAR(100) NOT NULL,
-  specialty_code VARCHAR(50) NOT NULL,
+  medical_specialities_code VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (doctor_id, specialty_code)
+  PRIMARY KEY (doctor_id),
+  FOREIGN KEY (medical_specialities_code) REFERENCES medical_specialities(code_id)
+);
+
+
+-- Tabla para gestionar las enfermedades
+CREATE TABLE diseases (
+  code_id VARCHAR(20) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (code_id)
+);
+
+-- Tabla para gestionar las alergias
+CREATE TABLE allergies (
+  code_id VARCHAR(20) NOT NULL PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
+  medical_records_id INT NOT NULL,
+  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Tabla para gestionar los registros médicos
 CREATE TABLE medical_records (
-  medical_records_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id VARCHAR(45) NOT NULL,
-  doctor_id VARCHAR(45) NOT NULL,
+  medical_records_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id VARCHAR(45),
+  doctor_id VARCHAR(45),
+  diseases_code_id VARCHAR(20) NOT NULL,
+  allergies_code_id VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users(user_id),
-  FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
-);
-
-
--- Tabla para gestionar las alergias
-CREATE TABLE allergies (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  medical_records_id INT NOT NULL,
-  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (medical_records_id) REFERENCES medical_records(medical_records_id)
-);
-
--- Tabla para gestionar las enfermedades
-CREATE TABLE diseases (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  medical_records_id INT NOT NULL,
-  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (medical_records_id) REFERENCES medical_records(medical_records_id)
+  CONSTRAINT diseases_code_id FOREIGN KEY (diseases_code_id) REFERENCES diseases(code_id),
+  CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
+  CONSTRAINT doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id),
+  CONSTRAINT allergies_code_id FOREIGN KEY (allergies_code_id) REFERENCES allergies(code_id)
 );
 
 -- Gestiona los registro de medicamentos que utilizara stock
@@ -212,6 +214,7 @@ CREATE TABLE appointments_times (
   FOREIGN KEY (appointments_id) REFERENCES appointments(id)
 );
 
+/*
 -- Indices para mejorar la eficiencia en las búsquedas
 CREATE INDEX idx_users_auth_username ON users_auth (username);
 CREATE INDEX idx_user_sessions_user_id ON user_sessions (user_id);
@@ -221,4 +224,4 @@ CREATE INDEX idx_allergies_medical_records_id ON allergies (medical_records_id);
 CREATE INDEX idx_diseases_medical_records_id ON diseases (medical_records_id);
 CREATE INDEX idx_medications_user_medical_records_id ON medications_user (medical_records_id);
 CREATE INDEX idx_surgeries_medical_records_id ON surgeries (medical_records_id);
-CREATE INDEX idx_appointments_medical_records_id ON appointments (medical_records_id);
+CREATE INDEX idx_appointments_medical_records_id ON appointments (medical_records_id);*/
