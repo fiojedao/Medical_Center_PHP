@@ -26,10 +26,11 @@ class MedicalSpecialitiesModel{
     public function get($id)
     {
         try {
+
             $vSql = "SELECT * FROM medical_specialities WHERE id=$id";
             $this->enlace->connect();
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
-
+          
             return $vResultado;
         } catch ( Exception $e ) {
             die ( $e->getMessage () );
