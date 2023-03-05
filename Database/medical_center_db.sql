@@ -31,7 +31,7 @@ CREATE TABLE users (
   lastname_one VARCHAR(45) NOT NULL,
   lastname_two VARCHAR(45) NOT NULL,
   genre VARCHAR(20) NOT NULL,
-  direccion VARCHAR(255) NOT NULL,
+  address VARCHAR(255) NOT NULL,
   date_of_bith DATETIME NOT NULL,
   contact VARCHAR(20) NOT NULL,
   emergency_contact VARCHAR(20) NOT NULL,
