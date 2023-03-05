@@ -2,14 +2,26 @@
 
 class UserSessionModel{
     public $enlace;
+    protected $session_token;
 
-   
     public function __construct() {
-        
         $this->enlace=new MySqlConnect();
-       
+        session_start();
+        $this->generate_token();
     }
 
+    public function get_session_token() {
+        return $this->session_token;
+    }
+
+    protected function generate_token() {
+        $this->session_token = bin2hex(random_bytes(32));
+        $_SESSION['session_token'] = $this->session_token;
+    }
+
+    public function validate_token($token) {
+        return $token === $this->session_token;
+    }
 
     public function all(){
         try {

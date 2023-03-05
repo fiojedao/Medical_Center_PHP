@@ -1,13 +1,13 @@
 {
 	"info": {
 		"_postman_id": "6e5fecfb-1203-47a4-9399-68eaebc05a9c",
-		"name": "API Bicicleta",
+		"name": "API Medical_Center php",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "7418211"
 	},
 	"item": [
 		{
-			"name": "Bicicleta",
+			"name": "Medical_Center",
 			"item": [
 				{
 					"name": "Lista bicicletas",
