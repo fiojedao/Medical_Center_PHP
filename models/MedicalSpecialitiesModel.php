@@ -1,6 +1,6 @@
 <?php
 
-class MedicalSpecialitiesModels{
+class MedicalSpecialitiesModel{
     public $enlace;
     public function __construct() {
         $this->enlace=new MySqlConnect();

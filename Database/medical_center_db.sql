@@ -94,11 +94,11 @@ CREATE TABLE diseases (
 
 -- Tabla para gestionar las alergias
 CREATE TABLE allergies (
-  code_id VARCHAR(20) NOT NULL PRIMARY KEY,
+  code_id VARCHAR(20) NOT NULL,
   name VARCHAR(100) NOT NULL,
-  medical_records_id INT NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (code_id)
 );
 
 -- Tabla para gestionar los registros médicos
@@ -106,13 +106,29 @@ CREATE TABLE medical_records (
   medical_records_id INT AUTO_INCREMENT PRIMARY KEY,
   user_id VARCHAR(45),
   doctor_id VARCHAR(45),
+  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
+  CONSTRAINT doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id)
+);
+
+CREATE TABLE medical_record_diseases (
+  user_id VARCHAR(45) NOT NULL,
+  medical_record_id INT NOT NULL,
   diseases_code_id VARCHAR(20) NOT NULL,
+  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT medical_record_id_diseases FOREIGN KEY (medical_record_id) REFERENCES medical_records(medical_records_id),
+  CONSTRAINT diseases_code_id FOREIGN KEY (diseases_code_id) REFERENCES diseases(code_id)
+);
+
+CREATE TABLE medical_record_allergies (
+  user_id VARCHAR(45) NOT NULL,
+  medical_record_id INT NOT NULL,
   allergies_code_id VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  CONSTRAINT diseases_code_id FOREIGN KEY (diseases_code_id) REFERENCES diseases(code_id),
-  CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
-  CONSTRAINT doctor_id FOREIGN KEY (doctor_id) REFERENCES doctors(doctor_id),
+  CONSTRAINT medical_record_id_allergies FOREIGN KEY (medical_record_id) REFERENCES medical_records(medical_records_id),
   CONSTRAINT allergies_code_id FOREIGN KEY (allergies_code_id) REFERENCES allergies(code_id)
 );
 
