@@ -47,8 +47,8 @@ class DiseaseModel{
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql = "Insert into diseases (code_id, name, medical_records_id, created_date, updated_date)". 
-                     "Values ('$objeto->code_id''$objeto->name', $objeto->medical_records_id ,'$objeto->created_date', '$objeto->updated_date')";
+			$sql = "Insert into diseases (code_id, name, created_date, updated_date)". 
+                     "Values ('$objeto->code_id''$objeto->name','$objeto->created_date', '$objeto->updated_date')";
 	
 			$idDisease = $this->enlace->executeSQL_DML_last( $sql);
            
