@@ -7,7 +7,8 @@ USE medical_center;
 -- Tabla para gestionar los tipos de usuario
 CREATE TABLE user_types (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  type_name VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  type VARCHAR(100) NOT NULL,
   description VARCHAR(255) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP

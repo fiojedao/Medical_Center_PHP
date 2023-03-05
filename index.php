@@ -10,13 +10,24 @@
 require_once "models/MySQLConnect.php";
 
 //Agregar todos los modelos
+require_once "models/AllergieModel.php";
+require_once "models/DiseaseModel.php";
 require_once "models/DoctorsModel.php";
+require_once "models/MedicalRecordModel.php";
 require_once "models/MedicalSpecialitiesModel.php";
+require_once "models/MedicationModel.php";
+require_once "models/UserModel.php";
+require_once "models/UserSessionModel.php";
 
 
 //Agregar todos los controladores
-require_once "controllers/DoctorsController.php";
+require_once "controllers/AllergiesController.php";
+require_once "controllers/DiseaseController.php";
 require_once "controllers/MedicalSpecialitiesController.php";
+require_once "controllers/MedicaRecordCotroller.php";
+require_once "controllers/MedicationController.php";
+require_once "controllers/UserController.php";
+require_once "controllers/UserSesionController.php";
     
     require_once "controllers/RoutesController.php";
     $index=new RoutesController();
