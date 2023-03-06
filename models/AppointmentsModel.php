@@ -9,7 +9,7 @@ class AppointmentsModel{
 
     public function all(){
         try {
-			$vResultado = $this->enlace->findAll();
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -18,12 +18,9 @@ class AppointmentsModel{
 
     public function get($id){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM appointments where id=$id;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL($vSql);
-			// Retornar el objeto
+
+            $vResultado = $this->enlace->find_by_id($id);
+            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

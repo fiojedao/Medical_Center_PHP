@@ -9,25 +9,22 @@ class DoctorsModel{
 
     public function all(){
         try {
-			$vResultado = $this->enlace->findAll();
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
 
-    /*get by id*/
-    public function get($id)
-    {
+    public function get($id){
         try {
-            $vSql = "SELECT * FROM doctors WHERE doctor_id=$id";
-            $this->enlace->connect();
-            $vResultado = $this->enlace->ExecuteSQL( $vSql);
 
-            return $vResultado;
-        } catch ( Exception $e ) {
-            die ( $e->getMessage () );
-        }
+            $vResultado = $this->enlace->find_by_id($id);
+            
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
     }
 
     /* Crear doctors */

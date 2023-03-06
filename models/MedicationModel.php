@@ -9,29 +9,23 @@ class MedicationModel{
 
     public function all(){
         try {
-			$vResultado = $this->enlace->findAll();
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
 
-    public function get($code){
+    public function get($id){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM medications where code='$code'";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
 
-           
-			// Retornar el objeto
+            $vResultado = $this->enlace->find_by_id($id);
+            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
 
     public function create($objeto) {
         try {

@@ -9,7 +9,7 @@ class MedicalRecordsModel{
 
     public function all(){
         try {
-			$vResultado = $this->enlace->findAll();
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

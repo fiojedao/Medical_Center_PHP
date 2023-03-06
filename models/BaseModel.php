@@ -4,11 +4,13 @@ class BaseModel {
     private $campoId;
     private $enlace;
     
+    
     /**
      * __construct
      *
      * @param  mixed $tabla
      * @param  mixed $campoId
+     * @param  mixed $enlace
      * @return void
      */
     public function __construct($tabla, $campoId, $enlace) {
@@ -17,13 +19,13 @@ class BaseModel {
         $this->campoId = $campoId;
     }
     
+    
     /**
      * find_all
      *
-     * @param  mixed $tabla nombre tabla
      * @return void
      */
-    public function findAll() {
+    public function find_all() {
         try {
             $tabla = $this->tabla;
             $this->enlace->connect();

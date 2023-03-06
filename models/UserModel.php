@@ -9,7 +9,7 @@ class UserModel{
 
     public function all(){
         try {
-			$vResultado = $this->enlace->findAll();
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -18,20 +18,14 @@ class UserModel{
 
     public function get($id){
         try {
-            $tallaM=new TallaModel();
-            $categM=new CategoriaModel();
-            //Consulta sql
-			$vSql = "SELECT * FROM users where user_id=$id";
-			$this->enlace->connect();
-         
-			// Retornar el objeto
+
+            $vResultado = $this->enlace->find_by_id($id);
+            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-    }  
-
-
+    }
 	
     public function create($objeto) {
         try {

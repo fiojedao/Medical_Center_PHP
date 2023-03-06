@@ -9,7 +9,7 @@ class AllergieModel {
 
     public function all(){
         try {
-			$vResultado = $this->enlace->findAll();
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -18,12 +18,9 @@ class AllergieModel {
 
     public function get($id){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM allergies WHERE code_id=$id";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->findAll ( $vSql);
-			// Retornar el objeto
+
+            $vResultado = $this->enlace->find_by_id($id);
+            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
