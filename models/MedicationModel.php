@@ -53,8 +53,8 @@ class MedicationModel{
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql = "Insert into  medications (code, name, description, dose, type, created_date, updated_date)". 
-                     "Values ('$objeto->code', '$objeto->name' ,'$objeto->description' ,'$objeto->dose' ,'$objeto->type' ,'$objeto->created_date', '$objeto->updated_date')";
+			$sql = "Insert into  medications (code, name, description, dose, type)". 
+                     "Values ('$objeto->code', '$objeto->name' ,'$objeto->description' ,'$objeto->dose' ,'$objeto->type' )";
 	
 			$idMedication = $this->enlace->executeSQL_DML_last( $sql);
            
@@ -75,7 +75,7 @@ class MedicationModel{
             //Consulta sql
             $this->enlace->connect();
 			$sql = "UPDATE  medications SET name ='$objeto->name',".
-            " description='$objeto->description', dose='$objeto->dose', type='$objeto->type',  created_date=$objeto->created_date, updated_date='$objeto->updated_date'". 
+            " description='$objeto->description', dose='$objeto->dose', type='$objeto->type', updated_date = CURRENT_TIMESTAMP()". 
             " Where code='$objeto->code'";
 			
             //Ejecutar la consulta

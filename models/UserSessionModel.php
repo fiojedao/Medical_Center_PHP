@@ -85,8 +85,8 @@ class UserSessionModel{
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql = "Insert into  user_sessions (user_id, session_token, , created_date, updated_date)". 
-                     "Values ('$objeto->user_id', '$objeto->session_token', '$objeto->created_date', '$objeto->updated_date')";
+			$sql = "Insert into  user_sessions (user_id, session_token )". 
+                     "Values ('$objeto->user_id', '$objeto->session_token')";
 	
 			$idUserSession = $this->enlace->executeSQL_DML_last( $sql);
            
@@ -106,9 +106,8 @@ class UserSessionModel{
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql = "UPDATE  user_sessions  SET user_id ='$objeto->user_id',".
-            " session_token='$objeto->session_token', created_date=$objeto->created_date, updated_date='$objeto->updated_date'". 
-            " Where id='$objeto->id'";
+			$sql = "UPDATE  user_sessions  SET user_id ='$objeto->user_id', session_token='$objeto->session_token', updated_date = CURRENT_TIMESTAMP()". 
+            " Where id ='$objeto->id'";
 			
             //Ejecutar la consulta
 			$cResults = $this->enlace->executeSQL_DML( $sql);

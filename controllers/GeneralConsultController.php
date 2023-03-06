@@ -1,20 +1,10 @@
 <?php
 
-<<<<<<< Updated upstream
-class allergies {
-=======
-class Allergies{
+class GeneralConsult{
     public function index(){
->>>>>>> Stashed changes
         
-    /**
-     * index
-     *
-     * @return void
-     */
-    public function index(){
-        $disease=new AllergieModel();
-        $response=$disease->all();
+        $generalConsult=new GeneralConsultModel();
+        $response=$generalConsult->all();
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,
@@ -31,17 +21,10 @@ class Allergies{
         echo json_encode($json,
         http_response_code($json["status"]));
     }
-        
-    /**
-     * get
-     *
-     * @param  mixed $param
-     * @return void
-     */
     public function get($param){
         
-        $allergie=new AllergieModel();
-        $response=$allergie->get($param);
+        $generalConsult=new GeneralConsultModel();
+        $response=$generalConsult->get($param);
         $json=array(
             'status'=>200,
             'results'=>$response
@@ -50,17 +33,12 @@ class Allergies{
         http_response_code($json["status"]));
         
     }
-        
-    /**
-     * create
-     *
-     * @return void
-     */
-    public function create(){
+    
+    public function create( ){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
-        $allergie=new AllergieModel();
-        $response=$allergie->create($object);
+        $generalConsult=new GeneralConsultModel();
+        $response=$generalConsult->create($object);
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,
@@ -77,18 +55,11 @@ class Allergies{
         http_response_code($json["status"]));
         
     }
-        
-    /**
-     * update
-     *
-     * @param  mixed $param
-     * @return void
-     */
-    public function update($param){
+    public function update(){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
-        $allergie=new AllergieModel();
-        $response=$allergie->update($object, $param);
+        $generalConsult=new GeneralConsultModel();
+        $response=$generalConsult->update($object);
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,
