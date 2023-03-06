@@ -1,6 +1,6 @@
 <?php
 
-class Allergie{
+class allergies{
     public function index(){
         
         $allergie=new AllergieModel();

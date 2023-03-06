@@ -40,8 +40,12 @@ class DoctorsModel{
     public function create($objeto) {
         try {
             $this->enlace->connect();
-			$sql = "INSERT INTO doctors (doctor_id, name, specialty_code)
-            VALUES('$objeto->doctor_id','$objeto->name','$objeto->specialty_code')";
+			$sql = "INSERT INTO doctors(doctor_id, 
+                        name, 
+                        medical_specialities_code)
+                    VALUES('$objeto->doctor_id',
+                        '$objeto->name',
+                        '$objeto->medical_specialities_code')";
 			
 			$vResultado = $this->enlace->executeSQL_DML_last($sql);
 
@@ -52,14 +56,17 @@ class DoctorsModel{
     }
 
     /* Update doctors */
-    public function update($id, $objeto) {
+    public function update($objeto, $id) {
         try {
             $this->enlace->connect();
-			$sql = "UPDATE doctors SET name ='$objeto->name',specialty_code ='$objeto->specialty_code',updated_date = CURRENT_TIMESTAMP() Where doctor_id=$id";
+			$sql = "UPDATE doctors SET name ='$objeto->name',
+                        medical_specialities_code ='$objeto->medical_specialities_code',
+                        updated_date = CURRENT_TIMESTAMP() 
+                    Where doctor_id=$id";
 			
 			$cResults = $this->enlace->executeSQL_DML($sql);
 
-            return $this->get($vResultado);
+            return $this->get($id);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

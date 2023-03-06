@@ -1,6 +1,6 @@
 <?php
 
-class MedicalRecord{
+class medicalRecord{
     public function index(){
         
         $medicalRecord=new MedicalRecordModel();

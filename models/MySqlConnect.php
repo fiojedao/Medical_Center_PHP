@@ -13,7 +13,7 @@ class MySqlConnect {
 		$this->username = 'root';
 		$this->password = '123456';
 		$this->host = 'localhost';
-		$this->dbname = 'biclicletadb';
+		$this->dbname = 'medical_center';
 	}
 	
 	/**

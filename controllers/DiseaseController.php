@@ -1,6 +1,6 @@
 <?php
 
-class Disease{
+class diseases{
     public function index(){
         
         $disease=new DiseaseModel();

@@ -1,26 +1,24 @@
 <?php
+require 'DataBaseModel.php';
 
-class AlergieModel{
-    public $enlace;
+class AlergieModel extends DataBaseModel {
+    private $instance;
 
-   
     public function __construct() {
-        
-        $this->enlace=new MySqlConnect();
-       
+        $this->get_instance();
     }
 
+    private static function get_instance() {
+      if (!isset($instance)) {
+        $instance = new DataBaseModel('allergies', 'code_id');
+      }
+  
+      return $instance;
+    }
 
     public function all(){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM allergies;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-				
-			// Retornar el objeto
-			return $vResultado;
+            $this->get_instance()->find_all();
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -29,7 +27,7 @@ class AlergieModel{
     public function get($id){
         try {
             //Consulta sql
-			$vSql = "SELECT * FROM allergies where id=$id";
+			$vSql = "SELECT * FROM allergies WHERE code_id=$id";
 			$this->enlace->connect();
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -40,50 +38,49 @@ class AlergieModel{
 		}
     }
 
-
-    public function create($objeto) {
+    public function cresate($objeto) {
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql =  "Insert into allergies (code_id, name,  created_date, updated_date)". 
-            "Values ('$objeto->code_id''$objeto->name','$objeto->created_date', '$objeto->updated_date')";
+			$sql =  "INSERT INTO allergies(code_id,
+                        name)
+                    Values ('$objeto->code_id',
+                        '$objeto->name')";
 
-			$idAllergie = $this->enlace->executeSQL_DML_last( $sql);
-         
-                   
-            //Retornar bicicleta
+			$idAllergie = $this->enlace->executeSQL_DML_last($sql);
+          
+            //Retornar ALERGIAS
             return $this->get($idAllergie);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-    public function update($objeto) {
+
+    public function updsate($objeto,$id) {
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql =  "UPDATE allergies SET name='$objeto->name',".
-            " created_date ='$objeto->created_date', updated_date ='$objeto->updated_date'". 
-            " Where code_id='$objeto->code_id'";
-			
+			$sql =  "UPDATE allergies SET name='$objeto->name',
+                        updated_date = CURRENT_TIMESTAMP()
+                    Where code_id=$id";
 			
             //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML( $sql);
-        
+			$cResults = $this->enlace->executeSQL_DML($sql);
 
-         
-            //Retornar bicicleta
-            return $this->get($objeto->id);
+            return $this->get($id);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
 
-
      //Obtener alergias segun id paciente
+     //revisar consulta
     public function getByMD($id){
         try {
             //Consulta sql
-			$vSql = " SELECT a.code_id, a.name, a.created_date, a.updated_date FROM allergies as a, medical_records as m where m.allergies_code_id=a.code_id and m.allergies_code_id=$id;";
+			$vSql = "SELECT a.code_id, a.name, a.created_date, a.updated_date 
+                    FROM allergies as a, medical_records as m 
+                    where m.allergies_code_id=a.code_id and m.allergies_code_id=$id;";
 			$this->enlace->connect();
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -93,10 +90,5 @@ class AlergieModel{
 			die ( $e->getMessage () );
 		}
     }
-
-
-
-
-   
 }
 ?>

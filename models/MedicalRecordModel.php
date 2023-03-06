@@ -36,7 +36,7 @@ class MedicalRecordsModel{
 
 
             //Consulta sql
-			$vSql = "SELECT * FROM medical_records where id=$id";
+			$vSql = "SELECT * FROM medical_records where doctor_id=$id";
 			$this->enlace->connect();
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
@@ -45,7 +45,6 @@ class MedicalRecordsModel{
             $user=$userM->get($vResultado->user_id);
             $vResultado->user=$user;
            
-            
             $doctor=$doctorM->get($vResultado->doctor_id);
             $vResultado->doctor=$doctor;
 

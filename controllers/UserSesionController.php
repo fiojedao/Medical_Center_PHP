@@ -1,6 +1,6 @@
 <?php
 
-class UserSesion{
+class userSesion{
     public function index(){
         
         $user=new UserSesionModel();

@@ -3,13 +3,9 @@
 class DiseaseModel{
     public $enlace;
 
-   
     public function __construct() {
-        
         $this->enlace=new MySqlConnect();
-       
     }
-
 
     public function all(){
         try {
@@ -17,7 +13,7 @@ class DiseaseModel{
 			$vSql = "SELECT * FROM diseases;";
 			$this->enlace->connect();
             //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
+			$vResultado = $this->enlace->ExecuteSQL($vSql);
 				
 			// Retornar el objeto
 			return $vResultado;
@@ -29,12 +25,11 @@ class DiseaseModel{
     public function get($id){
         try {
             //Consulta sql
-			$vSql = "SELECT * FROM diseases where id=$id";
+			$vSql = "SELECT * FROM diseases WHERE code_id=$id";
 			$this->enlace->connect();
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
 
-           
 			// Retornar el objeto
 			return $vResultado;
 		} catch ( Exception $e ) {
@@ -47,8 +42,10 @@ class DiseaseModel{
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql = "Insert into diseases (code_id, name, created_date, updated_date)". 
-                     "Values ('$objeto->code_id''$objeto->name','$objeto->created_date', '$objeto->updated_date')";
+			$sql = "INSERT INTO diseases(code_id, 
+                        name)
+                    VALUES ('$objeto->code_id',
+                        '$objeto->name')";
 	
 			$idDisease = $this->enlace->executeSQL_DML_last( $sql);
            
@@ -58,27 +55,25 @@ class DiseaseModel{
 		}
     }
 
-    public function update($objeto) {
+    public function update($objeto, $id) {
         try {
             //Consulta sql
             $this->enlace->connect();
-			$sql = "UPDATE diseases SET name='$objeto->name',".
-            " created_date ='$objeto->created_date', updated_date ='$objeto->updated_date'". 
-            " Where code_id='$objeto->code_id'";
+			$sql = "UPDATE diseases SET name='$objeto->name',
+                        updated_date = CURRENT_TIMESTAMP()
+                    WHERE code_id=$id";
 			
             //Ejecutar la consulta
 			$cResults = $this->enlace->executeSQL_DML( $sql);
-            
-            
-            //Retornar MedicalRecord
-            return $this->get($objeto->id);
+
+            return $this->get($id);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
 
-
      //Obtener enfermedades segun id paciente
+     //REVISAR CONSULTA
     public function getByMD($id){
         try {
             //Consulta sql
@@ -92,12 +87,5 @@ class DiseaseModel{
 			die ( $e->getMessage () );
 		}
     }
-
-
-
-
-
-
-   
 }
 ?>

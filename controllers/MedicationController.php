@@ -1,6 +1,6 @@
 <?php
 
-class Medication{
+class medication{
     public function index(){
         
         $medication=new MedicationModel();
