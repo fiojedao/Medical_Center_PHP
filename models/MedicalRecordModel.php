@@ -2,11 +2,21 @@
 
 class MedicalRecordsModel{
     private $enlace;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct() {
         $this->enlace = new BaseModel('medical_records', 'medical_records_id', new MySqlConnect());
     }
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
 			$vResultado = $this->enlace->find_all();
@@ -15,7 +25,13 @@ class MedicalRecordsModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
 
@@ -53,7 +69,12 @@ class MedicalRecordsModel{
 		}
     }
 
-
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             //Consulta sql
@@ -96,6 +117,13 @@ class MedicalRecordsModel{
 			die ( $e->getMessage () );
 		}
     }
+ 
+    /**
+     * update
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function update($objeto) {
         try {
             //Consulta sql

@@ -1,8 +1,13 @@
 <?php
 
 class medication{
-    public function index(){
         
+    /**
+     * index
+     *
+     * @return void
+     */
+    public function index(){
         $medication=new MedicationModel();
         $response=$medication->all();
         if(isset($response) && !empty($response)){
@@ -21,6 +26,13 @@ class medication{
         echo json_encode($json,
         http_response_code($json["status"]));
     }
+        
+    /**
+     * get
+     *
+     * @param  mixed $param
+     * @return void
+     */
     public function get($param){
         
         $medication=new MedicationModel();
@@ -33,7 +45,12 @@ class medication{
         http_response_code($json["status"]));
         
     }
-    
+        
+    /**
+     * create
+     *
+     * @return void
+     */
     public function create( ){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
@@ -55,11 +72,18 @@ class medication{
         http_response_code($json["status"]));
         
     }
-    public function update(){
+        
+    /**
+     * update
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function update($param){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
         $medication=new MedicationModel();
-        $response=$medication->update($object);
+        $response=$medication->update($object,$param);
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,

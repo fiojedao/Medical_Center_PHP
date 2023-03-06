@@ -2,11 +2,21 @@
 
 class DoctorsModel{
     private $enlace;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct() {
         $this->enlace = new BaseModel('doctors', 'doctor_id', new MySqlConnect());
     }
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
 			$vResultado = $this->enlace->find_all();
@@ -15,7 +25,13 @@ class DoctorsModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
 
@@ -27,7 +43,13 @@ class DoctorsModel{
 		}
     }
 
-    /* Crear doctors */
+    /* Crear doctors */    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             $this->enlace->connect();

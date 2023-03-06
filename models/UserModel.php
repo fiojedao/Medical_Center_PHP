@@ -2,11 +2,21 @@
 
 class UserModel{
     private $enlace;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct() {
         $this->enlace = new BaseModel('users', 'user_id', new MySqlConnect());
     }
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
 			$vResultado = $this->enlace->find_all();
@@ -15,7 +25,13 @@ class UserModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
 
@@ -26,7 +42,13 @@ class UserModel{
 			die ( $e->getMessage () );
 		}
     }
-	
+	    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             //Consulta sql
@@ -41,7 +63,13 @@ class UserModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function update($objeto) {
         try {
             //Consulta sql

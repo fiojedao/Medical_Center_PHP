@@ -2,11 +2,21 @@
 
 class AppointmentsModel{
     private $enlace;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct() {
         $this->enlace = new BaseModel('appointments', 'id', new MySqlConnect());
     }
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
 			$vResultado = $this->enlace->find_all();
@@ -15,7 +25,13 @@ class AppointmentsModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
 
@@ -26,7 +42,13 @@ class AppointmentsModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             $this->enlace->connect();
@@ -49,7 +71,14 @@ class AppointmentsModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $objeto
+     * @param  mixed $id
+     * @return void
+     */
     public function update($objeto,$id) {
         try {
             //Consulta sql

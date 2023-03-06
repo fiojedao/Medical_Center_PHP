@@ -1,8 +1,13 @@
 <?php
 
 class diseases{
-    public function index(){
         
+    /**
+     * index
+     *
+     * @return void
+     */
+    public function index(){
         $disease=new DiseaseModel();
         $response=$disease->all();
         if(isset($response) && !empty($response)){
@@ -21,6 +26,13 @@ class diseases{
         echo json_encode($json,
         http_response_code($json["status"]));
     }
+        
+    /**
+     * get
+     *
+     * @param  mixed $param
+     * @return void
+     */
     public function get($param){
         
         $disease=new DiseaseModel();
@@ -33,7 +45,12 @@ class diseases{
         http_response_code($json["status"]));
         
     }
-    
+        
+    /**
+     * create
+     *
+     * @return void
+     */
     public function create( ){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
@@ -55,11 +72,18 @@ class diseases{
         http_response_code($json["status"]));
         
     }
-    public function update(){
+        
+    /**
+     * update
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function update($param){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
         $disease=new DiseaseModel();
-        $response=$disease->update($object);
+        $response=$disease->update($object,$param);
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,

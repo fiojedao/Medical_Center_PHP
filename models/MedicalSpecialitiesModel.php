@@ -2,11 +2,21 @@
 
 class MedicalSpecialitiesModel{
     private $enlace;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct() {
         $this->enlace = new BaseModel('medical_specialities', 'code_id', new MySqlConnect());
     }
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
 			$vResultado = $this->enlace->find_all();
@@ -15,7 +25,13 @@ class MedicalSpecialitiesModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
 
@@ -26,8 +42,13 @@ class MedicalSpecialitiesModel{
 			die ( $e->getMessage () );
 		}
     }
-
-    /* Crear medical_specialities */
+    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             $this->enlace->connect();
@@ -41,8 +62,14 @@ class MedicalSpecialitiesModel{
 			die ( $e->getMessage () );
 		}
     }
-
-    /* Update medical_specialities */
+    
+    /**
+     * update
+     *
+     * @param  mixed $id
+     * @param  mixed $objeto
+     * @return void
+     */
     public function update($id, $objeto) {
         try {
             $this->enlace->connect();

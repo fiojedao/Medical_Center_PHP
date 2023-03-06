@@ -3,26 +3,52 @@
 class UserSessionModel{
     public $enlace;
     protected $session_token;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct() {
         $this->enlace = new BaseModel('user_sessions', 'id', new MySqlConnect());
         session_start();
         $this->generate_token();
     }
-
+    
+    /**
+     * get_session_token
+     *
+     * @return void
+     */
     public function get_session_token() {
         return $this->session_token;
     }
-
+    
+    /**
+     * generate_token
+     *
+     * @return void
+     */
     protected function generate_token() {
         $this->session_token = bin2hex(random_bytes(32));
         $_SESSION['session_token'] = $this->session_token;
     }
-
+    
+    /**
+     * validate_token
+     *
+     * @param  mixed $token
+     * @return void
+     */
     public function validate_token($token) {
         return $token === $this->session_token;
     }
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
 			$vResultado = $this->enlace->find_all();
@@ -31,7 +57,13 @@ class UserSessionModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
 
@@ -42,7 +74,13 @@ class UserSessionModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             //Consulta sql
@@ -57,7 +95,13 @@ class UserSessionModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function update($objeto) {
         try {
             //Consulta sql

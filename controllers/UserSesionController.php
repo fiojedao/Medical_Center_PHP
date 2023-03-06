@@ -1,8 +1,13 @@
 <?php
 
-class userSesion{
+class userSesion {
+    
+    /**
+     * index
+     *
+     * @return void
+     */
     public function index(){
-        
         $user=new UserSesionModel();
         $response=$user->all();
         if(isset($response) && !empty($response)){
@@ -21,6 +26,13 @@ class userSesion{
         echo json_encode($json,
         http_response_code($json["status"]));
     }
+        
+    /**
+     * get
+     *
+     * @param  mixed $param
+     * @return void
+     */
     public function get($param){
         
         $user=new UserSesionModel;
@@ -33,7 +45,12 @@ class userSesion{
         http_response_code($json["status"]));
         
     }
-    
+        
+    /**
+     * create
+     *
+     * @return void
+     */
     public function create( ){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
@@ -55,11 +72,18 @@ class userSesion{
         http_response_code($json["status"]));
         
     }
-    public function update(){
+        
+    /**
+     * update
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function update($param){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
         $user=new UserSesionModel;
-        $response=$user->update($object);
+        $response=$user->update($object,$param);
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,

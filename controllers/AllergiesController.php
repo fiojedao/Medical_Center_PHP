@@ -1,8 +1,13 @@
 <?php
 
 class allergies {
-    public function index(){
         
+    /**
+     * index
+     *
+     * @return void
+     */
+    public function index(){
         $disease=new AllergieModel();
         $response=$disease->all();
         if(isset($response) && !empty($response)){
@@ -21,6 +26,13 @@ class allergies {
         echo json_encode($json,
         http_response_code($json["status"]));
     }
+        
+    /**
+     * get
+     *
+     * @param  mixed $param
+     * @return void
+     */
     public function get($param){
         
         $allergie=new AllergieModel();
@@ -33,8 +45,13 @@ class allergies {
         http_response_code($json["status"]));
         
     }
-    
-    public function create( ){
+        
+    /**
+     * create
+     *
+     * @return void
+     */
+    public function create(){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
         $allergie=new AllergieModel();
@@ -55,11 +72,18 @@ class allergies {
         http_response_code($json["status"]));
         
     }
-    public function update(){
+        
+    /**
+     * update
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function update($param){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
         $allergie=new AllergieModel();
-        $response=$allergie->update($object);
+        $response=$allergie->update($object, $param);
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,

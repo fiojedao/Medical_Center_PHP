@@ -1,8 +1,13 @@
 <?php
 
 class medicalspecialities{
-    public function index(){
         
+    /**
+     * index
+     *
+     * @return void
+     */
+    public function index(){
         $alquiler=new AlquilerModel();
         $response=$alquiler->all();
         if(isset($response) && !empty($response)){
@@ -19,6 +24,13 @@ class medicalspecialities{
         echo json_encode($json,
         http_response_code($json["status"]));
     }
+        
+    /**
+     * get
+     *
+     * @param  mixed $param
+     * @return void
+     */
     public function get($param){
         
         $alquiler=new MedicalSpecialitiesModel();
@@ -38,6 +50,12 @@ class medicalspecialities{
         http_response_code($json["status"]));
         
     }
+        
+    /**
+     * create
+     *
+     * @return void
+     */
     public function create(){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
@@ -62,7 +80,7 @@ class medicalspecialities{
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
         $alquiler=new MedicalSpecialitiesModel();
-        $response=$alquiler->update($param, $object);
+        $response=$alquiler->update($object,$param);
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,
