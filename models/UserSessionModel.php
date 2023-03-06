@@ -5,7 +5,7 @@ class UserSessionModel{
     protected $session_token;
 
     public function __construct() {
-        $this->enlace=new MySqlConnect();
+        $this->enlace = new BaseModel('user_sessions', 'id', new MySqlConnect());
         session_start();
         $this->generate_token();
     }
@@ -25,13 +25,7 @@ class UserSessionModel{
 
     public function all(){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM user_sessions;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-				
-			// Retornar el objeto
+			$vResultado = $this->enlace->findAll();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

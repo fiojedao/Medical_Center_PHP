@@ -1,5 +1,5 @@
 <?php
-class DataBaseModel {
+class BaseModel {
     private $tabla;
     private $campoId;
     private $enlace;
@@ -11,8 +11,8 @@ class DataBaseModel {
      * @param  mixed $campoId
      * @return void
      */
-    public function __construct($tabla, $campoId) {
-        $this->enlace=new MySqlConnect();
+    public function __construct($tabla, $campoId, $enlace) {
+        $this->enlace = $enlace;
         $this->tabla = $tabla;
         $this->campoId = $campoId;
     }
@@ -23,7 +23,7 @@ class DataBaseModel {
      * @param  mixed $tabla nombre tabla
      * @return void
      */
-    public function find_all() {
+    public function findAll() {
         try {
             $tabla = $this->tabla;
             $this->enlace->connect();

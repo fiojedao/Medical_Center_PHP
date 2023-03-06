@@ -1,21 +1,15 @@
 <?php
 
 class AppointmentsModel{
-    public $enlace;
+    private $enlace;
 
     public function __construct() {
-        $this->enlace=new MySqlConnect();
+        $this->enlace = new BaseModel('appointments', 'id', new MySqlConnect());
     }
 
     public function all(){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM appointments;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-				
-			// Retornar el objeto
+			$vResultado = $this->enlace->findAll();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

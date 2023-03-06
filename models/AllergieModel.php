@@ -1,24 +1,16 @@
 <?php
-require 'DataBaseModel.php';
 
-class AlergieModel extends DataBaseModel {
-    private $instance;
+class AllergieModel {
+    private $enlace;
 
     public function __construct() {
-        $this->get_instance();
-    }
-
-    private static function get_instance() {
-      if (!isset($instance)) {
-        $instance = new DataBaseModel('allergies', 'code_id');
-      }
-  
-      return $instance;
+        $this->enlace = new BaseModel('allergies', 'code_id', new MySqlConnect());
     }
 
     public function all(){
         try {
-            $this->get_instance()->find_all();
+			$vResultado = $this->enlace->findAll();
+			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -30,7 +22,7 @@ class AlergieModel extends DataBaseModel {
 			$vSql = "SELECT * FROM allergies WHERE code_id=$id";
 			$this->enlace->connect();
             //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
+			$vResultado = $this->enlace->findAll ( $vSql);
 			// Retornar el objeto
 			return $vResultado;
 		} catch ( Exception $e ) {

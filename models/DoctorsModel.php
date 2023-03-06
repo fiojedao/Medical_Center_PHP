@@ -1,25 +1,19 @@
 <?php
 
 class DoctorsModel{
-    public $enlace;
+    private $enlace;
+
     public function __construct() {
-        $this->enlace=new MySqlConnect();
+        $this->enlace = new BaseModel('doctors', 'doctor_id', new MySqlConnect());
     }
 
-    /*list */
     public function all(){
         try {
-            //Consulta sql
-            $vSql = "SELECT * FROM doctors;";
-            $this->enlace->connect();
-            //Ejecutar la consulta
-            $vResultado = $this->enlace->ExecuteSQL($vSql);
-                
-            // Retornar el objeto
-            return $vResultado;
-        } catch ( Exception $e ) {
-            die ( $e->getMessage () );
-        }
+			$vResultado = $this->enlace->findAll();
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
     }
 
     /*get by id*/

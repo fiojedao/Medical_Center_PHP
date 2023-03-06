@@ -1,27 +1,20 @@
 <?php
 
 class UserModel{
+    private $enlace;
 
-   
-    public function __construct($name=null,$id=null) {
-        $this->enlace=new MySqlConnect();       
+    public function __construct() {
+        $this->enlace = new BaseModel('users', 'user_id', new MySqlConnect());
     }
 
     public function all(){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM  users;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-				
-			// Retornar el objeto
+			$vResultado = $this->enlace->findAll();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
 
     public function get($id){
         try {

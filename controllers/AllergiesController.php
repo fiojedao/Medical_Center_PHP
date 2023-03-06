@@ -1,10 +1,10 @@
 <?php
 
-class allergies{
+class allergies {
     public function index(){
         
-        $allergie=new AllergieModel();
-        $response=$allergie->all();
+        $disease=new AllergieModel();
+        $response=$disease->all();
         if(isset($response) && !empty($response)){
             $json=array(
                 'status'=>200,
