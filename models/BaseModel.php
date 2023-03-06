@@ -4,13 +4,12 @@ class BaseModel {
     private $campoId;
     private $enlace;
     
-    
     /**
      * __construct
      *
-     * @param  mixed $tabla
-     * @param  mixed $campoId
-     * @param  mixed $enlace
+     * @param mixed $tabla
+     * @param mixed $campoId
+     * @param mixed $enlace
      * @return void
      */
     public function __construct($tabla, $campoId, $enlace) {
@@ -45,17 +44,19 @@ class BaseModel {
     /**
      * find_by_id
      *
-     * @param  mixed $valor
+     * @param mixed $valor
      * @return void
      */
-    public function find_by_id($valor) {
+    public function find_by_id($param) {
         try {
             $tabla = $this->tabla;
             $campoId = $this->campoId;
             $this->enlace->connect();
 
-            $vSql = "SELECT * FROM $tabla WHERE $campoId = $valor;";
-            
+            $valor = is_numeric($param) ? $param:"'$param'";
+
+            $vSql = "SELECT * FROM $tabla WHERE $campoId= $valor;";
+
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
 
             return $vResultado;
@@ -68,8 +69,8 @@ class BaseModel {
     /**
      * create
      *
-     * @param  mixed $keystabla - (campo1, campor2)
-     * @param  mixed $valuestabla - (valor1, valor2)
+     * @param mixed $keystabla - (campo1, campor2)
+     * @param mixed $valuestabla - (valor1, valor2)
      * @return void
      */
     public function create($keystabla, $valuestabla) {
@@ -90,8 +91,8 @@ class BaseModel {
     /**
      * update
      *
-     * @param  mixed $tablaSet - campo = valor, campo = valor
-     * @param  mixed $valor - valor
+     * @param mixed $tablaSet - campo = valor, campo = valor
+     * @param mixed $valor - valor
      * @return void
      */
     public function update($tablaSet, $valor) {
@@ -116,8 +117,8 @@ class BaseModel {
     /**
      * customUpdate
      *
-     * @param  mixed $sql
-     * @param  mixed $valor
+     * @param mixed $sql
+     * @param mixed $valor
      * @return void
      */
     public function customUpdate($sql, $valor) {
