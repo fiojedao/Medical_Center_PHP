@@ -1,11 +1,6 @@
 <?php
 
-<<<<<<< Updated upstream
 class allergies {
-=======
-class Allergies{
-    public function index(){
->>>>>>> Stashed changes
         
     /**
      * index
