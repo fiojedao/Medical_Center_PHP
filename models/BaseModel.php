@@ -2,6 +2,7 @@
 class BaseModel {
     private $tabla;
     private $campoId;
+    private $campoEmail;
     private $enlace;
     
     /**
@@ -16,6 +17,22 @@ class BaseModel {
         $this->enlace = $enlace;
         $this->tabla = $tabla;
         $this->campoId = $campoId;
+    }
+    
+    /**
+     * __construct
+     *
+     * @param  mixed $tabla
+     * @param  mixed $campoId
+     * @param  mixed $enlace
+     * @param  mixed $campoEmail
+     * @return void
+     */
+    public function __construct($tabla, $campoId, $enlace, $campoEmail) {
+        $this->enlace = $enlace;
+        $this->tabla = $tabla;
+        $this->campoId = $campoId;
+        $this->campoEmail = $campoEmail;
     }
     
     
@@ -40,7 +57,6 @@ class BaseModel {
         }
     }
     
-    
     /**
      * find_by_id
      *
@@ -56,6 +72,31 @@ class BaseModel {
             $valor = is_numeric($param) ? $param:"'$param'";
 
             $vSql = "SELECT * FROM $tabla WHERE $campoId= $valor;";
+
+            $vResultado = $this->enlace->ExecuteSQL( $vSql);
+
+            return $vResultado;
+        } catch ( Exception $e ) {
+            die ( $e->getMessage () );
+            return false;
+        }
+    }
+        
+    /**
+     * find_by_email
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function find_by_email($param) {
+        try {
+            $tabla = $this->tabla;
+            $campoEmail = $this->campoEmail;
+            $this->enlace->connect();
+
+            $valor = is_numeric($param) ? $param:"'$param'";
+
+            $vSql = "SELECT * FROM $tabla WHERE $campoEmail= $valor;";
 
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
 

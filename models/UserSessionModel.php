@@ -10,40 +10,49 @@ class UserSessionModel{
      * @return void
      */
     public function __construct() {
-        $this->enlace = new BaseModel('user_sessions', 'id', new MySqlConnect());
-        session_start();
-        $this->generate_token();
+        $this->enlace = new BaseModel('user_sessions', 'id', new MySqlConnect(), 'email');
     }
     
-    /**
-     * get_session_token
-     *
-     * @return void
-     */
-    public function get_session_token() {
-        return $this->session_token;
+    function getUserByUserEmail($useremail) {
+        try {
+
+            $vResultado = $this->enlace->find_by_email($id);
+            
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
     }
-    
-    /**
-     * generate_token
-     *
-     * @return void
-     */
-    protected function generate_token() {
-        $this->session_token = bin2hex(random_bytes(32));
-        $_SESSION['session_token'] = $this->session_token;
+
+    function storeToken($userId, $token) {
+        $query = "INSERT INTO tokens (user_id, token) VALUES (?, ?)";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "is", $userId, $token);
+        mysqli_stmt_execute($stmt);
     }
-    
-    /**
-     * validate_token
-     *
-     * @param  mixed $token
-     * @return void
-     */
-    public function validate_token($token) {
-        return $token === $this->session_token;
+
+    function deleteToken($token) {
+        $query = "DELETE FROM tokens WHERE token = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "s", $token);
+        mysqli_stmt_execute($stmt);
     }
-    
+
+    function getTokenUserId($token) {
+        $query = "SELECT user_id FROM tokens WHERE token = ?";
+        $stmt = mysqli_prepare($this->connection, $query);
+        mysqli_stmt_bind_param($stmt, "s", $token);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        if (mysqli_num_rows($result) === 0) {
+            return false;
+        }
+
+        $row = mysqli_fetch_assoc($result);
+        return $row['user_id'];
+    }
+
     /**
      * all
      *
