@@ -16,24 +16,26 @@ CREATE TABLE user_types (
 
 -- Tabla para gestionar los usuarios
 CREATE TABLE users_auth (
-  user_id VARCHAR(45) NOT NULL PRIMARY KEY,
+  user_id VARCHAR(45) NOT NULL,
   username VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
   user_type_id INT NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_type_id) REFERENCES user_types(id)
+  FOREIGN KEY (user_type_id) REFERENCES user_types(id),
+  PRIMARY KEY (user_id, username, email)
 );
 
 CREATE TABLE users (
-  user_id VARCHAR(45) NOT NULL PRIMARY KEY,
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id VARCHAR(45) NOT NULL,
   name VARCHAR(45) NOT NULL,
   lastname_one VARCHAR(45) NOT NULL,
   lastname_two VARCHAR(45) NOT NULL,
   genre VARCHAR(20) NOT NULL,
   address VARCHAR(255) NOT NULL,
-  date_of_bith DATETIME NOT NULL,
+  date_of_birth DATE NOT NULL,
   contact VARCHAR(20) NOT NULL,
   emergency_contact VARCHAR(20) NOT NULL,
   blood_type VARCHAR(15) NOT NULL,
@@ -46,10 +48,12 @@ CREATE TABLE users (
 CREATE TABLE user_sessions (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id VARCHAR(45) NOT NULL,
+  user_name VARCHAR(100) NOT NULL,
+  user_email VARCHAR(100) NOT NULL,
   session_token VARCHAR(100) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES users_auth(user_id)
+  FOREIGN KEY (user_id, user_name, user_email) REFERENCES users_auth(user_id, username, email)
 );
 
 -- Tabla para gestionar las preferencias de los usuarios
@@ -347,7 +351,43 @@ INSERT INTO medications (code, name, description, dose, type, created_date, upda
 ('MED019', 'Trazodone', 'An antidepressant medication used to treat depression and insomnia.', '50-100 mg once daily at bedtime', 'Tablet', '2022-01-19 00:00:00', '2022-01-19 00:00:00'),
 ('MED020', 'Methotrexate', 'An antimetabolite medication used to treat cancer, autoimmune diseases, and ectopic pregnancy.', '10-25 mg once weekly', 'Tablet', '2022-01-20 00:00:00', '2022-01-20 00:00:00'),
 ('MED021', 'Alprazolam', 'An anti-anxiety medication used to treat anxiety disorders and panic attacks.', '0.25-0.5 mg three times daily', 'Tablet', '2022-01-21 00:00:00', '2022-01-21 00:00:00'),
-('MED022', 'Levothyroxine', 'A thyroid hormone medication used to treat hypothyroidism.', '50-100 mcg once daily', 'Tablet', '2022-01-22 00:00:00', '2022-01-21 00:00:00')
+('MED022', 'Levothyroxine', 'A thyroid hormone medication used to treat hypothyroidism.', '50-100 mcg once daily', 'Tablet', '2022-01-22 00:00:00', '2022-01-21 00:00:00');
+
+INSERT INTO user_types (id, name, type, description, created_date, updated_date)
+VALUES 
+  (1, 'Doctor', 'Staff', 'Profesional médico capacitado para brindar atención y tratamiento a pacientes', NOW(), NOW()),
+  (2, 'Enfermera', 'Staff', 'Profesional capacitado para brindar atención y cuidados a pacientes', NOW(), NOW()),
+  (3, 'Paciente', 'Patient', 'Individuo que busca atención médica y tratamiento en el centro médico', NOW(), NOW()),
+  (4, 'Administrador', 'Staff', 'Persona encargada de la gestión y administración del centro médico', NOW(), NOW()),
+  (5, 'Recepcionista', 'Staff', 'Persona encargada de recibir y atender a pacientes en la recepción del centro médico', NOW(), NOW());
+
+INSERT INTO users_auth (user_id, username, password, email, user_type_id, created_date, updated_date)
+VALUES 
+  ('u00001', 'j.perez', 'password1', 'j.perez@example.com', 1, NOW(), NOW()),
+  ('u00002', 'm.gonzalez', 'password2', 'm.gonzalez@example.com', 3, NOW(), NOW()),
+  ('u00003', 'p.ramirez', 'password3', 'p.ramirez@example.com', 2, NOW(), NOW()),
+  ('u00004', 'a.admin', 'password4', 'a.admin@example.com', 4, NOW(), NOW()),
+  ('u00005', 'r.recepcion', 'password5', 'r.recepcion@example.com', 5, NOW(), NOW()),
+  ('u00006', 'l.diaz', 'password5', 'l.diaz@example.com', 3, NOW(), NOW()),
+  ('u00007', 'a.castro', 'password5', 'a.castro@example.com', 3, NOW(), NOW()),
+  ('u00008', 'c.alvarez', 'password5', 'c.alvarez@example.com', 3, NOW(), NOW()),
+  ('u00009', 'r.hernandez', 'password5', 'r.hernandezn@example.com', 3, NOW(), NOW()),
+  ('u00010', 'i.torres', 'password5', 'i.torres@example.com', 3, NOW(), NOW());
+  
+INSERT INTO users 
+	(user_id, name, lastname_one, lastname_two, genre, address, date_of_birth, contact, emergency_contact, blood_type, created_date, updated_date)
+VALUES
+  ('u00001', 'Juan', 'Pérez', 'García', 'Masculino', 'Calle 123, Ciudad', '1980-01-01', '555-1234', '555-5678', 'O+', '2021-03-08 09:00:00', '2021-03-08 09:00:00'),
+  ('u00002', 'María', 'González', 'Hernández', 'Femenino', 'Avenida 456, Pueblo', '1985-02-15', '555-2345', '555-6789', 'A-', '2021-03-08 10:00:00', '2021-03-08 10:00:00'),
+  ('u00003', 'Pedro', 'Ramírez', 'Sánchez', 'Masculino', 'Calle 789, Villa', '1990-03-31', '555-3456', '555-7890', 'B+', '2021-03-08 11:00:00', '2021-03-08 11:00:00'),
+  ('u00004', 'Ana', 'Martínez', 'Jiménez', 'Femenino', 'Avenida 012, Colonia', '1987-04-25', '555-4567', '555-8901', 'AB+', '2021-03-08 12:00:00', '2021-03-08 12:00:00'),
+  ('u00005', 'Jorge', 'Gómez', 'Gutiérrez', 'Masculino', 'Calle 345, Aldea', '1983-05-11', '555-5678', '555-9012', 'O-', '2021-03-08 13:00:00', '2021-03-08 13:00:00'),
+  ('u00006', 'Luisa', 'Díaz', 'López', 'Femenino', 'Avenida 678, Ciudad', '1995-06-27', '555-6789', '555-0123', 'B-', '2021-03-08 14:00:00', '2021-03-08 14:00:00'),
+  ('u00007', 'Alberto', 'Castro', 'Fernández', 'Masculino', 'Calle 901, Pueblo', '1981-07-13', '555-7890', '555-1234', 'O+', '2021-03-08 15:00:00', '2021-03-08 15:00:00'),
+  ('u00008', 'Carmen', 'Álvarez', 'Cruz', 'Femenino', 'Avenida 234, Villa', '1992-08-29', '555-8901', '555-2345', 'AB-', '2021-03-08 16:00:00', '2021-03-08 16:00:00'),
+  ('u00009', 'Raúl', 'Hernández', 'Ortiz', 'Masculino', 'Calle 567, Colonia', '1997-09-14', '555-9012', '555-3456', 'O-', '2021-03-08 17:00:00', '2021-03-08 17:00:00'),
+  ('u00010', 'Isabel', 'Torres', 'Ruiz', 'Femenino', 'Avenida 890, Aldea', '1989-10-30', '555-0123', '555-4567', 'A+', '2021-03-08 18:00:00', '2021-03-08 18:00:00');
+
 
 
 

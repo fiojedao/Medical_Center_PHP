@@ -15,9 +15,7 @@ class UserSessionModel{
     
     function getUserByUserEmail($useremail) {
         try {
-
             $vResultado = $this->enlace->find_by_email($id);
-            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
