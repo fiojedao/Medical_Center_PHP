@@ -2,34 +2,41 @@
 
 class General_consultModel{
     public $enlace;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct() {
-        $this->enlace=new MySqlConnect();
+        $this->enlace = new BaseModel('general_consult', 'id_consult', new MySqlConnect());
     }
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM general_consult;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-				
-			// Retornar el objeto
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM general_consult where id_consult=$id;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL($vSql);
-			// Retornar el objeto
+
+            $vResultado = $this->enlace->find_by_id($id);
+            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
