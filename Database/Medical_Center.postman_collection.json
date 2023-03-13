@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{  \r\n    \"name\": \"test#343e2\"\r\n}",
+					"raw": "{  \r\n    \"name\": \"test#56255\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -36,12 +36,53 @@
 			"response": []
 		},
 		{
+			"name": "Disease-Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"name\": \"test#56255\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/diseases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"diseases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Allergies-Get-Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:81/medical_center_api/allergies/2b76f1e267a522562435",
+					"raw": "http://localhost:81/medical_center_api/allergies/A001",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -50,7 +91,40 @@
 					"path": [
 						"medical_center_api",
 						"allergies",
-						"2b76f1e267a522562435"
+						"A001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disease-Get-Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/diseases/A001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"diseases",
+						"A001"
 					]
 				}
 			},
@@ -87,6 +161,36 @@
 			"response": []
 		},
 		{
+			"name": "Disease-Put",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code_id\": \"A001\",\r\n    \"name\": \"Prueba Updatev22\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/diseases/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"diseases",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Allergies-Get-All",
 			"request": {
 				"method": "GET",
@@ -101,6 +205,27 @@
 					"path": [
 						"medical_center_api",
 						"allergies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Disease-Get-All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/diseases/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"diseases",
 						""
 					]
 				}
