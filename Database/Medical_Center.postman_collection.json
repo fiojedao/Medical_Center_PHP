@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "a4a3002a-c353-4e34-8802-fa69ac08bcc8",
+		"name": "Medical_Center",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4359992"
+	},
+	"item": [
+		{
+			"name": "Allergies-Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"name\": \"test#343e2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/allergies",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"allergies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allergies-Get-Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/allergies/2b76f1e267a522562435",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"allergies",
+						"2b76f1e267a522562435"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allergies-Put",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code_id\": \"A001\",\r\n    \"name\": \"Prueba Updatev22\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/allergies/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"allergies",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Allergies-Get-All",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:81/medical_center_api/allergies/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "81",
+					"path": [
+						"medical_center_api",
+						"allergies",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
