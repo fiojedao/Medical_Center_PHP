@@ -3,26 +3,36 @@
 class StockModel extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('stock', 'id', new MySqlConnect());
-   }
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct() {
+        parent::__construct('stock', 'id', new MySqlConnect());
+    }
     
+    /**
+     * getId
+     *
+     * @return $id
+     */
     private function getId(){
         try {
-            $code_id = "ST-".$this->enlace->generateId(8);
-            return $code_id;
+            $id = "ST-".$this->generateId(8);
+            return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
     }
-
+    
+    /**
+     * all
+     *
+     * @return $vResultado
+     */
     public function all(){
         try {
-			$vResultado = $this->enlace->find_all();
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -33,19 +43,18 @@ class StockModel extends BaseModel {
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
     public function get($id){
         try {
 
-            $vResultado = $this->enlace->find_by_id($id);
+            $vResultado = $this->find_by_id($id);
             
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
     
     /**
      * create

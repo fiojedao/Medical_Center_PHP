@@ -9,42 +9,47 @@ class DiseaseModel extends BaseModel {
     */
    public function __construct() {
        parent::__construct('diseases', 'code_id', new MySqlConnect());
-   }  
+   }
+    
     
     /**
-     * all
+     * getId
      *
-     * @return void
+     * @return $id
      */
-    public function all(){
-        try {
-			$vResultado = $this->enlace->find_all();
-
-			return $vResultado;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }  
-    
     private function getId(){
         try {
-            $code_id = "D-".$this->enlace->generateId(8);
-            return $code_id;
+            $id = "D-".$this->generateId(8);
+            return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
     }
     
     /**
+     * all
+     *
+     * @return $vResultado
+     */
+    public function all(){
+        try {
+			$vResultado = $this->find_all();
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+    
+    /**
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
     public function get($id){
         try {
 
-            $vResultado = $this->enlace->find_by_id($id);
+            $vResultado = $this->find_by_id($id);
             
 			return $vResultado;
 		} catch ( Exception $e ) {
@@ -52,7 +57,6 @@ class DiseaseModel extends BaseModel {
 		}
     }
 
-    
     /**
      * create
      *

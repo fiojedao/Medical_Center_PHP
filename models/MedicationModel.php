@@ -3,54 +3,59 @@
 class MedicationModel extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('medications', 'code', new MySqlConnect());
-   }
-    
-    /**
-     * all
+     * __construct
      *
      * @return void
      */
-    public function all(){
-        try {
-			$vResultado = $this->enlace->find_all();
-			return $vResultado;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }  
+    public function __construct() {
+        parent::__construct('medications', 'code', new MySqlConnect());
+    }
     
+    /**
+     * getId
+     *
+     * @return $id
+     */
     private function getId(){
         try {
-            $code_id = "M-".$this->enlace->generateId(8);
-            return $code_id;
+            $id = "M-".$this->generateId(8);
+            return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
     }
     
     /**
-     * get
+     * all
      *
-     * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
-    public function get($id){
+    public function all(){
         try {
-
-            $vResultado = $this->enlace->find_by_id($id);
-            
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
     
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return $vResultado
+     */
+    public function get($id){
+        try {
+
+            $vResultado = $this->find_by_id($id);
+            
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+
     /**
      * create
      *

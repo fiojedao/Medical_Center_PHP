@@ -3,17 +3,36 @@
 class GeneralConsultModel extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('general_consult', 'id_consult', new MySqlConnect());
-   }  
-
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct() {
+        parent::__construct('general_consult', 'id_consult', new MySqlConnect());
+    }
+    
+    /**
+     * getId
+     *
+     * @return $id
+     */
+    private function getId(){
+        try {
+            $id = "GC-".$this->generateId(8);
+            return $id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
+    }
+    
+    /**
+     * all
+     *
+     * @return $vResultado
+     */
     public function all(){
         try {
-			$vResultado = $this->enlace->find_all();
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -24,12 +43,12 @@ class GeneralConsultModel extends BaseModel {
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
     public function get($id){
         try {
 
-            $vResultado = $this->enlace->find_by_id($id);
+            $vResultado = $this->find_by_id($id);
             
 			return $vResultado;
 		} catch ( Exception $e ) {

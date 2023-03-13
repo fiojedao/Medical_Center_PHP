@@ -3,18 +3,23 @@
 class MedicalSpecialitiesModel extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('medical_specialities', 'code_id', new MySqlConnect());
-   } 
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct() {
+        parent::__construct('medical_specialities', 'code_id', new MySqlConnect());
+    }
     
+    /**
+     * getId
+     *
+     * @return $id
+     */
     private function getId(){
         try {
-            $code_id = "MS-".$this->enlace->generateId(8);
-            return $code_id;
+            $id = "MS-".$this->generateId(8);
+            return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
@@ -23,11 +28,11 @@ class MedicalSpecialitiesModel extends BaseModel {
     /**
      * all
      *
-     * @return void
+     * @return $vResultado
      */
     public function all(){
         try {
-			$vResultado = $this->enlace->find_all();
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -38,19 +43,19 @@ class MedicalSpecialitiesModel extends BaseModel {
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
     public function get($id){
         try {
 
-            $vResultado = $this->enlace->find_by_id($id);
+            $vResultado = $this->find_by_id($id);
             
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-    
+
     /**
      * create
      *

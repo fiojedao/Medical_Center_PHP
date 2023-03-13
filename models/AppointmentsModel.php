@@ -2,19 +2,25 @@
 
 class AppointmentsModel extends BaseModel {  
     
-    /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('appointments', 'id', new MySqlConnect());
-   }  
     
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct() {
+        parent::__construct('appointments', 'id', new MySqlConnect());
+    }
+    
+    /**
+     * getId
+     *
+     * @return $id
+     */
     private function getId(){
         try {
-            $code_id = "AP-".$this->generateId(8);
-            return $code_id;
+            $id = "A-".$this->generateId(8);
+            return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
@@ -23,7 +29,7 @@ class AppointmentsModel extends BaseModel {
     /**
      * all
      *
-     * @return void
+     * @return $vResultado
      */
     public function all(){
         try {
@@ -38,7 +44,7 @@ class AppointmentsModel extends BaseModel {
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
     public function get($id){
         try {

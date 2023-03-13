@@ -3,26 +3,62 @@
 class UserSessionModel extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('user_sessions', 'id', new MySqlConnect());
-   } 
-    
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct() {
+        parent::__construct('user_sessions', 'id', new MySqlConnect());
+    }
+
+    /**
+     * getId
+     *
+     * @return $id
+     */
     private function getId(){
         try {
-            $code_id = "US-".$this->enlace->generateId(8);
-            return $code_id;
+            $id = "US-".$this->generateId(8);
+            return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
     }
     
+    /**
+     * all
+     *
+     * @return $vResultado
+     */
+    public function all(){
+        try {
+			$vResultado = $this->find_all();
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return $vResultado
+     */
+    public function get($id){
+        try {
+
+            $vResultado = $this->find_by_id($id);
+            
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+    
     function getUserByUserEmail($useremail) {
         try {
-            $vResultado = $this->enlace->find_by_email($id);
+            $vResultado = $this->enlace->find_by_email($useremail);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -56,37 +92,6 @@ class UserSessionModel extends BaseModel {
 
         $row = mysqli_fetch_assoc($result);
         return $row['user_id'];
-    }
-
-    /**
-     * all
-     *
-     * @return void
-     */
-    public function all(){
-        try {
-			$vResultado = $this->enlace->find_all();
-			return $vResultado;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }
-    
-    /**
-     * get
-     *
-     * @param  mixed $id
-     * @return void
-     */
-    public function get($id){
-        try {
-
-            $vResultado = $this->enlace->find_by_id($id);
-            
-			return $vResultado;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
     }
     
     /**

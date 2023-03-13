@@ -3,21 +3,58 @@
 class UserAuthModel  extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('users_auth', 'user_id', new MySqlConnect());
-   }
-  
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct() {
+        parent::__construct('users_auth', 'user_id', new MySqlConnect());
+    }
+    
+    
+    /**
+     * getId
+     *
+     * @return $id
+     */
     private function getId(){
         try {
-            $code_id = "AP-".$this->enlace->generateId(8);
-            return $code_id;
+            $id = "UA-".$this->generateId(8);
+            return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
+    }
+    
+    /**
+     * all
+     *
+     * @return $vResultado
+     */
+    public function all(){
+        try {
+			$vResultado = $this->find_all();
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return $vResultado
+     */
+    public function get($id){
+        try {
+
+            $vResultado = $this->find_by_id($id);
+            
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
     }
 
     public function login($username, $password) {
@@ -38,37 +75,6 @@ class UserAuthModel  extends BaseModel {
 
     public function isAuthenticated($token) {
         return $this->db->getTokenUserId($token) !== false;
-    }
-    
-    /**
-     * all
-     *
-     * @return void
-     */
-    public function all(){
-        try {
-			$vResultado = $this->enlace->find_all();
-			return $vResultado;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }
-    
-    /**
-     * get
-     *
-     * @param  mixed $id
-     * @return void
-     */
-    public function get($id){
-        try {
-
-            $vResultado = $this->enlace->find_by_id($id);
-            
-			return $vResultado;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
     }
 	    
     /**

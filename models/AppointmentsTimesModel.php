@@ -9,11 +9,31 @@ class AppointmentsTimesModel extends BaseModel {
     */
    public function __construct() {
        parent::__construct('appointments_times', 'id', new MySqlConnect());
-   }  
-
+   }
+    
+    
+    /**
+     * getId
+     *
+     * @return $id
+     */
+    private function getId(){
+        try {
+            $id = "AT-".$this->generateId(8);
+            return $id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
+    }
+    
+    /**
+     * all
+     *
+     * @return $vResultado
+     */
     public function all(){
         try {
-			$vResultado = $this->enlace->find_all();
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -24,12 +44,12 @@ class AppointmentsTimesModel extends BaseModel {
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
     public function get($id){
         try {
 
-            $vResultado = $this->enlace->find_by_id($id);
+            $vResultado = $this->find_by_id($id);
             
 			return $vResultado;
 		} catch ( Exception $e ) {
