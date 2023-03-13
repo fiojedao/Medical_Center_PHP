@@ -1,50 +1,42 @@
 <?php
 
-class MedicationsUserModel{
-    public $enlace;
-
-   
-    public function __construct() {
-        
-        $this->enlace=new MySqlConnect();
-       
-    }  
+class MedicationsUserModel extends BaseModel {  
     
-    private function getId(){
-        try {
-            $code_id = "MU-".$this->enlace->generateId(8);
-            return $code_id;
-        } catch (Exception $e) {
-            die ( $e->getMessage () );
-        }
-    }
+    /**
+    * __construct
+    *
+    * @return void
+    */
+   public function __construct() {
+       parent::__construct('medications_user', 'id', new MySqlConnect());
+   }
 
-
+    
+    /**
+     * all
+     *
+     * @return void
+     */
     public function all(){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM medications_user;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-				
-			// Retornar el objeto
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM medications_user where id=$id";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
 
-           
-			// Retornar el objeto
+            $vResultado = $this->enlace->find_by_id($id);
+            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

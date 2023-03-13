@@ -1,14 +1,15 @@
 <?php
 
-class StockModel{
-    public $enlace;
-
-   
-    public function __construct() {
-        
-        $this->enlace=new MySqlConnect();
-       
-    }
+class StockModel extends BaseModel {  
+    
+    /**
+    * __construct
+    *
+    * @return void
+    */
+   public function __construct() {
+       parent::__construct('stock', 'id', new MySqlConnect());
+   }
     
     private function getId(){
         try {
@@ -21,36 +22,37 @@ class StockModel{
 
     public function all(){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM stock;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-				
-			// Retornar el objeto
+			$vResultado = $this->enlace->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * get
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function get($id){
         try {
-            //Consulta sql
-			$vSql = "SELECT * FROM stock where id=$id";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
 
-           
-			// Retornar el objeto
+            $vResultado = $this->enlace->find_by_id($id);
+            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
 
-
+    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             //Consulta sql
@@ -65,7 +67,13 @@ class StockModel{
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function update($objeto) {
         try {
             //Consulta sql
