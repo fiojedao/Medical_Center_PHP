@@ -22,3 +22,4 @@ Stack trace:
 [06-Mar-2023 07:30:33 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$vResultado" in C:\xampp\htdocs\medical_center_api\models\BaseModel.php on line 59
 [06-Mar-2023 07:31:29 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$vSql", expecting "," or ";" in C:\xampp\htdocs\medical_center_api\models\BaseModel.php on line 57
 
+[14-Mar-2023 00:03:43 Europe/Berlin] PHP Warning:  Undefined property: MedicalRecordsModel::$enlace in C:\xampp\htdocs\medical_center_api\models\MedicalRecordModel.php on line 30

@@ -13,7 +13,7 @@ class MedicalRecordsModel extends BaseModel {
     
     private function getId(){
         try {
-            $code_id = "MR-".$this->enlace->generateId(8);
+            $code_id = "MR-".$this->generateId(8);
             return $code_id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
@@ -27,7 +27,7 @@ class MedicalRecordsModel extends BaseModel {
      */
     public function all(){
         try {
-			$vResultado = $this->enlace->find_all();
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -51,9 +51,9 @@ class MedicalRecordsModel extends BaseModel {
 
             //Consulta sql
 			$vSql = "SELECT * FROM medical_records where doctor_id=$id";
-			$this->enlace->connect();
+			$this->connect();
             //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
+			$vResultado = $this->ExecuteSQL ( $vSql);
             $vResultado = $vResultado[0];
 
             $user=$userM->get($vResultado->user_id);
@@ -86,11 +86,11 @@ class MedicalRecordsModel extends BaseModel {
     public function create($objeto) {
         try {
             //Consulta sql
-            $this->enlace->connect();
+            $this->connect();
 			$sql = "Insert into medical_records (user_id, doctor_id, created_date, updated_date)". 
                      "Values ($objeto->user_id,$objeto->doctor_id, '$objeto->created_date', '$objeto->updated_date')";
 	
-			$idMedicalRecord = $this->enlace->executeSQL_DML_last( $sql);
+			$idMedicalRecord = $this->executeSQL_DML_last( $sql);
            
 
             foreach( $objeto->allergies as $allergies){
@@ -99,10 +99,10 @@ class MedicalRecordsModel extends BaseModel {
            
                 
             foreach($dataAllergie as $row){
-                $this->enlace->connect();
+                $this->connect();
                 $valores=implode(',', $row);
                 $sql = "INSERT INTO nombre_tabla( medical_records_id, allergie_code) VALUES(".$valores.");";
-                $vResultado = $this->enlace->executeSQL_DML($sql);
+                $vResultado = $this->executeSQL_DML($sql);
             }
 
 
@@ -112,10 +112,10 @@ class MedicalRecordsModel extends BaseModel {
                
                     
             foreach($dataDisease as $row){
-                $this->enlace->connect();
+                $this->connect();
                 $valores=implode(',', $row);
                 $sql = "INSERT INTO nombre_tabla( medical_records_id, disease_code) VALUES(".$valores.");";
-                $vResultado = $this->enlace->executeSQL_DML($sql);
+                $vResultado = $this->executeSQL_DML($sql);
             }
 
 
@@ -135,18 +135,18 @@ class MedicalRecordsModel extends BaseModel {
     public function update($objeto) {
         try {
             //Consulta sql
-            $this->enlace->connect();
+            $this->connect();
 			$sql = "UPDATE medical_records SET user_id =$objeto->user_id,".
             " doctor_id =$objeto->doctor_id, created_date ='$objeto->created_date', updated_date ='$objeto->updated_date'". 
             " Where medical_records_id=$objeto->medical_records_id";
             //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML( $sql);
+			$cResults = $this->executeSQL_DML( $sql);
 
             //Borrar data de tabla intermedia medicalRecord-alergias
 
-            $this->enlace->connect();
+            $this->connect();
 			$sql = "Delete from nombre_tabla Where medical_records_id=$objeto->medical_records_id";
-			$cResults = $this->enlace->executeSQL_DML( $sql);
+			$cResults = $this->executeSQL_DML( $sql);
 
 
             //actualizar data de alergias
@@ -157,10 +157,10 @@ class MedicalRecordsModel extends BaseModel {
            
                 
             foreach($dataAllergie as $row){
-                $this->enlace->connect();
+                $this->connect();
                 $valores=implode(',', $row);
                 $sql = "INSERT INTO nombre_tabla( medical_records_id, allergies_code) VALUES(".$valores.");";
-                $vResultado = $this->enlace->executeSQL_DML($sql);
+                $vResultado = $this->executeSQL_DML($sql);
             }
 
 
@@ -168,9 +168,9 @@ class MedicalRecordsModel extends BaseModel {
 
             //Borrar data de tabla intermedia meicalRecord-enfermedades
 
-             $this->enlace->connect();
+             $this->connect();
              $sql = "Delete from nombre_tabla Where medical_records_id=$objeto->medical_records_id";
-             $cResults = $this->enlace->executeSQL_DML( $sql);
+             $cResults = $this->executeSQL_DML( $sql);
 
              //actualizar data de enfermedades
     
@@ -180,10 +180,10 @@ class MedicalRecordsModel extends BaseModel {
                
                     
             foreach($dataDisease as $row){
-                $this->enlace->connect();
+                $this->connect();
                 $valores=implode(',', $row);
                 $sql = "INSERT INTO nombre_tabla( medical_records_id, disease_code) VALUES(".$valores.");";
-                $vResultado = $this->enlace->executeSQL_DML($sql);
+                $vResultado = $this->executeSQL_DML($sql);
             }
 
             

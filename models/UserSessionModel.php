@@ -58,7 +58,7 @@ class UserSessionModel extends BaseModel {
     
     function getUserByUserEmail($useremail) {
         try {
-            $vResultado = $this->enlace->find_by_email($useremail);
+            $vResultado = $this->find_by_email($useremail);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -103,11 +103,11 @@ class UserSessionModel extends BaseModel {
     public function create($objeto) {
         try {
             //Consulta sql
-            $this->enlace->connect();
+            $this->connect();
 			$sql = "Insert into  user_sessions (user_id, session_token )". 
                      "Values ('$objeto->user_id', '$objeto->session_token')";
 	
-			$idUserSession = $this->enlace->executeSQL_DML_last( $sql);
+			$idUserSession = $this->executeSQL_DML_last( $sql);
            
             return $this->get($idUserSession);
 		} catch ( Exception $e ) {
@@ -124,12 +124,12 @@ class UserSessionModel extends BaseModel {
     public function update($objeto) {
         try {
             //Consulta sql
-            $this->enlace->connect();
+            $this->connect();
 			$sql = "UPDATE  user_sessions  SET user_id ='$objeto->user_id', session_token='$objeto->session_token', updated_date = CURRENT_TIMESTAMP()". 
             " Where id ='$objeto->id'";
 			
             //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML( $sql);
+			$cResults = $this->executeSQL_DML( $sql);
             
             
             //Retornar 
