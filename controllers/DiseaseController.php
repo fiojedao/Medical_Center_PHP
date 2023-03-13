@@ -8,8 +8,8 @@ class diseases extends BaseController {
      * @return
      */
     public function index(){
-        $disease=new DiseaseModel();
-        $response=$disease->all();
+        $instance = new DiseaseModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,9 +20,8 @@ class diseases extends BaseController {
      * @return
      */
     public function get($param){
-        
-        $disease=new DiseaseModel();
-        $response=$disease->get($param);
+        $instance = new DiseaseModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -32,10 +31,9 @@ class diseases extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $disease = new DiseaseModel();
-        $response = $disease->create($object);
+        $instance = (new DiseaseModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -46,10 +44,9 @@ class diseases extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $disease = new DiseaseModel();
-        $response = $disease->update($object);
+        $instance = (new DiseaseModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

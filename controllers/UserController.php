@@ -8,8 +8,8 @@ class user extends BaseController {
      * @return
      */
     public function index(){
-        $user=new UserModel();
-        $response=$user->all();
+        $instance = new UserModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class user extends BaseController {
      * @return
      */
     public function get($param){
-        $user=new UserModel();
-        $response=$user->get($param);
+        $instance = new UserModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class user extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $user = new UserModel();
-        $response = $user->create($object);
+        $instance = (new UserModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class user extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $user = new UserModel();
-        $response = $user->update($object);
+        $instance = (new UserModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

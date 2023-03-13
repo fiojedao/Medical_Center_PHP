@@ -8,8 +8,8 @@ class medicalspecialities extends BaseController {
      * @return
      */
     public function index(){
-        $medicalspecialities=new MedicalSpecialitiesModel();
-        $response=$medicalspecialities->all();
+        $instance = new MedicalSpecialitiesModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class medicalspecialities extends BaseController {
      * @return
      */
     public function get($param){
-        $medicalspecialities=new MedicalSpecialitiesModel();
-        $response=$medicalspecialities->get($param);
+        $instance = new MedicalSpecialitiesModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class medicalspecialities extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $medicalspecialities = new MedicalSpecialitiesModel();
-        $response = $medicalspecialities->create($object);
+        $instance = (new MedicalSpecialitiesModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class medicalspecialities extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $medicalspecialities = new MedicalSpecialitiesModel();
-        $response = $medicalspecialities->update($object);
+        $instance = (new MedicalSpecialitiesModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

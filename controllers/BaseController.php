@@ -23,5 +23,11 @@ abstract class BaseController {
         echo json_encode($json,
         http_response_code($json["status"]));
     }
+
+    public function getObj(){
+        $inputJSON=file_get_contents('php://input');
+        $object = json_decode($inputJSON);
+        return $object;
+    }
 }
 ?>

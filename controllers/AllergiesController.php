@@ -8,8 +8,8 @@ class allergies extends BaseController {
      * @return
      */
     public function index(){
-        $allergie=new AllergieModel();
-        $response=$allergie->all();
+        $instance = new AllergieModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class allergies extends BaseController {
      * @return
      */
     public function get($param){
-        $allergie=new AllergieModel();
-        $response=$allergie->get($param);
+        $instance = new AllergieModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class allergies extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $allergie = new AllergieModel();
-        $response = $allergie->create($object);
+        $instance = new AllergieModel();
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class allergies extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $allergie = new AllergieModel();
-        $response = $allergie->update($object);
+        $instance = new AllergieModel();
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

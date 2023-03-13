@@ -8,8 +8,8 @@ class doctors extends BaseController {
      * @return
      */
     public function index(){
-        $doctors=new DoctorsModel();
-        $response=$doctors->all();
+        $instance = new DoctorsModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class doctors extends BaseController {
      * @return
      */
     public function get($param){
-        $doctors=new DoctorsModel();
-        $response=$doctors->get($param);
+        $instance = new DoctorsModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class doctors extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $doctors = new DoctorsModel();
-        $response = $doctors->create($object);
+        $instance = (new DoctorsModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class doctors extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $doctors = new DoctorsModel();
-        $response = $doctors->update($object);
+        $instance = (new DoctorsModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

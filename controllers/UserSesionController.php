@@ -8,8 +8,8 @@ class usersession extends BaseController {
      * @return
      */
     public function index(){
-        $usersession=new UserSessionModel();
-        $response=$usersession->all();
+        $instance = new UserSessionModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class usersession extends BaseController {
      * @return
      */
     public function get($param){
-        $usersession=new UserSessionModel();
-        $response=$usersession->get($param);
+        $instance = new UserSessionModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class usersession extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $usersession = new UserSessionModel();
-        $response = $usersession->create($object);
+        $instance = (new UserSessionModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class usersession extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $usersession = new UserSessionModel();
-        $response = $usersession->update($object);
+        $instance = (new UserSessionModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

@@ -8,8 +8,8 @@ class medicalrecord extends BaseController {
      * @return
      */
     public function index(){
-        $medicalrecord=new MedicalRecordsModel();
-        $response=$medicalrecord->all();
+        $instance = new MedicalRecordsModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class medicalrecord extends BaseController {
      * @return
      */
     public function get($param){
-        $medicalrecord=new MedicalRecordsModel();
-        $response=$medicalrecord->get($param);
+        $instance = new MedicalRecordsModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class medicalrecord extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $medicalrecord = new MedicalRecordsModel();
-        $response = $medicalrecord->create($object);
+        $instance = (new MedicalRecordsModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class medicalrecord extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $medicalrecord = new MedicalRecordsModel();
-        $response = $medicalrecord->update($object);
+        $instance = (new MedicalRecordsModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

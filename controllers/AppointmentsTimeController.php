@@ -8,8 +8,8 @@ class appointmentstimes extends BaseController {
      * @return
      */
     public function index(){
-        $appointmentstimes=new AppointmentsTimesModel();
-        $response=$appointmentstimes->all();
+        $instance = new AppointmentsTimesModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,9 +20,8 @@ class appointmentstimes extends BaseController {
      * @return
      */
     public function get($param){
-        
-        $appointmentstimes=new AppointmentsTimesModel();
-        $response=$appointmentstimes->get($param);
+        $instance = new AppointmentsTimesModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -32,10 +31,9 @@ class appointmentstimes extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $appointmentstimes = new AppointmentsTimesModel();
-        $response = $appointmentstimes->create($object);
+        $instance = (new AppointmentsTimesModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -46,10 +44,9 @@ class appointmentstimes extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $appointmentstimes = new AppointmentsTimesModel();
-        $response = $appointmentstimes->update($object);
+        $instance = (new AppointmentsTimesModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

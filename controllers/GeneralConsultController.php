@@ -8,8 +8,8 @@ class generalconsult extends BaseController {
      * @return
      */
     public function index(){
-        $generalconsult=new GeneralConsultModel();
-        $response=$generalconsult->all();
+        $instance = new GeneralConsultModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class generalconsult extends BaseController {
      * @return
      */
     public function get($param){
-        $generalconsult=new GeneralConsultModel();
-        $response=$generalconsult->get($param);
+        $instance = new GeneralConsultModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class generalconsult extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $generalconsult = new GeneralConsultModel();
-        $response = $generalconsult->create($object);
+        $instance = (new GeneralConsultModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class generalconsult extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $generalconsult = new GeneralConsultModel();
-        $response = $generalconsult->update($object);
+        $instance = (new GeneralConsultModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

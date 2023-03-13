@@ -8,8 +8,8 @@ class medicationuser extends BaseController {
      * @return
      */
     public function index(){
-        $medicationuser=new MedicationsUserModel();
-        $response=$medicationuser->all();
+        $instance = new MedicationsUserModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class medicationuser extends BaseController {
      * @return
      */
     public function get($param){
-        $medicationuser=new MedicationsUserModel();
-        $response=$medicationuser->get($param);
+        $instance = new MedicationsUserModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class medicationuser extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $medicationuser = new MedicationsUserModel();
-        $response = $medicationuser->create($object);
+        $instance = (new MedicationsUserModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class medicationuser extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $medicationuser = new MedicationsUserModel();
-        $response = $medicationuser->update($object);
+        $instance = (new MedicationsUserModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }

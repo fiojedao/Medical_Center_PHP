@@ -8,8 +8,8 @@ class stock extends BaseController {
      * @return
      */
     public function index(){
-        $stock=new StockModel();
-        $response=$stock->all();
+        $instance = new StockModel();
+        $response = $instance->all();
         $this->response($response);
     }
         
@@ -20,8 +20,8 @@ class stock extends BaseController {
      * @return
      */
     public function get($param){
-        $stock=new StockModel();
-        $response=$stock->get($param);
+        $instance = new StockModel();
+        $response = $instance->get($param);
         $this->response($response);
     }
         
@@ -31,10 +31,9 @@ class stock extends BaseController {
      * @return
      */
     public function create(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $stock = new StockModel();
-        $response = $stock->create($object);
+        $instance = (new StockModel());
+        $object = $this->getObj();
+        $response = $instance->create($object);
         $this->response($response);
     }
         
@@ -45,10 +44,9 @@ class stock extends BaseController {
      * @return
      */
     public function update(){
-        $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON);
-        $stock = new StockModel();
-        $response = $stock->update($object);
+        $instance = (new StockModel());
+        $object = $this->getObj();
+        $response = $instance->update($object);
         $this->response($response);
     }
 }
