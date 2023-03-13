@@ -1,5 +1,3 @@
-
-
 CREATE DATABASE medical_center;
 
 USE medical_center;
@@ -16,7 +14,7 @@ CREATE TABLE user_types (
 
 -- Tabla para gestionar los usuarios
 CREATE TABLE users_auth (
-  user_id VARCHAR(45) NOT NULL,
+  user_id VARCHAR(20) NOT NULL,
   username VARCHAR(100) NOT NULL,
   password VARCHAR(100) NOT NULL,
   email VARCHAR(100) NOT NULL,
@@ -29,7 +27,7 @@ CREATE TABLE users_auth (
 
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id VARCHAR(45) NOT NULL,
+  user_id VARCHAR(20) NOT NULL,
   name VARCHAR(45) NOT NULL,
   lastname_one VARCHAR(45) NOT NULL,
   lastname_two VARCHAR(45) NOT NULL,
@@ -47,7 +45,7 @@ CREATE TABLE users (
 -- Tabla para gestionar la autenticación de los usuarios
 CREATE TABLE user_sessions (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id VARCHAR(45) NOT NULL,
+  user_id VARCHAR(20) NOT NULL,
   user_name VARCHAR(100) NOT NULL,
   user_email VARCHAR(100) NOT NULL,
   session_token VARCHAR(100) NOT NULL,
@@ -59,7 +57,7 @@ CREATE TABLE user_sessions (
 -- Tabla para gestionar las preferencias de los usuarios
 CREATE TABLE user_preferences (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_id VARCHAR(45) NOT NULL,
+  user_id VARCHAR(20) NOT NULL,
   preference_name VARCHAR(100) NOT NULL,
   preference_value VARCHAR(100),
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -78,7 +76,7 @@ CREATE TABLE medical_specialities (
 
 -- Tabla para gestionar los médicos
 CREATE TABLE doctors (
-  doctor_id VARCHAR(45) NOT NULL,
+  doctor_id VARCHAR(20) NOT NULL,
   name VARCHAR(100) NOT NULL,
   medical_specialities_code VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -109,8 +107,8 @@ CREATE TABLE allergies (
 -- Tabla para gestionar los registros médicos
 CREATE TABLE medical_records (
   medical_records_id INT AUTO_INCREMENT PRIMARY KEY,
-  user_id VARCHAR(45),
-  doctor_id VARCHAR(45),
+  user_id VARCHAR(20),
+  doctor_id VARCHAR(20),
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT user_id FOREIGN KEY (user_id) REFERENCES users(user_id),
@@ -118,7 +116,7 @@ CREATE TABLE medical_records (
 );
 
 CREATE TABLE medical_record_diseases (
-  user_id VARCHAR(45) NOT NULL,
+  user_id VARCHAR(20) NOT NULL,
   medical_record_id INT NOT NULL,
   diseases_code_id VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -128,7 +126,7 @@ CREATE TABLE medical_record_diseases (
 );
 
 CREATE TABLE medical_record_allergies (
-  user_id VARCHAR(45) NOT NULL,
+  user_id VARCHAR(20) NOT NULL,
   medical_record_id INT NOT NULL,
   allergies_code_id VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -182,7 +180,7 @@ CREATE TABLE surgeries (
   name VARCHAR(100) NOT NULL,
   date DATETIME NOT NULL,
   medical_records_id INT NOT NULL,
-  doctor_id VARCHAR(45) NOT NULL,
+  doctor_id VARCHAR(20) NOT NULL,
   status CHAR NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -206,7 +204,7 @@ CREATE TABLE appointments (
 -- Tabla intermedia para relacionar médicos con citas
 CREATE TABLE appointment_doctors (
   appointment_id INT NOT NULL,
-  doctor_id VARCHAR(45) NOT NULL,
+  doctor_id VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (appointment_id, doctor_id),
@@ -217,7 +215,7 @@ CREATE TABLE appointment_doctors (
 -- Tabla consulta medica
 CREATE TABLE general_consult (
   id_consult INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  doctor_id VARCHAR(45) NOT NULL,
+  doctor_id VARCHAR(20) NOT NULL,
   description VARCHAR(255) NOT NULL,
   price DECIMAL NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
