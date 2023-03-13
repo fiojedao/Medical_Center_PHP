@@ -148,6 +148,24 @@ abstract class BaseModel {
     }
         
     /**
+     * customGet
+     *
+     * @param mixed $sql
+     * @return "$obj"
+     */
+    public function customGet($sql) {
+        try {
+            $this->enlace->connect();
+
+			$cResults = $this->enlace->executeSQL_DML($sql);
+
+            return $cResults;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+        
+    /**
      * customUpdate
      *
      * @param mixed $sql
