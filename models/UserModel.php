@@ -1,16 +1,15 @@
 <?php
 
-class UserModel{
-    private $enlace;
+class UserModel extends BaseModel {  
     
     /**
-     * __construct
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->enlace = new BaseModel('users', 'user_id', new MySqlConnect());
-    }
+    * __construct
+    *
+    * @return void
+    */
+   public function __construct() {
+       parent::__construct('users', 'id', new MySqlConnect());
+   }
     
     /**
      * all

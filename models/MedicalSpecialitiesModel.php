@@ -1,16 +1,15 @@
 <?php
 
-class MedicalSpecialitiesModel{
-    private $enlace;
+class MedicalSpecialitiesModel extends BaseModel {  
     
     /**
-     * __construct
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->enlace = new BaseModel('medical_specialities', 'code_id', new MySqlConnect());
-    }  
+    * __construct
+    *
+    * @return void
+    */
+   public function __construct() {
+       parent::__construct('medical_specialities', 'code_id', new MySqlConnect());
+   } 
     
     private function getId(){
         try {

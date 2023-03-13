@@ -1,20 +1,19 @@
 <?php
 
-class AppointmentsModel{
-    private $enlace;
+class AppointmentsModel extends BaseModel {  
     
     /**
-     * __construct
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->enlace = new BaseModel('appointments', 'id', new MySqlConnect());
-    }    
+    * __construct
+    *
+    * @return void
+    */
+   public function __construct() {
+       parent::__construct('appointments', 'id', new MySqlConnect());
+   }  
     
     private function getId(){
         try {
-            $code_id = "AP-".$this->enlace->generateId(8);
+            $code_id = "AP-".$this->generateId(8);
             return $code_id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
@@ -28,7 +27,7 @@ class AppointmentsModel{
      */
     public function all(){
         try {
-			$vResultado = $this->enlace->find_all();
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -44,7 +43,7 @@ class AppointmentsModel{
     public function get($id){
         try {
 
-            $vResultado = $this->enlace->find_by_id($id);
+            $vResultado = $this->find_by_id($id);
             
 			return $vResultado;
 		} catch ( Exception $e ) {
@@ -60,7 +59,7 @@ class AppointmentsModel{
      */
     public function create($objeto) {
         try {
-            $this->enlace->connect();
+            $this->connect();
 			$sql =  "INSERT INTO appointments(date,
                         description,
                         medical_records_id,
@@ -73,7 +72,7 @@ class AppointmentsModel{
                         '$objeto->status'
                     )";
 
-			$idAppointments = $this->enlace->executeSQL_DML_last($sql);
+			$idAppointments = $this->executeSQL_DML_last($sql);
             
             return $this->get($idAppointments);
 		} catch ( Exception $e ) {
@@ -91,7 +90,7 @@ class AppointmentsModel{
     public function update($objeto,$id) {
         try {
             //Consulta sql
-            $this->enlace->connect();
+            $this->connect();
 			$sql =  "UPDATE appointments SET date='$objeto->date',
                         description ='$objeto->description',
                         medical_records_id =$objeto->medical_records_id,
@@ -101,7 +100,7 @@ class AppointmentsModel{
                     WHERE id=$id";
 
             //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML($sql);
+			$cResults = $this->executeSQL_DML($sql);
 
             return $this->get($id);
 		} catch ( Exception $e ) {

@@ -1,16 +1,15 @@
 <?php
 
-class UserAuthModel {
-    private $enlace;
+class UserAuthModel  extends BaseModel {  
     
     /**
-     * __construct
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->enlace = new BaseModel('users_auth', 'email', new MySqlConnect());
-    }
+    * __construct
+    *
+    * @return void
+    */
+   public function __construct() {
+       parent::__construct('users_auth', 'user_id', new MySqlConnect());
+   }
   
     private function getId(){
         try {

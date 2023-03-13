@@ -1,17 +1,15 @@
 <?php
 
-class UserSessionModel{
-    public $enlace;
-    protected $session_token;
+class UserSessionModel extends BaseModel {  
     
     /**
-     * __construct
-     *
-     * @return void
-     */
-    public function __construct() {
-        $this->enlace = new BaseModel('user_sessions', 'id', new MySqlConnect(), 'email');
-    }  
+    * __construct
+    *
+    * @return void
+    */
+   public function __construct() {
+       parent::__construct('user_sessions', 'id', new MySqlConnect());
+   } 
     
     private function getId(){
         try {
