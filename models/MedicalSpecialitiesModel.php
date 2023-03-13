@@ -10,6 +10,15 @@ class MedicalSpecialitiesModel{
      */
     public function __construct() {
         $this->enlace = new BaseModel('medical_specialities', 'code_id', new MySqlConnect());
+    }  
+    
+    private function getId(){
+        try {
+            $code_id = "MS-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
     
     /**

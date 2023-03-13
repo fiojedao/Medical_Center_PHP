@@ -36,8 +36,8 @@ if(count($routesArray)>1 && isset($_SERVER['REQUEST_METHOD'])){
                     $action="update";
                     break;
                 case 'DELETE':
-                        $action="delete";
-                        break;
+                    $action="delete";
+                    break;
                 default:
                     $action="index";
                     break;

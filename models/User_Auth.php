@@ -11,6 +11,15 @@ class UserAuthModel {
     public function __construct() {
         $this->enlace = new BaseModel('users_auth', 'email', new MySqlConnect());
     }
+  
+    private function getId(){
+        try {
+            $code_id = "AP-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
+    }
 
     public function login($username, $password) {
         $user = $this->db->getUserByUsername($username);

@@ -5,6 +5,15 @@ class General_consultModel{
 
     public function __construct() {
         $this->enlace=new MySqlConnect();
+    }  
+    
+    private function getId(){
+        try {
+            $code_id = "GC-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
 
     public function all(){

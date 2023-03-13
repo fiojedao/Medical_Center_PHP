@@ -11,6 +11,15 @@ class UserSessionModel{
      */
     public function __construct() {
         $this->enlace = new BaseModel('user_sessions', 'id', new MySqlConnect(), 'email');
+    }  
+    
+    private function getId(){
+        try {
+            $code_id = "US-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
     
     function getUserByUserEmail($useremail) {

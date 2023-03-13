@@ -1,7 +1,6 @@
 <?php
 
-class AllergieModel {
-    private $enlace;
+class AllergieModel extends BaseModel {
     
     /**
      * __construct
@@ -9,17 +8,31 @@ class AllergieModel {
      * @return void
      */
     public function __construct() {
-        $this->enlace = new BaseModel('allergies', 'code_id', new MySqlConnect());
+        parent::__construct('allergies', 'code_id', new MySqlConnect());
+    }
+    
+    /**
+     * getId
+     *
+     * @return $id
+     */
+    private function getId(){
+        try {
+            $id = "AL-".$this->generateId(8);
+            return $id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
     
     /**
      * all
      *
-     * @return void
+     * @return $vResultado
      */
     public function all(){
         try {
-			$vResultado = $this->enlace->find_all();
+			$vResultado = $this->find_all();
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -30,80 +43,63 @@ class AllergieModel {
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
     public function get($id){
         try {
 
-            $vResultado = $this->enlace->find_by_id($id);
+            $vResultado = $this->find_by_id($id);
             
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-    
+
     /**
      * create
      *
      * @param  mixed $objeto
-     * @return void
+     * @return $vResultado
      */
     public function create($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql =  "INSERT INTO allergies(code_id,
-                        name)
-                    Values ('$objeto->code_id',
-                        '$objeto->name')";
+            $code_id = $this->getId();
+            $tuplas = "code_id, name";
 
-			$idAllergie = $this->enlace->executeSQL_DML_last($sql);
-          
-            //Retornar ALERGIAS
-            return $this->get($idAllergie);
+            $values = "'$code_id','$objeto->name'";
+
+            $vResultado = null;
+
+            if($this->createObj($tuplas, $values) > 0){
+                $vResultado =  $this->find_by_id($code_id);
+            }
+
+            return $vResultado;
+           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
+    
     
     /**
      * update
      *
      * @param  mixed $objeto
-     * @param  mixed $id
-     * @return void
+     * @return $vResultado
      */
-    public function update($objeto,$id) {
+    public function update($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql =  "UPDATE allergies SET name='$objeto->name',
-                        updated_date = CURRENT_TIMESTAMP()
-                    Where code_id=$id";
-			
-            //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML($sql);
+			$update =  "name='$objeto->name', updated_date = CURRENT_TIMESTAMP()";
 
-            return $this->get($id);
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }
+            $vResultado = null;
 
-     //Obtener alergias segun id paciente
-     //revisar consulta
-    public function getByMD($id){
-        try {
-            //Consulta sql
-			$vSql = "SELECT a.code_id, a.name, a.created_date, a.updated_date 
-                    FROM allergies as a, medical_records as m 
-                    where m.allergies_code_id=a.code_id and m.allergies_code_id=$id;";
-			$this->enlace->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
-			// Retornar el objeto
-			return $vResultado;
+            if($this->updateById($update,$objeto->code_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->code_id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

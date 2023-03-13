@@ -24,6 +24,15 @@ class MedicationModel{
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
+    }  
+    
+    private function getId(){
+        try {
+            $code_id = "M-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
     
     /**

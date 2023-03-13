@@ -22,6 +22,7 @@ require_once "models/UserSessionModel.php";
 
 
 //Agregar todos los controladores
+require_once "controllers/BaseController.php";
 require_once "controllers/AllergiesController.php";
 require_once "controllers/DiseaseController.php";
 require_once "controllers/MedicalSpecialitiesController.php";

@@ -1,45 +1,38 @@
 <?php
-class BaseModel {
+abstract class BaseModel {
     private $tabla;
     private $campoId;
     private $campoEmail;
     private $enlace;
-    
+
     /**
-     * __construct
-     *
-     * @param mixed $tabla
-     * @param mixed $campoId
-     * @param mixed $enlace
-     * @return void
-     */
-    public function __construct($tabla, $campoId, $enlace) {
-        $this->enlace = $enlace;
-        $this->tabla = $tabla;
-        $this->campoId = $campoId;
-    }
-    
-    /**
-     * __construct
+     * __construct0
      *
      * @param  mixed $tabla
      * @param  mixed $campoId
      * @param  mixed $enlace
      * @param  mixed $campoEmail
-     * @return void
+     * @return
      */
-    public function __construct($tabla, $campoId, $enlace, $campoEmail) {
-        $this->enlace = $enlace;
-        $this->tabla = $tabla;
-        $this->campoId = $campoId;
-        $this->campoEmail = $campoEmail;
+    public function __construct() {
+        $args = func_get_args();
+        if (count($args) == 3) {
+            $this->tabla = $args[0];
+            $this->campoId = $args[1];
+            $this->enlace = $args[2];
+        } elseif (count($args) == 4) {
+            $this->tabla = $args[0];
+            $this->campoId = $args[1];
+            $this->enlace = $args[2];
+            $this->campoEmail = $args[3];
+        }
     }
     
     
     /**
      * find_all
      *
-     * @return void
+     * @return
      */
     public function find_all() {
         try {
@@ -53,7 +46,6 @@ class BaseModel {
             return $vResultado;
         } catch ( Exception $e ) {
             die ( $e->getMessage () );
-            return false;
         }
     }
     
@@ -61,7 +53,7 @@ class BaseModel {
      * find_by_id
      *
      * @param mixed $valor
-     * @return void
+     * @return
      */
     public function find_by_id($param) {
         try {
@@ -71,14 +63,13 @@ class BaseModel {
 
             $valor = is_numeric($param) ? $param:"'$param'";
 
-            $vSql = "SELECT * FROM $tabla WHERE $campoId= $valor;";
+            $vSql = "SELECT * FROM $tabla WHERE $campoId = $valor;";
 
-            $vResultado = $this->enlace->ExecuteSQL( $vSql);
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
 
             return $vResultado;
         } catch ( Exception $e ) {
             die ( $e->getMessage () );
-            return false;
         }
     }
         
@@ -86,7 +77,7 @@ class BaseModel {
      * find_by_email
      *
      * @param  mixed $param
-     * @return void
+     * @return
      */
     public function find_by_email($param) {
         try {
@@ -94,38 +85,37 @@ class BaseModel {
             $campoEmail = $this->campoEmail;
             $this->enlace->connect();
 
-            $valor = is_numeric($param) ? $param:"'$param'";
-
-            $vSql = "SELECT * FROM $tabla WHERE $campoEmail= $valor;";
+            $vSql = "SELECT * FROM $tabla WHERE $campoEmail = $param;";
 
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
 
             return $vResultado;
         } catch ( Exception $e ) {
             die ( $e->getMessage () );
-            return false;
         }
     }
     
     /**
      * create
      *
-     * @param mixed $keystabla - (campo1, campor2)
-     * @param mixed $valuestabla - (valor1, valor2)
-     * @return void
+     * @param mixed $keystabla - campo1, campor2
+     * @param mixed $valuestabla - valor1, valor2
+     * @return $vResultado
      */
-    public function create($keystabla, $valuestabla) {
+    public function createObj($keystabla, $valuestabla) {
         try {
             $tabla = $this->tabla;
             $this->enlace->connect();
 
-            $sql =  "INSERT INTO $tabla $keystabla
-                    VALUES $valuestabla";
+            $vResultado = null;
 
-            return $this->enlace->executeSQL_DML_last($sql);
+            $sql =  "INSERT INTO $tabla($keystabla) VALUES($valuestabla)";
+
+            $vResultado = $this->enlace->executeSQL_DML($sql);
+
+            return $vResultado;
         } catch ( Exception $e ) {
             die ( $e->getMessage () );
-            return false;
         }
     }
         
@@ -133,25 +123,27 @@ class BaseModel {
      * update
      *
      * @param mixed $tablaSet - campo = valor, campo = valor
-     * @param mixed $valor - valor
-     * @return void
+     * @param mixed $param - valor
+     * @return;
      */
-    public function update($tablaSet, $valor) {
+    public function updateById($tablaSet,$param) {
         try {
             $tabla = $this->tabla;
             $campoId = $this->campoId;
 
             $this->enlace->connect();
+            $valor = is_numeric($param) ? $param:"'$param'";
+			$sql = "UPDATE $tabla SET $tablaSet WHERE $campoId =$valor";
+            
+            if($valor != ""){
+                $vresultado = $this->enlace->executeSQL_DML($sql);
 
-			$sql = "UPDATE $tabla SET $tablaSet
-                    WHERE $campoId = $valor";
+                return $vresultado;
+            }
 
-			$cResults = $this->enlace->executeSQL_DML($sql);
-
-            return $this->find_by_id($valor);
+            return;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
-            return false;
 		}
     }
         
@@ -160,7 +152,7 @@ class BaseModel {
      *
      * @param mixed $sql
      * @param mixed $valor
-     * @return void
+     * @return "$obj"
      */
     public function customUpdate($sql, $valor) {
         try {
@@ -171,7 +163,23 @@ class BaseModel {
             return $this->find_by_id($valor);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
-            return false;
+		}
+    }
+    
+    
+    /**
+     * generateId
+     *
+     * @param  mixed $pLength
+     * @return "new Id"
+     */
+    public function generateId($pLength)
+    {
+        try {
+            $vLength = isset($pLength) && !empty($pLength)? $pLength: 8;
+            return bin2hex(random_bytes($vLength));
+        } catch ( Exception $e ) {
+			die ( $e->getMessage () );
 		}
     }
 }

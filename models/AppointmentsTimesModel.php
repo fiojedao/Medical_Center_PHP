@@ -5,6 +5,15 @@ class appointments_timesModel{
 
     public function __construct() {
         $this->enlace=new MySqlConnect();
+    }  
+    
+    private function getId(){
+        try {
+            $code_id = "APTM-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
 
     public function all(){

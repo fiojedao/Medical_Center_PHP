@@ -9,7 +9,15 @@ class StockModel{
         $this->enlace=new MySqlConnect();
        
     }
-
+    
+    private function getId(){
+        try {
+            $code_id = "ST-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
+    }
 
     public function all(){
         try {

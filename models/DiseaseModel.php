@@ -25,6 +25,15 @@ class DiseaseModel{
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
+    }  
+    
+    private function getId(){
+        try {
+            $code_id = "D-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
     
     /**

@@ -10,6 +10,15 @@ class MedicalRecordsModel{
      */
     public function __construct() {
         $this->enlace = new BaseModel('medical_records', 'medical_records_id', new MySqlConnect());
+    }  
+    
+    private function getId(){
+        try {
+            $code_id = "MR-".$this->enlace->generateId(8);
+            return $code_id;
+        } catch (Exception $e) {
+            die ( $e->getMessage () );
+        }
     }
     
     /**
