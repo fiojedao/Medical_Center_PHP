@@ -1,81 +1,55 @@
 <?php
 
-class GeneralConsult{
+class generalconsult extends BaseController {
+        
+    /**
+     * index
+     *
+     * @return
+     */
     public function index(){
-        
-        $generalConsult=new GeneralConsultModel();
-        $response=$generalConsult->all();
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'total'=>count($response),
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'total'=>0,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
+        $generalconsult=new GeneralConsultModel();
+        $response=$generalconsult->all();
+        $this->response($response);
     }
+        
+    /**
+     * get
+     *
+     * @param  mixed $param
+     * @return
+     */
     public function get($param){
-        
-        $generalConsult=new GeneralConsultModel();
-        $response=$generalConsult->get($param);
-        $json=array(
-            'status'=>200,
-            'results'=>$response
-        );
-       echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $generalconsult=new GeneralConsultModel();
+        $response=$generalconsult->get($param);
+        $this->response($response);
     }
-    
-    public function create( ){
+        
+    /**
+     * create
+     *
+     * @return
+     */
+    public function create(){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
-        $generalConsult=new GeneralConsultModel();
-        $response=$generalConsult->create($object);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'total'=>0,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $generalconsult = new GeneralConsultModel();
+        $response = $generalconsult->create($object);
+        $this->response($response);
     }
+        
+    /**
+     * update
+     *
+     * @param  mixed $param
+     * @return
+     */
     public function update(){
         $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $generalConsult=new GeneralConsultModel();
-        $response=$generalConsult->update($object);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'total'=>0,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $object = json_decode($inputJSON);
+        $generalconsult = new GeneralConsultModel();
+        $response = $generalconsult->update($object);
+        $this->response($response);
     }
-
 }
 ?>

@@ -1,5 +1,12 @@
 <?php
 abstract class BaseController {
+
+    /**
+     * response
+     *
+     * @param  mixed $response
+     * @return void
+     */
     public function response($response){
         if(isset($response) && !empty($response)){
             $json=array(

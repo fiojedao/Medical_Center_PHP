@@ -1,81 +1,56 @@
 <?php
 
-class AppointmentsTimes{
-    public function index(){
+class appointmentstimes extends BaseController {
         
-        $appointmentsTimes=new AppointmentsTimesModel();
-        $response=$appointmentsTimes->all();
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'total'=>count($response),
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'total'=>0,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
+    /**
+     * index
+     *
+     * @return
+     */
+    public function index(){
+        $appointmentstimes=new AppointmentsTimesModel();
+        $response=$appointmentstimes->all();
+        $this->response($response);
     }
+        
+    /**
+     * get
+     *
+     * @param  mixed $param
+     * @return
+     */
     public function get($param){
         
-        $appointmentsTimes=new AppointmentsTimesModel();
-        $response=$appointmentsTimes->get($param);
-        $json=array(
-            'status'=>200,
-            'results'=>$response
-        );
-       echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $appointmentstimes=new AppointmentsTimesModel();
+        $response=$appointmentstimes->get($param);
+        $this->response($response);
     }
-    
-    public function create( ){
+        
+    /**
+     * create
+     *
+     * @return
+     */
+    public function create(){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
-        $appointmentsTimes=new AppointmentsTimesModel();
-        $response=$appointmentsTimes->create($object);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'total'=>0,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $appointmentstimes = new AppointmentsTimesModel();
+        $response = $appointmentstimes->create($object);
+        $this->response($response);
     }
+        
+    /**
+     * update
+     *
+     * @param  mixed $param
+     * @return
+     */
     public function update(){
         $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $appointmentsTimes=new AppointmentsTimesModel();
-        $response=$appointmentsTimes->update($object);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'total'=>0,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $object = json_decode($inputJSON);
+        $appointmentstimes = new AppointmentsTimesModel();
+        $response = $appointmentstimes->update($object);
+        $this->response($response);
     }
-
 }
 ?>

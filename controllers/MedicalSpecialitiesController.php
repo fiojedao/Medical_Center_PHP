@@ -1,101 +1,55 @@
 <?php
 
-class medicalspecialities{
+class medicalspecialities extends BaseController {
         
     /**
      * index
      *
-     * @return void
+     * @return
      */
     public function index(){
-        $alquiler=new AlquilerModel();
-        $response=$alquiler->all();
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
+        $medicalspecialities=new MedicalSpecialitiesModel();
+        $response=$medicalspecialities->all();
+        $this->response($response);
     }
         
     /**
      * get
      *
      * @param  mixed $param
-     * @return void
+     * @return
      */
     public function get($param){
-        
-        $alquiler=new MedicalSpecialitiesModel();
-        $response=$alquiler->get($param);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $medicalspecialities=new MedicalSpecialitiesModel();
+        $response=$medicalspecialities->get($param);
+        $this->response($response);
     }
         
     /**
      * create
      *
-     * @return void
+     * @return
      */
     public function create(){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
-        $alquiler=new MedicalSpecialitiesModel();
-        $response=$alquiler->create($object);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $medicalspecialities = new MedicalSpecialitiesModel();
+        $response = $medicalspecialities->create($object);
+        $this->response($response);
     }
-    public function update($param){
+        
+    /**
+     * update
+     *
+     * @param  mixed $param
+     * @return
+     */
+    public function update(){
         $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $alquiler=new MedicalSpecialitiesModel();
-        $response=$alquiler->update($object,$param);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $object = json_decode($inputJSON);
+        $medicalspecialities = new MedicalSpecialitiesModel();
+        $response = $medicalspecialities->update($object);
+        $this->response($response);
     }
-
 }
 ?>

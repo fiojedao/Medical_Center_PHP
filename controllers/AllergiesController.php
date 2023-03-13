@@ -8,8 +8,8 @@ class allergies extends BaseController {
      * @return
      */
     public function index(){
-        $disease=new AllergieModel();
-        $response=$disease->all();
+        $allergie=new AllergieModel();
+        $response=$allergie->all();
         $this->response($response);
     }
         
@@ -20,7 +20,6 @@ class allergies extends BaseController {
      * @return
      */
     public function get($param){
-        
         $allergie=new AllergieModel();
         $response=$allergie->get($param);
         $this->response($response);

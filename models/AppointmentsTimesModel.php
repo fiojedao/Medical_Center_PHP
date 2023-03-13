@@ -1,6 +1,6 @@
 <?php
 
-class appointments_timesModel extends BaseModel {  
+class AppointmentsTimesModel extends BaseModel {  
     
     /**
     * __construct

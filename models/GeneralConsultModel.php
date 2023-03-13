@@ -1,6 +1,6 @@
 <?php
 
-class General_consultModel extends BaseModel {  
+class GeneralConsultModel extends BaseModel {  
     
     /**
     * __construct

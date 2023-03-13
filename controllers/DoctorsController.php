@@ -1,108 +1,55 @@
 <?php
 
-class doctors{
-    
+class doctors extends BaseController {
+        
     /**
      * index
      *
-     * @return void
+     * @return
      */
     public function index(){
-        $alquiler=new AlquilerModel();
-        $response=$alquiler->all();
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
+        $doctors=new DoctorsModel();
+        $response=$doctors->all();
+        $this->response($response);
     }
         
     /**
      * get
      *
      * @param  mixed $param
-     * @return void
+     * @return
      */
     public function get($param){
-        
-        $alquiler=new AlquilerModel();
-        $response=$alquiler->get($param);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $doctors=new DoctorsModel();
+        $response=$doctors->get($param);
+        $this->response($response);
     }
         
     /**
      * create
      *
-     * @return void
+     * @return
      */
     public function create(){
         $inputJSON=file_get_contents('php://input');
         $object = json_decode($inputJSON); 
-        $alquiler=new DoctorsModel();
-        $response=$alquiler->create($object);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $doctors = new DoctorsModel();
+        $response = $doctors->create($object);
+        $this->response($response);
     }
         
     /**
      * update
      *
      * @param  mixed $param
-     * @return void
+     * @return
      */
-    public function update($param){
+    public function update(){
         $inputJSON=file_get_contents('php://input');
-        $object = json_decode($inputJSON); 
-        $alquiler=new DoctorsModel();
-        $response=$alquiler->update($object,$param);
-        if(isset($response) && !empty($response)){
-            $json=array(
-                'status'=>200,
-                'results'=>$response
-            );
-        }else{
-            $json=array(
-                'status'=>400,
-                'results'=>"No hay registros"
-            );
-        }
-        echo json_encode($json,
-        http_response_code($json["status"]));
-        
+        $object = json_decode($inputJSON);
+        $doctors = new DoctorsModel();
+        $response = $doctors->update($object);
+        $this->response($response);
     }
-
 }
 ?>
