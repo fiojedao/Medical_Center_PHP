@@ -87,8 +87,8 @@ class MedicalRecordsModel extends BaseModel {
         try {
             //Consulta sql
             $this->connect();
-			$sql = "Insert into medical_records (user_id, doctor_id, created_date, updated_date)". 
-                     "Values ($objeto->user_id,$objeto->doctor_id, '$objeto->created_date', '$objeto->updated_date')";
+			$sql = "Insert into medical_records (user_id, doctor_id )". 
+                     "Values ($objeto->user_id,$objeto->doctor_id)";
 	
 			$idMedicalRecord = $this->executeSQL_DML_last( $sql);
            

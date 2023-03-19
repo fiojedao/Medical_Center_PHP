@@ -64,13 +64,19 @@ class MedicalSpecialitiesModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            $this->enlace->connect();
-			$sql = "INSERT INTO medical_specialities (code, name, description)
-            VALUES('$objeto->code','$objeto->name','$objeto->description')";
-			
-			$vResultado = $this->enlace->executeSQL_DML_last($sql);
+            $code_id = $this->getId();
+            $tuplas = "code_id, name,description ";
 
-            return $this->get($vResultado);
+            $values = "'$code_id','$objeto->name', '$objeto->description'";
+
+            $vResultado = null;
+
+            if($this->createObj($tuplas, $values) > 0){
+                $vResultado =  $this->find_by_id($code_id);
+            }
+
+            return $vResultado;
+           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -86,7 +92,7 @@ class MedicalSpecialitiesModel extends BaseModel {
     public function update($id, $objeto) {
         try {
             $this->enlace->connect();
-			$sql = "UPDATE medical_specialities SET code ='$objeto->code',name ='$objeto->name',description ='$objeto->description',updated_date = CURRENT_TIMESTAMP() Where id=$id";
+			$sql = "UPDATE medical_specialities SET code_id ='$objeto->code_id',name ='$objeto->name',description ='$objeto->description',updated_date = CURRENT_TIMESTAMP() Where id=$id";
 			
 			$cResults = $this->enlace->executeSQL_DML($sql);
 

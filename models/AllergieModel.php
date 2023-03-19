@@ -104,5 +104,25 @@ class AllergieModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+
+/*
+    
+     //Obtener enfermedades segun id medical_record
+     //REVISAR CONSULTA
+     public function getByMD($id){
+        try {
+            //Consulta sql
+			$vSql = "SELECT a.code_id, a.name, a.created_date, a.updated_date FROM allergies AS a, medical_record_allergies AS m WHERE a.code_id= m.allergies_code_id and m.medical_record_id=$id;";
+			$this->enlace->connect();
+            //Ejecutar la consulta
+			$vResultado = $this->enlace->ExecuteSQL ( $vSql);
+			// Retornar el objeto
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+*/
+
 }
 ?>

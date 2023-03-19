@@ -65,17 +65,18 @@ class DoctorsModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            $this->enlace->connect();
-			$sql = "INSERT INTO doctors(doctor_id, 
-                        name, 
-                        medical_specialities_code)
-                    VALUES('$objeto->doctor_id',
-                        '$objeto->name',
-                        '$objeto->medical_specialities_code')";
-			
-			$vResultado = $this->enlace->executeSQL_DML_last($sql);
+            $code_id = $this->getId();
+            $tuplas = "doctor_id, name,  medical_specialities_code";
 
-            return $this->get($vResultado);
+            $values = "'$code_id','$objeto->name, '$objeto->medical_specialities_code''";
+
+            $vResultado = null;
+
+            if($this->createObj($tuplas, $values) > 0){
+                $vResultado =  $this->find_by_id($code_id);
+            }
+
+            return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

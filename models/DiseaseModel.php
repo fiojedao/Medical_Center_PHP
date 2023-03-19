@@ -65,19 +65,23 @@ class DiseaseModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "INSERT INTO diseases(code_id, 
-                        name)
-                    VALUES ('$objeto->code_id',
-                        '$objeto->name')";
-	
-			$idDisease = $this->enlace->executeSQL_DML_last( $sql);
+            $code_id = $this->getId();
+            $tuplas = "code_id, name";
+
+            $values = "'$code_id','$objeto->name'";
+
+            $vResultado = null;
+
+            if($this->createObj($tuplas, $values) > 0){
+                $vResultado =  $this->find_by_id($code_id);
+            }
+
+            return $vResultado;
            
-            return $this->get($idDisease);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
+
     }
     
     /**
@@ -104,12 +108,12 @@ class DiseaseModel extends BaseModel {
 		}
     }
 
-     //Obtener enfermedades segun id paciente
+     //Obtener enfermedades segun id medical_record
      //REVISAR CONSULTA
     public function getByMD($id){
         try {
             //Consulta sql
-			$vSql = "SELECT d.code_id, d.name, d.created_date, d.updated_date FROM diseases as d, medical_records as m where m.allergies_code_id=d.code_id and m.allergies_code_id=$id;";
+			$vSql = "SELECT d.code_id, d.name, d.created_date, d.updated_date FROM diseases AS d, medical_record_diseases AS m WHERE d.code_id= m.diseases_code_id AND m.medical_record_id=$id;";
 			$this->enlace->connect();
             //Ejecutar la consulta
 			$vResultado = $this->enlace->ExecuteSQL ( $vSql);

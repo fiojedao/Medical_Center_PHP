@@ -64,17 +64,21 @@ class MedicationModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "Insert into  medications (code, name, description, dose, type)". 
-                     "Values ('$objeto->code', '$objeto->name' ,'$objeto->description' ,'$objeto->dose' ,'$objeto->type' )";
-	
-			$idMedication = $this->enlace->executeSQL_DML_last( $sql);
-           
-            return $this->get($idMedication);
+            $code = $this->getId();
+            $tuplas = "code, name, description, dose, type ";
+
+            $values = "'$code','$objeto->name','$objeto->description' ,'$objeto->dose' ,'$objeto->type'";
+
+            $vResultado = null;
+
+            if($this->createObj($tuplas, $values) > 0){
+                $vResultado =  $this->find_by_id($code);
+            }
+
+            return $vResultado;        
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
-		}
+		}  
     }
     
     /**
