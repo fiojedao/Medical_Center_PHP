@@ -3,13 +3,13 @@
 class MedicalRecordsModel extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('medical_records', 'medical_records_id', new MySqlConnect());
-   }   
+     * __construct
+     *
+     * @return;
+     */
+    public function __construct() {
+        parent::__construct('medical_records', 'medical_records_id', new MySqlConnect());
+    }   
     
     private function getId(){
         try {
@@ -23,7 +23,7 @@ class MedicalRecordsModel extends BaseModel {
     /**
      * all
      *
-     * @return void
+     * @return;
      */
     public function all(){
         try {
@@ -38,39 +38,37 @@ class MedicalRecordsModel extends BaseModel {
      * get
      *
      * @param  mixed $id
-     * @return void
+     * @return;
      */
     public function get($id){
         try {
-
-            $doctorM=new DoctorModel();
-            $userM=new UserModel();
-            $allergiesM=new AllegiesModel();
-            $deseasesM=new DiseasesModel();
-
-
             //Consulta sql
-			$vSql = "SELECT * FROM medical_records where doctor_id=$id";
-			$this->connect();
-            //Ejecutar la consulta
-			$vResultado = $this->ExecuteSQL ( $vSql);
-            $vResultado = $vResultado[0];
+			$vSql = "SELECT 
+                        mr.medical_records_id, 
+                        mr.user_id, 
+                        mr.doctor_id, 
+                        allergies.allergies_code_id,
+                        allergies.name as allergies_name, 
+                        diseases.diseases_code_id,
+                        diseases.name as diseases_name, 
+                        mr.created_date, 
+                        mr.updated_date 
+                    FROM medical_records as mr
+                    INNER JOIN (
+                            SELECT mra.user_id, mra.medical_record_id, mra.allergies_code_id, a.name 
+                            FROM medical_record_allergies mra
+                            INNER JOIN allergies a 
+                                ON a.code_id = mra.allergies_code_id) as allergies
+                        ON mr.medical_records_id = allergies.medical_record_id
+                    INNER JOIN (
+                            SELECT mrd.user_id, mrd.medical_record_id, mrd.diseases_code_id, d.name 
+                            FROM medical_record_diseases mrd
+                            INNER JOIN diseases d
+                            ON d.code_id = mrd.diseases_code_id) as diseases
+                    ON mr.medical_records_id = diseases.medical_record_id
+                    WHERE mr.medical_records_id = $id;";
 
-            $user=$userM->get($vResultado->user_id);
-            $vResultado->user=$user;
-           
-            $doctor=$doctorM->get($vResultado->doctor_id);
-            $vResultado->doctor=$doctor;
-
-            //Listar allergies segun paciente
-            $allergies=$allergiesM->getByMD($id);
-            $vResultado->allergies= $allergies;
-
-            //Listar enfermedadess segun paciente
-            $diseases=$deseasesM->getByMD($id);
-            $vResultado->diseases=$diseases;
-           
-			// Retornar el objeto
+			 $vResultado = $this->customGet($vSql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -81,7 +79,7 @@ class MedicalRecordsModel extends BaseModel {
      * create
      *
      * @param  mixed $objeto
-     * @return void
+     * @return
      */
     public function create($objeto) {
         try {
@@ -130,7 +128,7 @@ class MedicalRecordsModel extends BaseModel {
      * update
      *
      * @param  mixed $objeto
-     * @return void
+     * @return
      */
     public function update($objeto) {
         try {
@@ -194,11 +192,5 @@ class MedicalRecordsModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
-
-
-
-
-   
 }
 ?>

@@ -32,7 +32,7 @@ abstract class BaseModel {
     /**
      * find_all
      *
-     * @return
+     * @return "$obj";
      */
     public function find_all() {
         try {
@@ -53,7 +53,7 @@ abstract class BaseModel {
      * find_by_id
      *
      * @param mixed $valor
-     * @return
+     * @return "$obj";
      */
     public function find_by_id($param) {
         try {
@@ -77,7 +77,7 @@ abstract class BaseModel {
      * find_by_email
      *
      * @param  mixed $param
-     * @return
+     * @return "$obj";
      */
     public function find_by_email($param) {
         try {
@@ -100,7 +100,7 @@ abstract class BaseModel {
      *
      * @param mixed $keystabla - campo1, campor2
      * @param mixed $valuestabla - valor1, valor2
-     * @return $vResultado
+     * @return $vResultado;
      */
     public function createObj($keystabla, $valuestabla) {
         try {
@@ -124,7 +124,7 @@ abstract class BaseModel {
      *
      * @param mixed $tablaSet - campo = valor, campo = valor
      * @param mixed $param - valor
-     * @return;
+     * @return "$obj";
      */
     public function updateById($tablaSet,$param) {
         try {
@@ -141,7 +141,7 @@ abstract class BaseModel {
                 return $vresultado;
             }
 
-            return;
+            return null;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -151,13 +151,13 @@ abstract class BaseModel {
      * customGet
      *
      * @param mixed $sql
-     * @return "$obj"
+     * @return "$obj";
      */
     public function customGet($sql) {
         try {
             $this->enlace->connect();
 
-			$cResults = $this->enlace->executeSQL_DML($sql);
+			$cResults = $this->enlace->ExecuteSQL($sql);
 
             return $cResults;
 		} catch ( Exception $e ) {
@@ -170,7 +170,7 @@ abstract class BaseModel {
      *
      * @param mixed $sql
      * @param mixed $valor
-     * @return "$obj"
+     * @return "$obj";
      */
     public function customUpdate($sql, $valor) {
         try {

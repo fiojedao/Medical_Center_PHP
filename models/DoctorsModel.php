@@ -1,7 +1,6 @@
 <?php
 
 class DoctorsModel extends BaseModel {  
-    
     /**
      * __construct
      *

@@ -584,3 +584,69 @@ VALUES
 ('u00009', 'Raúl Hernández Ortiz','1234', 'r.hernandezn@example.com', 13, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
 ('u00010', 'Isabel Torres Ruiz','1234', 'i.torres@example.com', 13, '2023-03-18 12:00:00', '2023-03-18 12:00:00');
 
+
+
+INSERT INTO doctors (doctor_id,name,medical_specialities_code,created_date,updated_date)
+VALUES
+('DTR001','Pedro','MSP001',NOW(),NOW()),
+('DTR002','Ricardo','MSP002',NOW(),NOW()),
+('DTR003','Jorge','MSP003',NOW(),NOW()),
+('DTR004','Alejandro','MSP004',NOW(),NOW()),
+('DTR005','Alexis','MSP005',NOW(),NOW()),
+('DTR006','Felipe','MSP006',NOW(),NOW()),
+('DTR007','Carlos','MSP007',NOW(),NOW()),
+('DTR008','Ramon','MSP008',NOW(),NOW()),
+('DTR009','Roberto','MSP009',NOW(),NOW()),
+('DTR010','Raul','MSP010',NOW(),NOW()),
+('DTR011','Ramses','MSP011',NOW(),NOW()),
+('DTR012','Rogelio','MSP012',NOW(),NOW());
+
+INSERT INTO medical_records (user_id,doctor_id,created_date,updated_date)
+VALUES('u00001','DTR001',NOW(),NOW()),
+('u00001','DTR002',NOW(),NOW()),
+('u00001','DTR003',NOW(),NOW()),
+('u00002','DTR004',NOW(),NOW()),
+('u00002','DTR005',NOW(),NOW()),
+('u00003','DTR006',NOW(),NOW()),
+('u00004','DTR007',NOW(),NOW()),
+('u00004','DTR008',NOW(),NOW()),
+('u00004','DTR001',NOW(),NOW()),
+('u00004','DTR002',NOW(),NOW()),
+('u00005','DTR003',NOW(),NOW()),
+('u00005','DTR004',NOW(),NOW()),
+('u00002','DTR005',NOW(),NOW()),
+('u00006','DTR006',NOW(),NOW());
+
+INSERT INTO medical_record_allergies (user_id,medical_record_id,allergies_code_id)
+VALUES
+('u00001',1,'A001'),
+('u00001',2,'A002'),
+('u00001',3,'A003'),
+('u00002',4,'A004'),
+('u00002',5,'A005'),
+('u00003',6,'A006'),
+('u00004',7,'A007'),
+('u00004',8,'A008'),
+('u00004',9,'A009'),
+('u00004',10,'A010'),
+('u00005',11,'A001'),
+('u00005',12,'A002'),
+('u00002',13,'A001'),
+('u00006',14,'A002');
+
+INSERT INTO medical_record_diseases (user_id,medical_record_id,diseases_code_id)
+VALUES
+('u00001',1,'D001'),
+('u00001',2,'D002'),
+('u00001',3,'D003'),
+('u00002',4,'D004'),
+('u00002',5,'D005'),
+('u00003',6,'D006'),
+('u00004',7,'D007'),
+('u00004',8,'D008'),
+('u00004',9,'D009'),
+('u00004',10,'D010'),
+('u00005',11,'D001'),
+('u00005',12,'D002'),
+('u00002',13,'D001'),
+('u00006',14,'D002');

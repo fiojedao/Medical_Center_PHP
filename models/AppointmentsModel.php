@@ -1,8 +1,6 @@
 <?php
 
-class AppointmentsModel extends BaseModel {  
-    
-    
+class AppointmentsModel extends BaseModel {
     /**
      * __construct
      *
