@@ -20,6 +20,8 @@
     require_once "models/MedicationModel.php";
     require_once "models/UserModel.php";
     require_once "models/UserSessionModel.php";
+    require_once "models/AppointmentsModel.php";
+    require_once "models/AppointmentsTimesModel.php";
 
 
     //Agregar todos los controladores
@@ -30,6 +32,8 @@
     require_once "controllers/MedicationController.php";
     require_once "controllers/UserController.php";
     require_once "controllers/UserSesionController.php";
+    require_once "controllers/AppointmentsController.php";
+    require_once "controllers/AppointmentsTimeController.php";
     
     require_once "controllers/RoutesController.php";
     $index=new RoutesController();

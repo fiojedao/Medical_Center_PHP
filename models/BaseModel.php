@@ -118,6 +118,30 @@ abstract class BaseModel {
             die ( $e->getMessage () );
         }
     }
+    
+    /**
+     * create
+     *
+     * @param mixed $keystabla - campo1, campor2
+     * @param mixed $valuestabla - valor1, valor2
+     * @return $vResultado;
+     */
+    public function createObj_Last($keystabla, $valuestabla) {
+        try {
+            $tabla = $this->tabla;
+            $this->enlace->connect();
+
+            $vResultado = null;
+
+            $sql =  "INSERT INTO $tabla($keystabla) VALUES($valuestabla)";
+
+            $vResultado = $this->enlace->executeSQL_DML_last($sql);
+
+            return $vResultado;
+        } catch ( Exception $e ) {
+            die ( $e->getMessage () );
+        }
+    }
         
     /**
      * update

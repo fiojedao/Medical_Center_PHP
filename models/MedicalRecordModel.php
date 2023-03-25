@@ -83,42 +83,14 @@ class MedicalRecordsModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            //Consulta sql
-            $this->connect();
-			$sql = "Insert into medical_records (user_id, doctor_id )". 
-                     "Values ($objeto->user_id,$objeto->doctor_id)";
-	
-			$idMedicalRecord = $this->executeSQL_DML_last( $sql);
+            $tuplas = "user_id, doctor_id";
+
+            $values = "'$objeto->user_id','$objeto->doctor_id'";
+
+            $vResultado =  $this->createObj_Last($tuplas, $values);
+
+            return $vResultado;
            
-
-            foreach( $objeto->allergies as $allergies){
-                $dataAllergie[]=array($medical_record_id, $allergie_code);
-            }
-           
-                
-            foreach($dataAllergie as $row){
-                $this->connect();
-                $valores=implode(',', $row);
-                $sql = "INSERT INTO nombre_tabla( medical_records_id, allergie_code) VALUES(".$valores.");";
-                $vResultado = $this->executeSQL_DML($sql);
-            }
-
-
-            foreach( $objeto->diseases as $diseases){
-                $dataDiseases[]=array($medical_record_id, $disease_code);
-            }
-               
-                    
-            foreach($dataDisease as $row){
-                $this->connect();
-                $valores=implode(',', $row);
-                $sql = "INSERT INTO nombre_tabla( medical_records_id, disease_code) VALUES(".$valores.");";
-                $vResultado = $this->executeSQL_DML($sql);
-            }
-
-
-                
-            return $this->get($idMedicalRecord);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
