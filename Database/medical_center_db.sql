@@ -137,7 +137,7 @@ CREATE TABLE medical_record_allergies (
 
 -- Gestiona los registro de medicamentos que utilizara stock
 CREATE TABLE medications (
-  code VARCHAR(100) PRIMARY KEY,
+  code VARCHAR(20) PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   description VARCHAR(255) NOT NULL,
   dose VARCHAR(255) NOT NULL,
@@ -167,10 +167,11 @@ CREATE TABLE medications_user (
   medical_records_id INT NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  medications_code INT NOT NULL,
+  medications_code VARCHAR(20),
   stock_id INT NOT NULL,
   FOREIGN KEY (medical_records_id) REFERENCES medical_records(medical_records_id),
   FOREIGN KEY (stock_id) REFERENCES stock(id)
+  FOREIGN KEY (medications_code) REFERENCES medications(code)
 );
 
 -- Tabla para gestionar las cirugias
