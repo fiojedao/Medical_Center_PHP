@@ -149,7 +149,7 @@ CREATE TABLE medications (
 -- Contiene la información de los medicamentos en existencia
 CREATE TABLE stock (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  medications_code VARCHAR(100) NOT NULL,
+  medications_code VARCHAR(20) NOT NULL,
   lot VARCHAR(50) NOT NULL,
   expiration_date DATE NOT NULL,
   description VARCHAR(255) NOT NULL,
