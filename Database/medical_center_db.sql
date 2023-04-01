@@ -165,12 +165,12 @@ CREATE TABLE medications_user (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   medical_records_id INT NOT NULL,
-  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   medications_code VARCHAR(20),
   stock_id INT NOT NULL,
+  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (medical_records_id) REFERENCES medical_records(medical_records_id),
-  FOREIGN KEY (stock_id) REFERENCES stock(id)
+  FOREIGN KEY (stock_id) REFERENCES stock(id),
   FOREIGN KEY (medications_code) REFERENCES medications(code)
 );
 
@@ -234,6 +234,17 @@ CREATE TABLE appointments_times (
   FOREIGN KEY (appointments_id) REFERENCES appointments(id)
 );
 
+CREATE TABLE share_files (
+ id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+ medical_record_id INT NOT NULL,
+ foreign_user_id VARCHAR(45) NOT NULL,
+ created_date DATETIME NOT NULL,
+ updated_date DATETIME NULL,
+ FOREIGN KEY (medical_record_id) REFERENCES medical_records(medical_records_id)
+);
+
+
+
 /*
 -- Indices para mejorar la eficiencia en las búsquedas
 CREATE INDEX idx_users_auth_username ON users_auth (username);
@@ -246,6 +257,8 @@ CREATE INDEX idx_medications_user_medical_records_id ON medications_user (medica
 CREATE INDEX idx_surgeries_medical_records_id ON surgeries (medical_records_id);
 CREATE INDEX idx_appointments_medical_records_id ON appointments (medical_records_id);*/
 
+
+-- INSERT
 
 -- INSERT
 
@@ -418,46 +431,51 @@ VALUES
 ('u00008', 'DOC008', '2023-03-25 17:30:00', '2023-03-25 17:30:00'),
 ('u00009', 'DOC009', '2023-03-26 18:30:00', '2023-03-26 18:30:00'),
 ('u00010', 'DOC010', '2023-03-27 19:30:00', '2023-03-27 19:30:00');
-
+/*
+select* from  medical_records;
 select* from  appointments;
+*/
 INSERT INTO appointments (date, description, medical_records_id, consulting_room, status)
 VALUES 
-('2023-03-18 10:30:00', 'Descripción de la cita 1', 31, 'Consultorio 1', 'A'),
-('2023-03-19 11:30:00', 'Descripción de la cita 2', 34, 'Consultorio 2', 'P'),
-('2023-03-20 12:30:00', 'Descripción de la cita 3', 35, 'Consultorio 3', 'T'),
-('2023-03-21 13:30:00', 'Descripción de la cita 4', 36, 'Consultorio 4', 'A'),
-('2023-03-22 14:30:00', 'Descripción de la cita 5', 37, 'Consultorio 1', 'T'),
-('2023-03-23 15:30:00', 'Descripción de la cita 6', 38, 'Consultorio 2', 'A'),
-('2023-03-24 16:30:00', 'Descripción de la cita 7', 39, 'Consultorio 3', 'T'),
-('2023-03-25 17:30:00', 'Descripción de la cita 8', 40, 'Consultorio 4', 'A'),
-('2023-03-26 18:30:00', 'Descripción de la cita 9', 31, 'Consultorio 1', 'P'),
-('2023-03-27 19:30:00', 'Descripción de la cita 10', 32, 'Consultorio 2', 'A'),
-('2023-03-28 20:30:00', 'Descripción de la cita 11', 33, 'Consultorio 3', 'P'),
-('2023-03-29 21:30:00', 'Descripción de la cita 12', 34, 'Consultorio 4', 'A'),
-('2023-03-30 22:30:00', 'Descripción de la cita 13', 35, 'Consultorio 1', 'T'),
-('2023-03-31 23:30:00', 'Descripción de la cita 14', 36, 'Consultorio 2', 'A'),
-('2023-04-01 09:30:00', 'Descripción de la cita 15', 37, 'Consultorio 3', 'T'),
-('2023-04-02 10:30:00', 'Descripción de la cita 16', 38, 'Consultorio 4', 'A'),
-('2023-04-03 11:30:00', 'Descripción de la cita 17', 39, 'Consultorio 5', 'P'),
-('2023-04-04 12:30:00', 'Descripción de la cita 18', 40, 'Consultorio 5', 'A'),
-('2023-04-05 13:30:00', 'Descripción de la cita 19', 31, 'Consultorio 5', 'P'),
-('2023-04-06 14:30:00', 'Descripción de la cita 20', 32, 'Consultorio 5', 'A');
-
-
+('2023-03-18 10:30:00', 'Descripción de la cita 1', 1, 'Consultorio 1', 'A'),
+('2023-03-19 11:30:00', 'Descripción de la cita 2', 4, 'Consultorio 2', 'P'),
+('2023-03-20 12:30:00', 'Descripción de la cita 3', 5, 'Consultorio 3', 'T'),
+('2023-03-21 13:30:00', 'Descripción de la cita 4', 6, 'Consultorio 4', 'A'),
+('2023-03-22 14:30:00', 'Descripción de la cita 5', 7, 'Consultorio 1', 'T'),
+('2023-03-23 15:30:00', 'Descripción de la cita 6', 8, 'Consultorio 2', 'A'),
+('2023-03-24 16:30:00', 'Descripción de la cita 7', 9, 'Consultorio 3', 'T'),
+('2023-03-25 17:30:00', 'Descripción de la cita 8', 1, 'Consultorio 4', 'A'),
+('2023-03-26 18:30:00', 'Descripción de la cita 9', 1, 'Consultorio 1', 'P'),
+('2023-03-27 19:30:00', 'Descripción de la cita 10', 2, 'Consultorio 2', 'A'),
+('2023-03-28 20:30:00', 'Descripción de la cita 11', 3, 'Consultorio 3', 'P'),
+('2023-03-29 21:30:00', 'Descripción de la cita 12', 4, 'Consultorio 4', 'A'),
+('2023-03-30 22:30:00', 'Descripción de la cita 13', 5, 'Consultorio 1', 'T'),
+('2023-03-31 23:30:00', 'Descripción de la cita 14', 6, 'Consultorio 2', 'A'),
+('2023-04-01 09:30:00', 'Descripción de la cita 15', 7, 'Consultorio 3', 'T'),
+('2023-04-02 10:30:00', 'Descripción de la cita 16', 8, 'Consultorio 4', 'A'),
+('2023-04-03 11:30:00', 'Descripción de la cita 17', 9, 'Consultorio 5', 'P'),
+('2023-04-04 12:30:00', 'Descripción de la cita 18', 9, 'Consultorio 5', 'A'),
+('2023-04-05 13:30:00', 'Descripción de la cita 19', 1, 'Consultorio 5', 'P'),
+('2023-04-06 14:30:00', 'Descripción de la cita 20', 2, 'Consultorio 5', 'A');
+/*
+select* from  appointments;
+select* from  appointments_times;
+*/
 INSERT INTO appointments_times (appointments_id, init_datetime, end_datetime, created_date, updated_date)
 VALUES 
-(31, '2023-03-18 10:00:00', '2023-03-18 10:30:00', '2023-03-18 10:30:00', '2023-03-18 10:30:00'),
-(32, '2023-03-19 11:00:00', '2023-03-19 11:30:00', '2023-03-19 11:30:00', '2023-03-19 11:30:00'),
-(23, '2023-03-20 12:00:00', '2023-03-20 12:30:00', '2023-03-20 12:30:00', '2023-03-20 12:30:00'),
-(34, '2023-03-21 13:00:00', '2023-03-21 13:30:00', '2023-03-21 13:30:00', '2023-03-21 13:30:00'),
-(25, '2023-03-22 14:00:00', '2023-03-22 14:30:00', '2023-03-22 14:30:00', '2023-03-22 14:30:00'),
-(36, '2023-03-23 15:00:00', '2023-03-23 15:30:00', '2023-03-23 15:30:00', '2023-03-23 15:30:00'),
-(27, '2023-03-24 16:00:00', '2023-03-24 16:30:00', '2023-03-24 16:30:00', '2023-03-24 16:30:00'),
-(28, '2023-03-25 17:00:00', '2023-03-25 17:30:00', '2023-03-25 17:30:00', '2023-03-25 17:30:00'),
-(29, '2023-03-26 18:00:00', '2023-03-26 18:30:00', '2023-03-26 18:30:00', '2023-03-26 18:30:00'),
-(40, '2023-03-27 19:00:00', '2023-03-27 19:30:00', '2023-03-27 19:30:00', '2023-03-27 19:30:00');
-
-
+(1, '2023-03-18 10:00:00', '2023-03-18 10:30:00', '2023-03-18 10:30:00', '2023-03-18 10:30:00'),
+(2, '2023-03-19 11:00:00', '2023-03-19 11:30:00', '2023-03-19 11:30:00', '2023-03-19 11:30:00'),
+(3, '2023-03-20 12:00:00', '2023-03-20 12:30:00', '2023-03-20 12:30:00', '2023-03-20 12:30:00'),
+(4, '2023-03-21 13:00:00', '2023-03-21 13:30:00', '2023-03-21 13:30:00', '2023-03-21 13:30:00'),
+(5, '2023-03-22 14:00:00', '2023-03-22 14:30:00', '2023-03-22 14:30:00', '2023-03-22 14:30:00'),
+(6, '2023-03-23 15:00:00', '2023-03-23 15:30:00', '2023-03-23 15:30:00', '2023-03-23 15:30:00'),
+(7, '2023-03-24 16:00:00', '2023-03-24 16:30:00', '2023-03-24 16:30:00', '2023-03-24 16:30:00'),
+(8, '2023-03-25 17:00:00', '2023-03-25 17:30:00', '2023-03-25 17:30:00', '2023-03-25 17:30:00'),
+(9, '2023-03-26 18:00:00', '2023-03-26 18:30:00', '2023-03-26 18:30:00', '2023-03-26 18:30:00'),
+(10, '2023-03-27 19:00:00', '2023-03-27 19:30:00', '2023-03-27 19:30:00', '2023-03-27 19:30:00');
+/*
+select* from  general_consult;
+*/
 INSERT INTO general_consult (doctor_id, description, price, created_date, updated_date) 
 VALUES 
 ('DOC001', 'Consulta general', 500, '2023-03-18 10:00:00', '2023-03-18 11:00:00'),
@@ -475,30 +493,30 @@ VALUES
 /*Revisar campos user_id, medical_record_id,*/
 INSERT INTO medical_record_allergies (user_id, medical_record_id, allergies_code_id, created_date, updated_date)
 VALUES 
-('u00001', 31, 'A001', '2022-09-01 10:30:00', '2022-09-01 10:30:00'),
-('u00002', 32, 'A003', '2022-09-02 09:15:00', '2022-09-02 09:15:00'),
-('u00003', 32, 'A004', '2022-09-02 10:00:00', '2022-09-02 10:00:00'),
-('u00004', 33, 'A005', '2022-09-03 14:20:00', '2022-09-03 14:20:00'),
-('u00005', 33, 'A002', '2022-09-03 15:30:00', '2022-09-03 15:30:00'),
-('u00006', 34, 'A001', '2022-09-04 08:45:00', '2022-09-04 08:45:00'),
-('u00007', 35, 'A003', '2022-09-05 11:00:00', '2022-09-05 11:00:00'),
-('u00008', 36, 'A005', '2022-09-06 13:15:00', '2022-09-06 13:15:00'),
-('u00009', 40, 'A002', '2022-09-07 16:30:00', '2022-09-07 16:30:00');
+('u00001', 1, 'A001', '2022-09-01 10:30:00', '2022-09-01 10:30:00'),
+('u00002', 2, 'A003', '2022-09-02 09:15:00', '2022-09-02 09:15:00'),
+('u00003', 2, 'A004', '2022-09-02 10:00:00', '2022-09-02 10:00:00'),
+('u00004', 3, 'A005', '2022-09-03 14:20:00', '2022-09-03 14:20:00'),
+('u00005', 3, 'A002', '2022-09-03 15:30:00', '2022-09-03 15:30:00'),
+('u00006', 4, 'A001', '2022-09-04 08:45:00', '2022-09-04 08:45:00'),
+('u00007', 5, 'A003', '2022-09-05 11:00:00', '2022-09-05 11:00:00'),
+('u00008', 6, 'A005', '2022-09-06 13:15:00', '2022-09-06 13:15:00'),
+('u00009', 6, 'A002', '2022-09-07 16:30:00', '2022-09-07 16:30:00');
 
 /*select* from medical_record_diseases;*/
 /*Revisar campos user_id, medical_record_id,*/
 INSERT INTO medical_record_diseases (user_id, medical_record_id, diseases_code_id, created_date, updated_date)
 VALUES 
-('u00001', 31, 'D001', '2022-09-01 10:30:00', '2022-09-01 10:30:00'),
-('u00002', 32, 'D002', '2022-09-02 09:15:00', '2022-09-02 09:15:00'),
-('u00003', 32, 'D004', '2022-09-02 10:00:00', '2022-09-02 10:00:00'),
-('u00004', 33, 'D005', '2022-09-03 14:20:00', '2022-09-03 14:20:00'),
-('u00005', 33, 'D012', '2022-09-03 15:30:00', '2022-09-03 15:30:00'),
-('u00006', 34, 'D011', '2022-09-04 08:45:00', '2022-09-04 08:45:00'),
-('u00007', 35, 'D013', '2022-09-05 11:00:00', '2022-09-05 11:00:00'),
-('u00008', 36, 'D015', '2022-09-06 13:15:00', '2022-09-06 13:15:00'),
-('u00009', 37, 'D020', '2022-09-07 16:30:00', '2022-09-07 16:30:00'),
-('u00010', 40, 'D012', '2022-09-07 16:30:00', '2022-09-07 16:30:00');
+('u00001', 1, 'D001', '2022-09-01 10:30:00', '2022-09-01 10:30:00'),
+('u00002', 2, 'D002', '2022-09-02 09:15:00', '2022-09-02 09:15:00'),
+('u00003', 2, 'D004', '2022-09-02 10:00:00', '2022-09-02 10:00:00'),
+('u00004', 3, 'D005', '2022-09-03 14:20:00', '2022-09-03 14:20:00'),
+('u00005', 3, 'D012', '2022-09-03 15:30:00', '2022-09-03 15:30:00'),
+('u00006', 4, 'D011', '2022-09-04 08:45:00', '2022-09-04 08:45:00'),
+('u00007', 5, 'D013', '2022-09-05 11:00:00', '2022-09-05 11:00:00'),
+('u00008', 6, 'D015', '2022-09-06 13:15:00', '2022-09-06 13:15:00'),
+('u00009', 7, 'D020', '2022-09-07 16:30:00', '2022-09-07 16:30:00'),
+('u00010', 8, 'D012', '2022-09-07 16:30:00', '2022-09-07 16:30:00');
 
 /*select* from stock;*/
 INSERT INTO stock (medications_code, lot, expiration_date, description, entry_date, amount, created_date, updated_date)
@@ -511,21 +529,27 @@ INSERT INTO stock (medications_code, lot, expiration_date, description, entry_da
 ('MED006', 'L006', '2024-05-31', 'Descp6', '2022-03-18', 90, '2022-03-18 14:37:00', '2022-03-18 14:37:00'),
 ('MED007', 'L007', '2025-02-28', 'Descp7', '2022-03-18', 70, '2022-03-18 14:40:00', '2022-03-18 14:40:00');
 
+
 /*select* from medications_user;*/
+/*select * from medications;*/
 /*REVISAR medical_records_id campo name */
 /*CAMPO MEDICAL_RECORD_ID VARCHAR NO INT*/
-INSERT INTO medications_user (name, medical_records_id, created_date, updated_date, medications_code, stock_id)
+
+
+
+INSERT INTO medications_user (name, medical_records_id, medications_code, stock_id, created_date, updated_date)
 VALUES 
-('Metformin', 31, '2023-03-18 10:00:00', '2023-03-18 10:00:00', 'MED004', 6),
-('Omeprazole', 32, '2023-03-18 11:00:00', '2023-03-18 11:00:00', 'MED006', 7),
-('Atorvastatin', 33, '2023-03-18 12:00:00', '2023-03-18 12:00:00', 'MED008', 1),
-('Furosemide', 34, '2023-03-18 13:00:00', '2023-03-18 13:00:00', 'MED0018', 3),
-('Hydrocodone', 35, '2023-03-18 14:00:00', '2023-03-18 14:00:00', 'MED0014', 4),
-('Trazodone', 36, '2023-03-18 15:00:00', '2023-03-18 15:00:00', 'MED0019', 5),
-('Gabapentin', 37, '2023-03-18 16:00:00', '2023-03-18 16:00:00', 'MED013', 2),
-('Amlodipine', 38, '2023-03-18 17:00:00', '2023-03-18 17:00:00', 'MED015', 3),
-('Alprazolam', 39, '2023-03-18 18:00:00', '2023-03-18 18:00:00', 'MED021', 1),
-('Tramadol', 40, '2023-03-18 19:00:00', '2023-03-18 19:00:00','MED011', 7);
+('Metformin', 1,'MED004', 6,'2023-03-18 10:00:00',  '2023-03-18 10:00:00'),
+('Omeprazole', 2,'MED006', 7, '2023-03-18 11:00:00',  '2023-03-18 11:00:00' ),
+('Atorvastatin', 3, 'MED008', 1,  '2023-03-18 12:00:00','2023-03-18 12:00:00'),
+('Furosemide', 4, 'MED018', 3, '2023-03-18 13:00:00', '2023-03-18 13:00:00'),
+('Hydrocodone', 5, 'MED014', 4, '2023-03-18 14:00:00',  '2023-03-18 14:00:00'),
+('Trazodone', 6, 'MED019', 5, '2023-03-18 15:00:00',  '2023-03-18 15:00:00'),
+('Gabapentin', 7, 'MED013', 2, '2023-03-18 16:00:00',  '2023-03-18 16:00:00'),
+('Amlodipine', 8, 'MED015', 3 , '2023-03-18 17:00:00', '2023-03-18 17:00:00'),
+('Alprazolam', 9, 'MED021', 1, '2023-03-18 18:00:00', '2023-03-18 18:00:00'),
+('Tramadol', 1, 'MED011', 7, '2023-03-18 19:00:00',  '2023-03-18 19:00:00');
+
 
 /*select* from user_preferences;*/
 INSERT INTO user_preferences (user_id, preference_name, preference_value, created_date, updated_date) 
@@ -540,10 +564,10 @@ VALUES
 ('u00008', 'PREF8', 'VALUE8', '2022-10-08 10:15:00', '2022-10-08 10:15:00'),
 ('u00009', 'PREF9', 'VALUE9', '2022-10-09 13:00:00', '2022-10-09 13:00:00'),
 ('u00010', 'PREF10', 'VALUE10', '2022-10-10 15:30:00', '2022-10-10 15:30:00');
- 
-/*select * from users;*/
+
+
 /*Revisar insert campos user_id, user_name*/
-INSERT INTO user_sessions (user_id, user_name, user_email, session_token, created_date, updated_date) 
+/*INSERT INTO user_sessions (user_id, user_name, user_email, session_token, created_date, updated_date) 
 VALUES 
 ('u00001', 'Juan Pérez García', 'j.perez@example.com', 'abc123', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
 ('u00002', 'María González Hernández', 'm.gonzalez@example.com', 'def456', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
@@ -554,7 +578,8 @@ VALUES
 ('u00007', 'Alberto Castro Fernández', 'a.castro@example.com', 'stu901', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
 ('u00008', 'Carmen Álvarez Cruz', 'c.alvarez@example.com', 'vwx234', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
 ('u00009', 'Raúl Hernández Ortiz', 'r.hernandezn@example.com', 'yz012', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00010', 'Isabel Torres Ruiz', 'i.torres@example.com', '456abc', '2023-03-18 12:00:00', '2023-03-18 12:00:00');
+('u00010', 'Isabel Torres Ruiz', 'i.torres@example.com', '456abc', '2023-03-18 12:00:00', '2023-03-18 12:00:00');*/
+
 
 /*select * from user_types;*/
 /*Revisarv campos name, type*/
@@ -571,21 +596,22 @@ VALUES
 ('Administrativo', 'Administrativo', 'Este tipo de usuario se encarga de llevar a cabo tareas administrativas en el centro médico, como la gestión de citas, facturación, gestión de seguros, etc.', '2023-03-18 17:00:00', '2023-03-18 17:00:00'),
 ('Clínico', 'Clínico', 'Es un profesional de la salud que atiende a pacientes en un entorno clínico y se encarga de realizar evaluaciones, diagnósticos, tratamientos y seguimiento de pacientes.', '2023-03-18 18:00:00', '2023-03-18 18:00:00');
 
-/*Revisarv campos user_id, user_name*/
-INSERT INTO user_sessions (user_id, user_name, password, email, user_type_id, created_date, updated_date) 
+/*
+Select * from users;
+Revisar campos user_id, user_name
+INSERT INTO user_sessions (user_id, user_name, user_email, session_token, created_date, updated_date) 
 VALUES 
-('u00001', 'Juan Pérez García', '1234', 'j.perez@example.com', 1, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00002', 'María González Hernández', '1234','m.gonzalez@example.com', 2, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00003', 'Pedro Ramírez Sánchez','1234', 'p.ramirez@example.com', 3, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00004', 'Ana Martínez Jiménez', '1234','a.admin@example.com', 4, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00005', 'Jorge Gómez Gutiérrez','1234', 'r.recepcion@example.com', 5, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00006', 'Luisa Díaz López', '1234','l.diaz@example.com', 13, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00007', 'Alberto Castro Fernández','1234', 'a.castro@example.com', 13, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00008', 'Carmen Álvarez Cruz','1234', 'c.alvarez@example.com', 13, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00009', 'Raúl Hernández Ortiz','1234', 'r.hernandezn@example.com', 13, '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00010', 'Isabel Torres Ruiz','1234', 'i.torres@example.com', 13, '2023-03-18 12:00:00', '2023-03-18 12:00:00');
-
-
+('u00001', 'Juan Pérez García', 'j.perez@example.com', 'J1' , '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00002', 'María González Hernández', 'm.gonzalez@example.com', 'M2' , '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00003', 'Pedro Ramírez Sánchez', 'p.ramirez@example.com', 'P3', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00004', 'Ana Martínez Jiménez', 'a.admin@example.com', 'A4', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00005', 'Jorge Gómez Gutiérrez','r.recepcion@example.com', 'J5', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00006', 'Luisa Díaz López', 'l.diaz@example.com', 'L13', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00007', 'Alberto Castro Fernández', 'a.castro@example.com','A13', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00008', 'Carmen Álvarez Cruz', 'c.alvarez@example.com', 'C13', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00009', 'Raúl Hernández Ortiz', 'r.hernandezn@example.com', 'R13' , '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
+('u00010', 'Isabel Torres Ruiz', 'i.torres@example.com', 'I13', '2023-03-18 12:00:00', '2023-03-18 12:00:00');
+*/
 
 INSERT INTO doctors (doctor_id,name,medical_specialities_code,created_date,updated_date)
 VALUES
@@ -651,3 +677,23 @@ VALUES
 ('u00005',12,'D002'),
 ('u00002',13,'D001'),
 ('u00006',14,'D002');
+
+/*
+select* from share_files;
+select* from medical_records;
+*/
+
+INSERT INTO share_files (medical_record_id, foreign_user_id, created_date, updated_date)
+VALUES
+(1, 'u00010', '2022-01-01 00:00:00', '2022-01-01 00:00:00'),
+(2, 'u00009', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+(3, 'u00008', '2022-01-03 00:00:00', '2022-01-03 00:00:00'),
+(4, 'u00007', '2022-01-04 00:00:00', '2022-01-04 00:00:00'),
+(5, 'u00006', '2022-01-05 00:00:00', '2022-01-05 00:00:00'),
+(6, 'u00005', '2022-01-06 00:00:00', '2022-01-06 00:00:00'),
+(7, 'u00004', '2022-01-07 00:00:00', '2022-01-07 00:00:00'),
+(8, 'u00003', '2022-01-08 00:00:00', '2022-01-08 00:00:00'),
+(9, 'u00002', '2022-01-09 00:00:00', '2022-01-09 00:00:00'),
+(10, 'u00001', '2022-01-10 00:00:00', '2022-01-10 00:00:00');
+
+
