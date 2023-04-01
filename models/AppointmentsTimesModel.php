@@ -59,19 +59,14 @@ class AppointmentsTimesModel extends BaseModel {
 
     public function create($objeto) {
         try {
-            $this->enlace->connect();
-			$sql =  "INSERT INTO appointments_times(appointments_id,
-                        init_datetime,
-                        end_datetime,
-                        status)
-                    VALUES ($objeto->appointments_id,
-                        '$objeto->init_datetime',
-                        $objeto->end_datetime
-                    )";
+            $tuplas = "appointments_id, init_datetime, end_datetime";
 
-			$idAppointments_times = $this->enlace->executeSQL_DML_last($sql);
-            
-            return $this->get($idAppointments_times);
+            $values = "$objeto->appointments_id,'$objeto->init_datetime', '$objeto->end_datetime'";
+
+            $vResultado =  $this->createObj_Last($tuplas, $values);
+
+            return $vResultado;
+           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

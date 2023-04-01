@@ -59,26 +59,36 @@ class AppointmentsModel extends BaseModel {
      * create
      *
      * @param  mixed $objeto
-     * @return void
+     * @return
      */
     public function create($objeto) {
         try {
-            $this->connect();
-			$sql =  "INSERT INTO appointments(date,
-                        description,
-                        medical_records_id,
-                        consulting_room,
-                        status)
-                    VALUES ('$objeto->date',
-                        '$objeto->description',
-                        $objeto->medical_records_id,
-                        '$objeto->consulting_room',
-                        '$objeto->status'
-                    )";
+            $medical_record = new MedicalRecordsModel();
+            $appointmetsTime = new AppointmentsTimesModel();
 
-			$idAppointments = $this->executeSQL_DML_last($sql);
-            
-            return $this->get($idAppointments);
+            $obj_medical_record = new stdClass();
+            $obj_medical_record->user_id = $objeto->user_id;
+            $obj_medical_record->doctor_id = $objeto->doctor_id;
+
+            $medical_records_id = $medical_record->create($obj_medical_record);
+
+            $tuplas = "date, description, medical_records_id, consulting_room, status";
+
+            $values = "'$objeto->date','$objeto->description', $medical_records_id, '$objeto->consulting_room', '$objeto->status'";
+
+            $appointments_id =  $this->createObj_Last($tuplas, $values);
+
+            $obj_appointments = new stdClass();
+            $obj_appointments->appointments_id = $appointments_id;
+            $obj_appointments->init_datetime = $objeto->init_datetime;
+            $obj_appointments->end_datetime = $objeto->end_datetime;
+
+            $medical_records_id = $appointmetsTime->create($obj_appointments);
+
+            $vResultado = $this->get($appointments_id);
+
+            return $vResultado;
+           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
