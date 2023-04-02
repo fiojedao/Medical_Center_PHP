@@ -55,7 +55,7 @@ class StockModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-    
+        
     /**
      * create
      *
@@ -64,19 +64,23 @@ class StockModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "Insert into stock ( medications_code, lot, expiration_date, description, entry_date, amount)". 
-                     "Values ('$objeto->medications_code','$objeto->lot','$objeto->expiration_date','$objeto->description','$objeto->entry_date', $objeto->amount)";
-	
-			$idStock = $this->enlace->executeSQL_DML_last( $sql);
+            $tuplas = "medications_code, lot, expiration_date, description, entry_date, amount";
+
+            $values = "'$objeto->medications_code',
+            '$objeto->lot','$objeto->expiration_date',
+            '$objeto->description',
+            '$objeto->entry_date', 
+            $objeto->amount";
+
+            $vResultado =  $this->createObj_Last($tuplas, $values);
+
+            return $vResultado;
            
-            return $this->get($idStock);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-    
+     
     /**
      * update
      *
@@ -85,30 +89,24 @@ class StockModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "UPDATE stock SET medications_code='$objeto->medications_code',".
-            "lot ='$objeto->lot', expiration_date ='$objeto->expiration_date', description ='$objeto->description', entry_date ='$objeto->entry_date',  amount ='$objeto-> amount', updated_date = CURRENT_TIMESTAMP()". 
-            " Where id='$objeto->id'";
-			
-            //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML( $sql);
-            
-            
-            //Retornar stock modificado
-            return $this->get($objeto->id);
+			$update = "medications_code='$objeto->medications_code',
+            lot ='$objeto->lot',
+            expiration_date ='$objeto->expiration_date', 
+            description ='$objeto->description',
+            entry_date ='$objeto->entry_date',
+            amount ='$objeto-> amount',
+            updated_date = CURRENT_TIMESTAMP()";
+
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
-
-
-
-
-
-
-
-   
 }
 ?>

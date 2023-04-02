@@ -75,11 +75,12 @@ class MedicalRecordsModel extends BaseModel {
 		}
     }
 
+    
     /**
      * create
      *
      * @param  mixed $objeto
-     * @return
+     * @return void
      */
     public function create($objeto) {
         try {
@@ -89,77 +90,114 @@ class MedicalRecordsModel extends BaseModel {
 
             $vResultado =  $this->createObj_Last($tuplas, $values);
 
-            return $vResultado;
-           
+            if(!empty($vResultado)){
+
+            foreach( $objeto->allergies as $allergie_code){
+                $dataAllergie[]=array($objeto->user_id, $objeto->medical_record_id, $allergie_code);
+            }
+
+            foreach($dataAllergie as $row){
+                $this->connect();
+                $values=implode(',', $row);
+                $tuplas = "user_id, medical_records_id, allergies_code_id";
+                $vResultado = null;
+    
+                if($this->createObj($tuplas, $values) == 0){
+                    $vResultado =  "Error al crear registro tabla intermedia medicalRecord-alergias campos= " . $values;
+                    return $vResultado;
+                }
+            }
+            foreach( $objeto->diseases as $disease_code){
+                $dataDiseases[]=array($objeto->user_id, $objeto->medical_record_id, $disease_code);
+             }
+             
+             foreach($dataDisease as $row){
+              $this->connect();
+              $values=implode(',', $row);
+
+              $tuplas = "user_id, medical_records_id, diseases_code_id";
+              $vResultado = null;
+  
+              if($this->createObj($tuplas, $values) ==0){
+                  $vResultado =  "Error al crear registro tabla intermedia medicalRecord-enfermedades campos= " . $values;
+                  return $vResultado;
+              }
+              
+             }
+             return $vResultado;
+            }    
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
  
+    
     /**
      * update
      *
      * @param  mixed $objeto
-     * @return
+     * @return void
      */
     public function update($objeto) {
         try {
-            //Consulta sql
-            $this->connect();
-			$sql = "UPDATE medical_records SET user_id =$objeto->user_id,".
-            " doctor_id =$objeto->doctor_id, created_date ='$objeto->created_date', updated_date ='$objeto->updated_date'". 
-            " Where medical_records_id=$objeto->medical_records_id";
-            //Ejecutar la consulta
-			$cResults = $this->executeSQL_DML( $sql);
+			$update =  "user_id =$objeto->user_id,
+             doctor_id =$objeto->doctor_id,
+             created_date ='$objeto->created_date',
+             updated_date ='$objeto->updated_date'";
+            $vResultado = null;
 
-            //Borrar data de tabla intermedia medicalRecord-alergias
-
-            $this->connect();
-			$sql = "Delete from nombre_tabla Where medical_records_id=$objeto->medical_records_id";
-			$cResults = $this->executeSQL_DML( $sql);
-
-
-            //actualizar data de alergias
-            
-            foreach( $objeto->allergies as $allergies){
-                $dataAllergie[]=array($medical_record_id, $allergie_code);
-            }
-           
+            if($this->updateById($update,$objeto->medical_records_id) > 0){
                 
-            foreach($dataAllergie as $row){
-                $this->connect();
-                $valores=implode(',', $row);
-                $sql = "INSERT INTO nombre_tabla( medical_records_id, allergies_code) VALUES(".$valores.");";
-                $vResultado = $this->executeSQL_DML($sql);
-            }
+                $vResultadoDelect = null;
+                $nombretabla=null;
+                $nombretabla="medical_record_diseases";
+                $nombreCampo="medical_record_id";
+                if( $vResultadoDelect = $this->delectById($nombretabla, $nombreCampo,$objeto->medical_records_id)>0){
+                    //actualizar data de alergias
+                    foreach( $objeto->allergies as $allergie_code){
+                        $dataAllergie[]=array($objeto->user_id, $objeto->medical_record_id, $allergie_code);
+                    }
 
-
+                    foreach($dataAllergie as $row){
+                        $this->connect();
+                        $values=implode(',', $row);
+                        $tuplas = "user_id, medical_records_id, allergies_code_id";
+                        $vResultado = null;
             
-
-            //Borrar data de tabla intermedia meicalRecord-enfermedades
-
-             $this->connect();
-             $sql = "Delete from nombre_tabla Where medical_records_id=$objeto->medical_records_id";
-             $cResults = $this->executeSQL_DML( $sql);
-
-             //actualizar data de enfermedades
-    
-             foreach( $objeto->diseases as $diseases){
-                $dataDiseases[]=array($medical_record_id, $disease_code);
-            }
-               
+                        if($this->createObj($tuplas, $values) == 0){
+                            $vResultado =  "Error al crear registro tabla intermedia medicalRecord-alergias campos= " . $values;
+                            return $vResultado;
+                        }
+                        
+                    }
+                }
+                $vResultadoDelect = null;
+                $nombretabla=null;
+                $nombretabla="medical_record_allergies";
+                if( $vResultadoDelect = $this->delectById($nombretabla, $nombreCampo,$objeto->medical_records_id)>0){
+                    //actualizar data de enfermedades
+                    foreach( $objeto->diseases as $disease_code){
+                       $dataDiseases[]=array($objeto->user_id, $objeto->medical_record_id, $disease_code);
+                    }
                     
-            foreach($dataDisease as $row){
-                $this->connect();
-                $valores=implode(',', $row);
-                $sql = "INSERT INTO nombre_tabla( medical_records_id, disease_code) VALUES(".$valores.");";
-                $vResultado = $this->executeSQL_DML($sql);
-            }
+                    foreach($dataDisease as $row){
+                     $this->connect();
+                     $values=implode(',', $row);
 
+                     $tuplas = "user_id, medical_records_id, diseases_code_id";
+                     $vResultado = null;
+         
+                     if($this->createObj($tuplas, $values) ==0){
+                         $vResultado =  "Error al crear registro tabla intermedia medicalRecord-enfermedades campos= " . $values;
+                         return $vResultado;
+                     }
+                     
+                    }
+                }
+                $vResultado = $this->find_by_id($objeto->medical_records_id);
+                return  $vResultado;
+            }
             
-            
-            //Retornar MedicalRecord
-            return $this->get($objeto->medical_records_id);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

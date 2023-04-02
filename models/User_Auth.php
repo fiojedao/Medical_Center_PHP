@@ -121,9 +121,6 @@ class UserAuthModel  extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
-    
-
-    
+ 
 }
 ?>

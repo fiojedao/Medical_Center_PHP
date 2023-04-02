@@ -82,17 +82,19 @@ class DoctorsModel extends BaseModel {
     }
 
     /* Update doctors */
-    public function update($objeto, $id) {
+    public function update($objeto) {
         try {
-            $this->enlace->connect();
-			$sql = "UPDATE doctors SET name ='$objeto->name',
-                        medical_specialities_code ='$objeto->medical_specialities_code',
-                        updated_date = CURRENT_TIMESTAMP() 
-                    Where doctor_id=$id";
-			
-			$cResults = $this->enlace->executeSQL_DML($sql);
+			$update = "name ='$objeto->name',
+            medical_specialities_code ='$objeto->medical_specialities_code',
+            updated_date = CURRENT_TIMESTAMP()";
 
-            return $this->get($id);
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->doctor_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

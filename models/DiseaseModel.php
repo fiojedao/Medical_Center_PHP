@@ -82,25 +82,24 @@ class DiseaseModel extends BaseModel {
 
     }
     
+       
     /**
      * update
      *
      * @param  mixed $objeto
-     * @param  mixed $id
-     * @return
+     * @return void
      */
-    public function update($objeto, $id) {
+    public function update($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "UPDATE diseases SET name='$objeto->name',
-                        updated_date = CURRENT_TIMESTAMP()
-                    WHERE code_id=$id";
-			
-            //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML( $sql);
+			$update =  "name='$objeto->name', updated_date = CURRENT_TIMESTAMP()";
 
-            return $this->get($id);
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->code_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->code_id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

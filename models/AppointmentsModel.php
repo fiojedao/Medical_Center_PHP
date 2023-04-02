@@ -93,33 +93,33 @@ class AppointmentsModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-    
+
+        
     /**
      * update
      *
      * @param  mixed $objeto
-     * @param  mixed $id
      * @return void
      */
-    public function update($objeto,$id) {
+    public function update($objeto) {
         try {
-            //Consulta sql
-            $this->connect();
-			$sql =  "UPDATE appointments SET date='$objeto->date',
-                        description ='$objeto->description',
-                        medical_records_id =$objeto->medical_records_id,
-                        consulting_room ='$objeto->consulting_room',
-                        status ='$objeto->status',
-                        updated_date = CURRENT_TIMESTAMP()
-                    WHERE id=$id";
+			$update = "date='$objeto->date',
+            description ='$objeto->description',
+            medical_records_id =$objeto->medical_records_id,
+            consulting_room ='$objeto->consulting_room',
+            status ='$objeto->status'";
 
-            //Ejecutar la consulta
-			$cResults = $this->executeSQL_DML($sql);
+            $vResultado = null;
 
-            return $this->get($id);
+            if($this->updateById($update,$objeto->id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
+
 }
 ?>

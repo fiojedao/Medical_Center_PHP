@@ -1,6 +1,6 @@
 <?php
 
-class MedicationsUserModel extends BaseModel {  
+class ShareFilesModel extends BaseModel {  
     
     /**
      * __construct
@@ -8,22 +8,7 @@ class MedicationsUserModel extends BaseModel {
      * @return void
      */
     public function __construct() {
-        parent::__construct('medications_user', 'id', new MySqlConnect());
-    }
-    
-    
-    /**
-     * getId
-     *
-     * @return $id
-     */
-    private function getId(){
-        try {
-            $id = "MU-".$this->generateId(8);
-            return $id;
-        } catch (Exception $e) {
-            die ( $e->getMessage () );
-        }
+        parent::__construct('share_files', 'id', new MySqlConnect());
     }
     
     /**
@@ -65,9 +50,9 @@ class MedicationsUserModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            $tuplas = "name, medical_records_id, stock_id ";
+            $tuplas = "medical_record_id, foreign_user_id";
 
-            $values = "'$objeto->name','$objeto->medical_records_id', $objeto->stock_id";
+            $values = "$objeto->medical_record_id,'$objeto->foreign_user_id'";
 
             $vResultado =  $this->createObj_Last($tuplas, $values);
 
@@ -86,9 +71,8 @@ class MedicationsUserModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-			$update = "name='$objeto->name',
-            medical_records_id ='$objeto->medical_records_id',
-            stock_id = $objeto->stock_id,
+			$update = "medical_record_id=$objeto-> medical_record_id,
+            foreign_user_id='$objeto-> foreign_user_id', 
             updated_date = CURRENT_TIMESTAMP()";
 
             $vResultado = null;
@@ -101,7 +85,6 @@ class MedicationsUserModel extends BaseModel {
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-    }
-   
+    }   
 }
 ?>

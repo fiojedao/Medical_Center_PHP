@@ -56,7 +56,13 @@ class AppointmentsTimesModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
             $tuplas = "appointments_id, init_datetime, end_datetime";
@@ -71,21 +77,27 @@ class AppointmentsTimesModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
-    public function update($objeto,$id) {
+    
+    /**
+     * update
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
+    public function update($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql =  "UPDATE appointments_times SET appointments_id=$objeto->appointments_id,
-                        init_datetime ='$objeto->init_datetime',
-                        end_datetime =$objeto->end_datetime,
-                        updated_date = CURRENT_TIMESTAMP()
-                    WHERE id=$id";
+			$update = "appointments_id=$objeto->appointments_id,
+            init_datetime ='$objeto->init_datetime',
+            end_datetime =$objeto->end_datetime,
+            updated_date = CURRENT_TIMESTAMP()";
 
-            //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML($sql);
+            $vResultado = null;
 
-            return $this->get($id);
+            if($this->updateById($update,$objeto->id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

@@ -224,5 +224,33 @@ abstract class BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+    
+    /**
+     * delectById
+     *
+     * @param  mixed $tabla
+     * @param  mixed $campoId
+     * @param  mixed $param
+     * @return void
+     */
+    public function delectById($tabla,$campoId,$param) {
+        try {
+            $this->enlace->connect();
+            $valor = is_numeric($param) ? $param:"'$param'";
+			$sql = "Delete from $tabla WHERE $campoId =$valor";
+            
+            if($valor != ""){
+                $vresultado = $this->enlace->executeSQL_DML($sql);
+
+                return $vresultado;
+            }
+
+            return null;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+
+
 }
 ?>

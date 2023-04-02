@@ -81,22 +81,26 @@ class MedicalSpecialitiesModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-    
+     
     /**
      * update
      *
-     * @param  mixed $id
      * @param  mixed $objeto
      * @return void
      */
-    public function update($id, $objeto) {
+    public function update($objeto) {
         try {
-            $this->enlace->connect();
-			$sql = "UPDATE medical_specialities SET code_id ='$objeto->code_id',name ='$objeto->name',description ='$objeto->description',updated_date = CURRENT_TIMESTAMP() Where id=$id";
-			
-			$cResults = $this->enlace->executeSQL_DML($sql);
+			$update = "name ='$objeto->name',
+            description ='$objeto->description',
+            updated_date = CURRENT_TIMESTAMP()";
 
-            return $this->get($vResultado);
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->code_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->code_id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

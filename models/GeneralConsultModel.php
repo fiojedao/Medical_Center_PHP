@@ -55,41 +55,53 @@ class GeneralConsultModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * create
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function create($objeto) {
         try {
-            $this->enlace->connect();
-			$sql =  "INSERT INTO general_consult(doctor_id,
-                        description,
-                        price,
-                        status)
-                    VALUES ('$objeto->doctor_id',
-                        '$objeto->description',
-                        $objeto->price
-                    )";
+            $tuplas = "doctor_id,
+            description,
+            price,
+            status";
 
-			$idgeneral_consult = $this->enlace->executeSQL_DML_last($sql);
-            
-            return $this->get($idgeneral_consult);
+            $values = "$objeto->doctor_id',
+            '$objeto->description',
+            $objeto->price";
+
+            $vResultado =  $this->createObj_Last($tuplas, $values);
+
+            return $vResultado;
+           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $objeto
+     * @return void
+     */
     public function update($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql =  "UPDATE general_consult SET date='$objeto->doctor_id',
-                        description ='$objeto->description',
-                        price =$objeto->price,
-                        updated_date = CURRENT_TIMESTAMP()
-                    WHERE id_consul=$objeto->id_consult";
+			$update = "doctor_id='$objeto->doctor_id',
+            description ='$objeto->description',
+            price =$objeto->price,
+            updated_date = CURRENT_TIMESTAMP()";
 
-            //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML($sql);
+            $vResultado = null;
 
-            return $this->get($id);
+            if($this->updateById($update,$objeto->id_consult) > 0){
+                 $vResultado = $this->find_by_id($objeto->id_consult);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

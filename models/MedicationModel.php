@@ -80,7 +80,7 @@ class MedicationModel extends BaseModel {
 			die ( $e->getMessage () );
 		}  
     }
-    
+        
     /**
      * update
      *
@@ -89,27 +89,23 @@ class MedicationModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "UPDATE  medications SET name ='$objeto->name',".
-            " description='$objeto->description', dose='$objeto->dose', type='$objeto->type', updated_date = CURRENT_TIMESTAMP()". 
-            " Where code='$objeto->code'";
-			
-            //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML( $sql);
-            
-            
-            //Retornar 
-            return $this->get($objeto->code);
+			$update = " name ='$objeto->name',
+             description='$objeto->description',
+             dose='$objeto->dose',
+             type='$objeto->type',
+             updated_date = CURRENT_TIMESTAMP()";
+
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->code) > 0){
+                 $vResultado = $this->find_by_id($objeto->code);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
-
-
-
-
    
 }
 ?>

@@ -93,7 +93,7 @@ class UserSessionModel extends BaseModel {
         $row = mysqli_fetch_assoc($result);
         return $row['user_id'];
     }
-    
+        
     /**
      * create
      *
@@ -102,47 +102,37 @@ class UserSessionModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            //Consulta sql
-            $this->connect();
-			$sql = "Insert into  user_sessions (user_id, session_token )". 
-                     "Values ('$objeto->user_id', '$objeto->session_token')";
-	
-			$idUserSession = $this->executeSQL_DML_last( $sql);
+            $tuplas = "user_id,user_name,user_email,  session_token";
+
+            $values = "'$objeto->user_id', 
+            '$objeto->user_name', 
+            '$objeto->user_email', 
+            '$objeto->session_token'";
+
+            $vResultado =  $this->createObj_Last($tuplas, $values);
+
+            return $vResultado;
            
-            return $this->get($idUserSession);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
     
-    /**
-     * update
-     *
-     * @param  mixed $objeto
-     * @return void
-     */
     public function update($objeto) {
         try {
-            //Consulta sql
-            $this->connect();
-			$sql = "UPDATE  user_sessions  SET user_id ='$objeto->user_id', session_token='$objeto->session_token', updated_date = CURRENT_TIMESTAMP()". 
-            " Where id ='$objeto->id'";
-			
-            //Ejecutar la consulta
-			$cResults = $this->executeSQL_DML( $sql);
-            
-            
-            //Retornar 
-            return $this->get($objeto->id);
+			$update = "user_id ='$objeto->user_id', user_name= '$objeto->user_name', user_email='$objeto->user_email' , session_token='$objeto->session_token', updated_date = CURRENT_TIMESTAMP()";
+
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
-
-
-
-
-   
+  
 }
 ?>
