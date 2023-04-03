@@ -120,7 +120,7 @@ class UserSessionModel extends BaseModel {
     
     public function update($objeto) {
         try {
-			$update = "user_id ='$objeto->user_id', user_name= '$objeto->user_name', user_email='$objeto->user_email' , session_token='$objeto->session_token', updated_date = CURRENT_TIMESTAMP()";
+			$update = "user_name= '$objeto->user_name', user_email='$objeto->user_email' , session_token='$objeto->session_token', updated_date = CURRENT_TIMESTAMP()";
 
             $vResultado = null;
 

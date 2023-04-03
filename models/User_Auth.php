@@ -78,42 +78,38 @@ class UserAuthModel  extends BaseModel {
     /**
      * create
      *
-     * @param mixed $objeto
-     * @return 
+     * @param  mixed $objeto
+     * @return void
      */
     public function create($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "Insert into  users (user_id, name , lastname_one, lastname_two ,  genre , direction, date_of_birth, contact , emergency_contact, blood_type )". 
-                     "Values ('$objeto->user_id', '$objeto->name','$objeto->lastname_one','$objeto->lastname_two','$objeto->genre ','$objeto->direction','$objeto->date_of_birth','$objeto->contact','$objeto->blood_type')";
-	
-			$idUser = $this->enlace->executeSQL_DML_last( $sql);
-           
-            return $this->get($idUser);
+            $code_id = $this->getId();
+            $tuplas = "user_id, username , password, email, user_type_id ";
+            $values = "'$objeto->user_id', '$objeto->username','$objeto->password','$objeto->email', $objeto->user_type_id";
+            $vResultado =  $this->createObj_Last($tuplas, $values);
+            return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-    
+     
     /**
      * update
      *
-     * @param mixed $objeto
-     * @return 
+     * @param  mixed $objeto
+     * @return void
      */
     public function update($objeto) {
         try {
-            //Consulta sql
-            $this->enlace->connect();
-			$sql = "UPDATE  users  SET name='$objeto-> name',  lastname_one='$objeto->lastname_one', lastname_two='$objeto->lastname_two ', genre='$objeto->genre',direction='$objeto->direction', date_of_birth='$objeto->date_of_birth', contact='$objeto->contact', emergency_contact'$objeto->emergency_contact',  blood_type='$objeto->blood_type',  updated_date = CURRENT_TIMESTAMP()". 
-            " Where user_id='$objeto->user_id'";
-			
-            //Ejecutar la consulta
-			$cResults = $this->enlace->executeSQL_DML( $sql);
-            
-            //Retornar 
-            return $this->get($objeto->user_id);
+			$update = "password ='$objeto->password',
+            updated_date = CURRENT_TIMESTAMP()";
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->user_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->user_id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

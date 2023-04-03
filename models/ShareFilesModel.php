@@ -51,7 +51,6 @@ class ShareFilesModel extends BaseModel {
             $tuplas = "medical_record_id, foreign_user_id";
             $values = "$objeto->medical_record_id,'$objeto->foreign_user_id'";
             $vResultado =  $this->createObj_Last($tuplas, $values);
-
             return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

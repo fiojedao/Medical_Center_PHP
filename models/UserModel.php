@@ -64,14 +64,14 @@ class UserModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            $tuplas = "user_id, name , lastname_one, lastname_two ,  genre , direction, date_of_birth, contact , emergency_contact, blood_type";
+            $tuplas = "user_id, name , lastname_one, lastname_two ,  genre , address, date_of_birth, contact , emergency_contact, blood_type";
 
             $values = "'$objeto->user_id',
             '$objeto->name',
             '$objeto->lastname_one',
             '$objeto->lastname_two',
             '$objeto->genre ',
-            '$objeto->direction',
+            '$objeto->address',
             '$objeto->date_of_birth',
             '$objeto->contact',
             '$objeto->blood_type'";
@@ -93,7 +93,7 @@ class UserModel extends BaseModel {
     public function update($objeto) {
         try {
 			$update = "name='$objeto-> name',  lastname_one='$objeto->lastname_one',
-            lastname_two='$objeto->lastname_two ', genre='$objeto->genre',direction='$objeto->direction',
+            lastname_two='$objeto->lastname_two ', genre='$objeto->genre', address='$objeto->address',
             date_of_birth='$objeto->date_of_birth', contact='$objeto->contact', emergency_contact'$objeto->emergency_contact',
             blood_type='$objeto->blood_type',  updated_date = CURRENT_TIMESTAMP()";
 
