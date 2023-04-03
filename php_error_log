@@ -8,7 +8,7 @@ Stack trace:
 [06-Mar-2023 05:34:59 Europe/Berlin] PHP Warning:  Undefined variable $response in C:\xampp\htdocs\medical_center_api\controllers\AllergiesController.php on line 5
 [06-Mar-2023 05:46:34 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "{" in C:\xampp\htdocs\medical_center_api\models\AllergieModel.php on line 3
 [06-Mar-2023 06:03:18 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$vResultado" in C:\xampp\htdocs\medical_center_api\models\BaseModel.php on line 27
-[06-Mar-2023 06:03:34 Europe/Berlin] PHP Parse error:  syntax error, unexpected variable "$vResultado" in C:\xampp\htdocs\medical_center_api\models\BaseModel.php on line 27
+[06-Mar-2023 06:03:34 Eurwope/Berlin] PHP Parse error:  syntax error, unexpected variable "$vResultado" in C:\xampp\htdocs\medical_center_api\models\BaseModel.php on line 27
 [06-Mar-2023 06:10:23 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "->" in C:\xampp\htdocs\medical_center_api\controllers\AllergiesController.php on line 7
 [06-Mar-2023 06:50:58 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "::", expecting identifier or variable or "{" or "$" in C:\xampp\htdocs\medical_center_api\models\AllergieModel.php on line 16
 [06-Mar-2023 06:54:46 Europe/Berlin] PHP Parse error:  syntax error, unexpected token "->" in C:\xampp\htdocs\medical_center_api\controllers\AllergiesController.php on line 7
