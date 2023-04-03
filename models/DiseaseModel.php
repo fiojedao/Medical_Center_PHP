@@ -4,7 +4,7 @@ class DiseaseModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('diseases', 'code_id', new MySqlConnect());
@@ -41,7 +41,7 @@ class DiseaseModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
@@ -58,8 +58,8 @@ class DiseaseModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return
+     * @param mixed $objeto
+     * @return $vResultado
      */
     public function create($objeto) {
         try {
@@ -79,19 +79,17 @@ class DiseaseModel extends BaseModel {
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-
     }
-    
-       
+     
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return $vResultado
      */
     public function update($objeto) {
         try {
-			$update =  "name='$objeto->name', updated_date = CURRENT_TIMESTAMP()";
+			$update =  "name='$objeto->name',updated_date=CURRENT_TIMESTAMP()";
 
             $vResultado = null;
 

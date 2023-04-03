@@ -5,7 +5,7 @@ class StockModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('stock', 'id', new MySqlConnect());
@@ -42,14 +42,12 @@ class StockModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
         try {
-
             $vResultado = $this->find_by_id($id);
-            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -59,8 +57,8 @@ class StockModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function create($objeto) {
         try {
@@ -84,8 +82,8 @@ class StockModel extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function update($objeto) {
         try {
@@ -94,8 +92,8 @@ class StockModel extends BaseModel {
             expiration_date ='$objeto->expiration_date', 
             description ='$objeto->description',
             entry_date ='$objeto->entry_date',
-            amount ='$objeto-> amount',
-            updated_date = CURRENT_TIMESTAMP()";
+            amount='$objeto-> amount',
+            updated_date =CURRENT_TIMESTAMP()";
 
             $vResultado = null;
 

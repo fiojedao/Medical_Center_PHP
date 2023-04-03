@@ -16,7 +16,7 @@ class stock extends BaseController {
     /**
      * get
      *
-     * @param  mixed $param
+     * @param mixed $param
      * @return
      */
     public function get($param){
@@ -40,7 +40,7 @@ class stock extends BaseController {
     /**
      * update
      *
-     * @param  mixed $param
+     * @param mixed $param
      * @return
      */
     public function update(){

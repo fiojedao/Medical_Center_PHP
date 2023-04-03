@@ -16,7 +16,7 @@ class usersession extends BaseController {
     /**
      * get
      *
-     * @param  mixed $param
+     * @param mixed $param
      * @return
      */
     public function get($param){
@@ -40,7 +40,7 @@ class usersession extends BaseController {
     /**
      * update
      *
-     * @param  mixed $param
+     * @param mixed $param
      * @return
      */
     public function update(){

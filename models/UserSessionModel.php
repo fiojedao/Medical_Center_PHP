@@ -5,7 +5,7 @@ class UserSessionModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('user_sessions', 'id', new MySqlConnect());
@@ -42,7 +42,7 @@ class UserSessionModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
@@ -97,8 +97,8 @@ class UserSessionModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function create($objeto) {
         try {

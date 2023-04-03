@@ -5,7 +5,7 @@ class AllergieModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('allergies', 'code_id', new MySqlConnect());
@@ -42,7 +42,7 @@ class AllergieModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
@@ -59,7 +59,7 @@ class AllergieModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
+     * @param mixed $objeto
      * @return $vResultado
      */
     public function create($objeto) {
@@ -76,22 +76,21 @@ class AllergieModel extends BaseModel {
             }
 
             return $vResultado;
-           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-    }
-    
+    }  
     
     /**
      * update
      *
-     * @param  mixed $objeto
+     * @param mixed $objeto
      * @return $vResultado
      */
     public function update($objeto) {
         try {
-			$update =  "name='$objeto->name', updated_date = CURRENT_TIMESTAMP()";
+			$update = "name='$objeto->name', 
+                        updated_date=CURRENT_TIMESTAMP()";
 
             $vResultado = null;
 

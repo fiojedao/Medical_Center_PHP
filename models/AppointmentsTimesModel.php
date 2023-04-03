@@ -3,14 +3,13 @@
 class AppointmentsTimesModel extends BaseModel {  
     
     /**
-    * __construct
-    *
-    * @return void
-    */
-   public function __construct() {
-       parent::__construct('appointments_times', 'id', new MySqlConnect());
-   }
-    
+     * __construct
+     *
+     * @return
+     */
+    public function __construct() {
+        parent::__construct('appointments_times', 'id', new MySqlConnect());
+    }
     
     /**
      * getId
@@ -43,14 +42,12 @@ class AppointmentsTimesModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
         try {
-
             $vResultado = $this->find_by_id($id);
-            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -60,14 +57,14 @@ class AppointmentsTimesModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function create($objeto) {
         try {
             $tuplas = "appointments_id, init_datetime, end_datetime";
 
-            $values = "$objeto->appointments_id,'$objeto->init_datetime', '$objeto->end_datetime'";
+            $values = "$objeto->appointments_id,'$objeto->init_datetime','$objeto->end_datetime'";
 
             $vResultado =  $this->createObj_Last($tuplas, $values);
 
@@ -81,14 +78,14 @@ class AppointmentsTimesModel extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function update($objeto) {
         try {
 			$update = "appointments_id=$objeto->appointments_id,
             init_datetime ='$objeto->init_datetime',
-            end_datetime =$objeto->end_datetime,
+            end_datetime = '$objeto->end_datetime',
             updated_date = CURRENT_TIMESTAMP()";
 
             $vResultado = null;

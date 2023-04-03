@@ -5,7 +5,7 @@ class ShareFilesModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('share_files', 'id', new MySqlConnect());
@@ -28,14 +28,12 @@ class ShareFilesModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
         try {
-
             $vResultado = $this->find_by_id($id);
-            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -45,19 +43,16 @@ class ShareFilesModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function create($objeto) {
         try {
             $tuplas = "medical_record_id, foreign_user_id";
-
             $values = "$objeto->medical_record_id,'$objeto->foreign_user_id'";
-
             $vResultado =  $this->createObj_Last($tuplas, $values);
 
             return $vResultado;
-           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -66,8 +61,8 @@ class ShareFilesModel extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function update($objeto) {
         try {

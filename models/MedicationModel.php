@@ -5,7 +5,7 @@ class MedicationModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('medications', 'code', new MySqlConnect());
@@ -42,7 +42,7 @@ class MedicationModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
@@ -59,16 +59,14 @@ class MedicationModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function create($objeto) {
         try {
             $code = $this->getId();
             $tuplas = "code, name, description, dose, type ";
-
             $values = "'$code','$objeto->name','$objeto->description' ,'$objeto->dose' ,'$objeto->type'";
-
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
@@ -84,8 +82,8 @@ class MedicationModel extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function update($objeto) {
         try {
@@ -94,7 +92,6 @@ class MedicationModel extends BaseModel {
              dose='$objeto->dose',
              type='$objeto->type',
              updated_date = CURRENT_TIMESTAMP()";
-
             $vResultado = null;
 
             if($this->updateById($update,$objeto->code) > 0){

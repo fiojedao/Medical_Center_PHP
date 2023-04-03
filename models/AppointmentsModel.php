@@ -4,7 +4,7 @@ class AppointmentsModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('appointments', 'id', new MySqlConnect());
@@ -41,7 +41,7 @@ class AppointmentsModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
@@ -58,7 +58,7 @@ class AppointmentsModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
+     * @param mixed $objeto
      * @return
      */
     public function create($objeto) {
@@ -94,32 +94,29 @@ class AppointmentsModel extends BaseModel {
 		}
     }
 
-        
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function update($objeto) {
         try {
 			$update = "date='$objeto->date',
-            description ='$objeto->description',
-            medical_records_id =$objeto->medical_records_id,
-            consulting_room ='$objeto->consulting_room',
-            status ='$objeto->status'";
+            description='$objeto->description',
+            medical_records_id=$objeto->medical_records_id,
+            consulting_room='$objeto->consulting_room',
+            status='$objeto->status'";
 
             $vResultado = null;
 
             if($this->updateById($update,$objeto->id) > 0){
                  $vResultado = $this->find_by_id($objeto->id);
             }
-
             return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-
 }
 ?>

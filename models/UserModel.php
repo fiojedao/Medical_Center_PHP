@@ -5,7 +5,7 @@ class UserModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('users', 'id', new MySqlConnect());
@@ -42,7 +42,7 @@ class UserModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
@@ -59,8 +59,8 @@ class UserModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function create($objeto) {
         try {
@@ -88,8 +88,8 @@ class UserModel extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function update($objeto) {
         try {
@@ -108,10 +108,6 @@ class UserModel extends BaseModel {
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-    }
-
-    
-
-    
+    } 
 }
 ?>

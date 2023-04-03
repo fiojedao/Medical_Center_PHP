@@ -37,7 +37,7 @@ class MedicalRecordsModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return;
      */
     public function get($id){
@@ -78,19 +78,16 @@ class MedicalRecordsModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
+     * @param mixed $objeto
      * @return
      */
     public function create($objeto) {
         try {
             $tuplas = "user_id, doctor_id";
-
             $values = "'$objeto->user_id','$objeto->doctor_id'";
-
-            $vResultado =  $this->createObj_Last($tuplas, $values);
+            $vResultado = $this->createObj_Last($tuplas, $values);
 
             return $vResultado;
-           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -99,7 +96,7 @@ class MedicalRecordsModel extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
+     * @param mixed $objeto
      * @return
      */
     public function update($objeto) {

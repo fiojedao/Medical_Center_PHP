@@ -4,7 +4,7 @@ class DoctorsModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('doctors', 'doctor_id', new MySqlConnect());
@@ -41,14 +41,12 @@ class DoctorsModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
         try {
-
             $vResultado = $this->find_by_id($id);
-            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -59,8 +57,8 @@ class DoctorsModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function create($objeto) {
         try {
@@ -84,9 +82,9 @@ class DoctorsModel extends BaseModel {
     /* Update doctors */
     public function update($objeto) {
         try {
-			$update = "name ='$objeto->name',
-            medical_specialities_code ='$objeto->medical_specialities_code',
-            updated_date = CURRENT_TIMESTAMP()";
+			$update = "name='$objeto->name',
+            medical_specialities_code='$objeto->medical_specialities_code',
+            updated_date=CURRENT_TIMESTAMP()";
 
             $vResultado = null;
 

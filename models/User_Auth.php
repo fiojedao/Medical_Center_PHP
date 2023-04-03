@@ -5,7 +5,7 @@ class UserAuthModel  extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return 
      */
     public function __construct() {
         parent::__construct('users_auth', 'user_id', new MySqlConnect());
@@ -43,7 +43,7 @@ class UserAuthModel  extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
@@ -80,8 +80,8 @@ class UserAuthModel  extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function create($objeto) {
         try {
@@ -101,8 +101,8 @@ class UserAuthModel  extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return 
      */
     public function update($objeto) {
         try {

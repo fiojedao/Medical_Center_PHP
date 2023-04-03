@@ -1,0 +1,6 @@
+{
+    "audioCues.terminalQuickFix": "auto", 
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    }
+}

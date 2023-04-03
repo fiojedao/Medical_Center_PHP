@@ -8,10 +8,10 @@ abstract class BaseModel {
     /**
      * __construct0
      *
-     * @param  mixed $tabla
-     * @param  mixed $campoId
-     * @param  mixed $enlace
-     * @param  mixed $campoEmail
+     * @param mixed $tabla
+     * @param mixed $campoId
+     * @param mixed $enlace
+     * @param mixed $campoEmail
      * @return
      */
     public function __construct() {
@@ -76,7 +76,7 @@ abstract class BaseModel {
     /**
      * find_by_email
      *
-     * @param  mixed $param
+     * @param mixed $param
      * @return "$obj";
      */
     public function find_by_email($param) {
@@ -100,7 +100,7 @@ abstract class BaseModel {
      *
      * @param mixed $keystabla - campo1, campor2
      * @param mixed $valuestabla - valor1, valor2
-     * @return $vResultado;
+     * @return "$obj";
      */
     public function createObj($keystabla, $valuestabla) {
         try {
@@ -109,7 +109,7 @@ abstract class BaseModel {
 
             $vResultado = null;
 
-            $sql =  "INSERT INTO $tabla($keystabla) VALUES($valuestabla)";
+            $sql = "INSERT INTO $tabla($keystabla) VALUES($valuestabla)";
 
             $vResultado = $this->enlace->executeSQL_DML($sql);
 
@@ -124,7 +124,7 @@ abstract class BaseModel {
      *
      * @param mixed $keystabla - campo1, campor2
      * @param mixed $valuestabla - valor1, valor2
-     * @return $vResultado;
+     * @return "$obj";
      */
     public function createObj_Last($keystabla, $valuestabla) {
         try {
@@ -212,7 +212,7 @@ abstract class BaseModel {
     /**
      * generateId
      *
-     * @param  mixed $pLength
+     * @param mixed $pLength
      * @return "new Id"
      */
     public function generateId($pLength)
@@ -228,10 +228,10 @@ abstract class BaseModel {
     /**
      * delectById
      *
-     * @param  mixed $tabla
-     * @param  mixed $campoId
-     * @param  mixed $param
-     * @return void
+     * @param mixed $tabla
+     * @param mixed $campoId
+     * @param mixed $param
+     * @return 
      */
     public function delectById($tabla,$campoId,$param) {
         try {

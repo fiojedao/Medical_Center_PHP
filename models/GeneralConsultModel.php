@@ -5,7 +5,7 @@ class GeneralConsultModel extends BaseModel {
     /**
      * __construct
      *
-     * @return void
+     * @return
      */
     public function __construct() {
         parent::__construct('general_consult', 'id_consult', new MySqlConnect());
@@ -42,14 +42,12 @@ class GeneralConsultModel extends BaseModel {
     /**
      * get
      *
-     * @param  mixed $id
+     * @param mixed $id
      * @return $vResultado
      */
     public function get($id){
         try {
-
             $vResultado = $this->find_by_id($id);
-            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -59,15 +57,14 @@ class GeneralConsultModel extends BaseModel {
     /**
      * create
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function create($objeto) {
         try {
-            $tuplas = "doctor_id,
-            description,
-            price,
-            status";
+            $tuplas = "doctor_id, 
+            description, 
+            price,status";
 
             $values = "$objeto->doctor_id',
             '$objeto->description',
@@ -76,7 +73,6 @@ class GeneralConsultModel extends BaseModel {
             $vResultado =  $this->createObj_Last($tuplas, $values);
 
             return $vResultado;
-           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -85,22 +81,21 @@ class GeneralConsultModel extends BaseModel {
     /**
      * update
      *
-     * @param  mixed $objeto
-     * @return void
+     * @param mixed $objeto
+     * @return
      */
     public function update($objeto) {
         try {
 			$update = "doctor_id='$objeto->doctor_id',
-            description ='$objeto->description',
-            price =$objeto->price,
-            updated_date = CURRENT_TIMESTAMP()";
+            description='$objeto->description',
+            price=$objeto->price,
+            updated_date=CURRENT_TIMESTAMP()";
 
             $vResultado = null;
 
             if($this->updateById($update,$objeto->id_consult) > 0){
                  $vResultado = $this->find_by_id($objeto->id_consult);
             }
-
             return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
