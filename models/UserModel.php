@@ -10,7 +10,7 @@ class UserModel extends BaseModel {
     public function __construct() {
         parent::__construct('users', 'id', new MySqlConnect());
     }
-	
+
     /**
      * getId
      *
@@ -24,7 +24,6 @@ class UserModel extends BaseModel {
             die ( $e->getMessage () );
         }
     }
-    
     /**
      * all
      *
@@ -64,21 +63,39 @@ class UserModel extends BaseModel {
      */
     public function create($objeto) {
         try {
-            $tuplas = "user_id, name , lastname_one, lastname_two ,  genre , address, date_of_birth, contact , emergency_contact, blood_type";
+            $response = null;
+            $user_id = $this->getId();
+            $userauth = new UserAuthModel();
+            $obj_userauth = new stdClass();
+            $user_type_id = isset($objeto->user_type_id)&&($objeto->user_type_id!=null)?$objeto->user_type_id:3;
 
-            $values = "'$objeto->user_id',
-            '$objeto->name',
-            '$objeto->lastname_one',
-            '$objeto->lastname_two',
-            '$objeto->genre ',
-            '$objeto->address',
-            '$objeto->date_of_birth',
-            '$objeto->contact',
-            '$objeto->blood_type'";
+            $obj_userauth->user_id=$user_id;
+            $obj_userauth->username=$objeto->username;
+            $obj_userauth->password=$objeto->password;
+            $obj_userauth->email=$objeto->email;
+            $obj_userauth->user_type_id=$user_type_id;
 
-            $vResultado =  $this->createObj_Last($tuplas, $values);
+            $respoonseAuth = $userauth->create($obj_userauth);
+            if($respoonseAuth->isValid){
+                $tuplas = "user_id,name,lastname_one,lastname_two,genre,address,date_of_birth,contact,emergency_contact,blood_type";
 
-            return $vResultado;
+                $values = "'$user_id',
+                '$objeto->name',
+                '$objeto->lastname_one',
+                '$objeto->lastname_two',
+                '$objeto->genre ',
+                '$objeto->address',
+                '$objeto->date_of_birth',
+                '$objeto->contact',
+                '$objeto->emergency_contact',
+                '$objeto->blood_type'";
+                $vResultado = $this->createObj_Last($tuplas, $values);
+                $response =  $this->find_by_id($vResultado);
+            } else {
+                $response = $respoonseAuth;
+            }
+
+            return $response;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
