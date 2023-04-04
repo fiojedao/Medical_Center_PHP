@@ -363,6 +363,56 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "medicalrecord-Get-Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/medicalrecord/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"medicalrecord",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "medicalrecord-Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"u00010\",\r\n    \"doctor_id\": \"DTR011\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/medicalrecord",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"medicalrecord"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -463,6 +513,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Felix\",\r\n    \"username\":\"fojeda\",\r\n    \"email\":\"fojeda@prueba.com\",\r\n    \"password\":\"Uno23456\",\r\n    \"lastname_one\":\"Ojeda\",\r\n    \"lastname_two\":\"Ortiz\",\r\n    \"genre\":\"m\",\r\n    \"address\":\"Alajuela\",\r\n    \"date_of_birth\":\"1996/06/17\",\r\n    \"contact\":\"69566313\",\r\n    \"emergency_contact\":\"88888888\",\r\n    \"blood_type\":\"O+\",\r\n    \"user_type_id\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -484,6 +564,95 @@
 							"path": [
 								"medical_center_api",
 								"usersession"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "appointments-Get-All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointments-Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"u00008\",\r\n    \"doctor_id\": \"DTR007\",\r\n    \"date\": \"2023-02-01 00:00:00\" ,\r\n    \"description\": \"Prueba cita v4\",\r\n    \"consulting_room\": \"Sala 8\",\r\n    \"status\": \"T\",\r\n    \"init_datetime\": \"2022-01-01 00:00:00\",\r\n    \"end_datetime\": \"2022-01-01 00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserAuth",
+			"item": [
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"useremail\":\"fojeda@prueba.com\",\r\n    \"password\": \"Uno23456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/userauth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"userauth",
+								"login"
 							]
 						}
 					},
