@@ -69,7 +69,7 @@ class AllergieModel extends BaseModel {
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
-                $vResultado =  $this->find_by_id($code_id);
+                $vResultado = $this->find_by_id($code_id);
             }
 
             return $vResultado;

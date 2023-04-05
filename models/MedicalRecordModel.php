@@ -68,7 +68,7 @@ class MedicalRecordsModel extends BaseModel {
                     ON mr.medical_records_id = diseases.medical_record_id
                     WHERE mr.medical_records_id = $id;";
 
-			 $vResultado = $this->customGet($vSql);
+			$vResultado = $this->customGet($vSql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

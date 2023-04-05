@@ -77,12 +77,13 @@ class UserModel extends BaseModel {
 
             $respoonseAuth = $userauth->create($obj_userauth);
             if($respoonseAuth->isValid){
-                $tuplas = "user_id,name,lastname_one,lastname_two,genre,address,date_of_birth,contact,emergency_contact,blood_type";
+                $tuplas = "user_id,name,lastname_one,lastname_two,number_id,genre,address,date_of_birth,contact,emergency_contact,blood_type";
 
                 $values = "'$user_id',
                 '$objeto->name',
                 '$objeto->lastname_one',
                 '$objeto->lastname_two',
+                '$objeto->number_id',
                 '$objeto->genre ',
                 '$objeto->address',
                 '$objeto->date_of_birth',

@@ -29,6 +29,7 @@ CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id VARCHAR(20) NOT NULL,
   name VARCHAR(45) NOT NULL,
+  number_id VARCHAR(20) NOT NULL,
   lastname_one VARCHAR(45) NOT NULL,
   lastname_two VARCHAR(45) NOT NULL,
   genre VARCHAR(20) NOT NULL,
@@ -44,11 +45,10 @@ CREATE TABLE users (
 
 -- Tabla para gestionar la autenticación de los usuarios
 CREATE TABLE user_sessions (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id VARCHAR(20) NOT NULL,
   user_name VARCHAR(100) NOT NULL,
   user_email VARCHAR(100) NOT NULL,
-  session_token VARCHAR(100) NOT NULL,
+  session_token VARCHAR(255) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id, user_name, user_email) REFERENCES users_auth(user_id, username, email)
@@ -695,5 +695,3 @@ VALUES
 (8, 'u00003', '2022-01-08 00:00:00', '2022-01-08 00:00:00'),
 (9, 'u00002', '2022-01-09 00:00:00', '2022-01-09 00:00:00'),
 (10, 'u00001', '2022-01-10 00:00:00', '2022-01-10 00:00:00');
-
-
