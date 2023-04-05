@@ -70,10 +70,11 @@ if(count($routesArray)>1 && isset($_SERVER['REQUEST_METHOD'])){
             $param=$routesArray[4];
             $response->$action($param);
         }
-    } catch (\Throwable $th) {
+    } catch (Exception $th) {
         $json=array(
             'status'=>404,
-            'result'=>$th
+            'result'=>$th,
+            'isValid'=> false
         );
         echo json_encode($json,
         http_response_code($json["status"]));

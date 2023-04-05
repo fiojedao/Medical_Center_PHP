@@ -56,23 +56,32 @@ abstract class BaseController {
         }
     }
 
-    public function autorize(){   
+    public function autorize(){
+        $json=array(
+            'status'=>401,
+            'result'=>"Error Processing Request: UNAUTHORIZED",
+            'isValid'=> false
+        );
+        
         try {
             $token = null;
             $headers = apache_request_headers();
-            if(isset($headers['Authentication'])){
+            
+            if(isset($headers['Authorization'])){
               $matches = array();
-              preg_match('/Bearer\s(\S+)/', $headers['Authentication'], $matches);
+              preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches);
               if(isset($matches[1])){
                 $token = $matches[1];
-                return true;
+                if ((new UserAuthModel())->verifyToken($token)) {
+                    return true;
+                }
               }
-            } 
-            return false;
-                   
+            }
+            echo json_encode($json,http_response_code($json["status"]));
         } catch (Exception $e) {
-            return false;
+            echo json_encode($json,http_response_code($json["status"]));
         }
+        exit;
     }
 }
 ?>

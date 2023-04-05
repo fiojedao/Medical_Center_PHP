@@ -55,18 +55,40 @@ class UserAuthModel extends BaseModel {
                 'rol'=>$user->user_type_id
             ];
             $jwt_token = JWT::encode($data,$this->secret_key,'HS256');
+            $this->createSession($jwt_token,$user);
         }
 
         return $jwt_token;
+    }
+
+    private function createSession($token, $userAuth) {
+        try {
+            $sessionm = new UserSessionModel();
+            $exist = $sessionm->getUserByUserEmail($userAuth->email);
+
+            if(is_array($exist) && is_object($exist[0]) && isset($exist[0])) return;
+
+            $obj = new stdClass();
+
+            $obj->user_id=$userAuth->user_id;
+            $obj->user_name=$userAuth->username;
+            $obj->user_email=$userAuth->email;
+            $obj->session_token=$token;
+            $sessionm->create($obj);
+        } catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
     }
 
     public function logout($token) {
         $this->db->deleteToken($token);
     }
 
-    public function isAuthenticated($token) {
-        return $this->db->getTokenUserId($token) !== false;
+    public function verifyToken($token){
+        $sessionm = new UserSessionModel();
+        return $sessionm->getToken($token);
     }
+
 	    
     /**
      * create

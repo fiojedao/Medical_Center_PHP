@@ -181,10 +181,7 @@ abstract class BaseModel {
     public function customGet($sql) {
         try {
             $this->enlace->connect();
-
-			$cResults = $this->enlace->ExecuteSQL($sql);
-
-            return $cResults;
+            return $this->enlace->ExecuteSQL($sql);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -252,29 +249,5 @@ abstract class BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
-
-
-    public function autorize(){   
-        try {
-            
-            $token = null;
-            $headers = apache_request_headers();
-            if(isset($headers['Authentication'])){
-              $matches = array();
-              preg_match('/Bearer\s(\S+)/', $headers['Authentication'], $matches);
-              if(isset($matches[1])){
-                $token = $matches[1];
-                return true;
-              }
-            } 
-            return false;
-                   
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
-    
 }
 ?>
