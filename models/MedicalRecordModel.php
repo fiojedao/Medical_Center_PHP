@@ -92,20 +92,6 @@ class MedicalRecordsModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
- 
-    /**
-     * update
-     *
-     * @param mixed $objeto
-     * @return
-     */
-    public function update($objeto) {
-        try {
-            //Retornar MedicalRecord
-            return $this->get($objeto->medical_records_id);
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }
+
 }
 ?>

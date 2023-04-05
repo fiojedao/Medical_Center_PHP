@@ -86,8 +86,7 @@ class StockModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-			$update = "medications_code='$objeto->medications_code',
-            lot ='$objeto->lot',
+			$update = " lot ='$objeto->lot',
             expiration_date ='$objeto->expiration_date', 
             description ='$objeto->description',
             entry_date ='$objeto->entry_date',

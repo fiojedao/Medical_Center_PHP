@@ -110,7 +110,18 @@ class UserModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-			return null;
+			$update = "name='$objeto-> name',  lastname_one='$objeto->lastname_one',
+            lastname_two='$objeto->lastname_two ', genre='$objeto->genre', address='$objeto->address',
+            date_of_birth='$objeto->date_of_birth', contact='$objeto->contact', emergency_contact'$objeto->emergency_contact',
+            blood_type='$objeto->blood_type',  updated_date = CURRENT_TIMESTAMP()";
+
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->user_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
