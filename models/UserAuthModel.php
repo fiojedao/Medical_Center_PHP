@@ -20,8 +20,7 @@ class UserAuthModel extends BaseModel {
      */
     public function all(){
         try {
-			$vResultado = $this->find_all();
-			return $vResultado;
+			return $this->find_all();
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -33,10 +32,9 @@ class UserAuthModel extends BaseModel {
      * @param mixed $id
      * @return $vResultado
      */
-    public function get($id){
+    public function getbyId($id){
         try {
-            $vResultado = $this->find_by_id($id);
-			return $vResultado;
+			return $this->find_by_id($id);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -80,16 +78,21 @@ class UserAuthModel extends BaseModel {
 		}
     }
 
-    public function logout($token) {
-        $this->db->deleteToken($token);
+    public function logout($objeto) {
+        try {
+            $resp = (new UserSessionModel())->removeToken($objeto->useremail,$objeto->token);
+            $obj = new stdClass();
+            $obj->logout=$resp;
+            return $obj;
+        } catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
     }
 
     public function verifyToken($token){
-        $sessionm = new UserSessionModel();
-        return $sessionm->getToken($token);
+        return (new UserSessionModel())->getToken($token);
     }
 
-	    
     /**
      * create
      *
@@ -137,42 +140,17 @@ class UserAuthModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-    
-    /**
-     * update
-     *
-     * @param mixed $objeto
-     * @return 
-     */
-    public function update($objeto) {
-        try {
-            //Consulta sql
-            $this->enlace->connect();
-			//$sql = "UPDATE  users  SET name='$objeto-> name',  lastname_one='$objeto->lastname_one', lastname_two='$objeto->lastname_two ', genre='$objeto->genre',direction='$objeto->direction', date_of_birth='$objeto->date_of_birth', contact='$objeto->contact', emergency_contact'$objeto->emergency_contact',  blood_type='$objeto->blood_type',  updated_date = CURRENT_TIMESTAMP()". 
-            //" Where user_id='$objeto->user_id'";
-			
-            //Ejecutar la consulta
-			//$cResults = $this->enlace->executeSQL_DML( $sql);
-            
-            //Retornar 
-            return null;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }
 
-    private function cryptPassword($password){
+    protected function cryptPassword($password){
         try {
             $response = null;
             if(isset($password)&& $password!=null){
-				$crypt=password_hash($password, PASSWORD_BCRYPT);
-				$response=$crypt;
+				$response=password_hash($password, PASSWORD_BCRYPT);
 			}
             return $response;
         } catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
- 
 }
 ?>
