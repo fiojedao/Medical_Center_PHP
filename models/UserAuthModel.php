@@ -45,12 +45,14 @@ class UserAuthModel extends BaseModel {
         $jwt_token = null;
 
         $user = $this->find_by_email($objeto->useremail)[0];
-
+        date_default_timezone_set('America/Costa_Rica');
+        $locatedate = date("d-m-Y h:i:s");
         if(is_object($user) && isset($user) && !empty($user) && password_verify($objeto->password, $user->password)){
             $data=[
                 'id'=>$user->user_id,
                 'email'=>$user->email,
-                'rol'=>$user->user_type_id
+                'rol'=>$user->user_type_id,
+                'time'=>$locatedate
             ];
             $jwt_token = JWT::encode($data,$this->secret_key,'HS256');
             $this->createSession($jwt_token,$user);
@@ -109,7 +111,7 @@ class UserAuthModel extends BaseModel {
             $exist = $this->existsRecord($objeto->username, $objeto->email);
 
             if($exist){
-                $vResultado->err = "Cuenta existente";
+                $vResultado->error = "Cuenta existente";
                 $vResultado->isValid = false;
                 return $vResultado;
             }
