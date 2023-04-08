@@ -45,7 +45,6 @@ class UserAuthModel extends BaseModel {
         $jwt_token = null;
 
         $user = $this->find_by_email($objeto->useremail)[0];
-        date_default_timezone_set('America/Costa_Rica');
         $locatedate = date("d-m-Y h:i:s");
         if(is_object($user) && isset($user) && !empty($user) && password_verify($objeto->password, $user->password)){
             $data=[
