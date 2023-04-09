@@ -33,11 +33,12 @@ abstract class BaseController {
     private function body($code, $response){
         switch ($code) {
             case 200:
-                if(!is_array($response) && property_exists($response,'err')){
+                if(!is_array($response) && property_exists($response,'error')){
                     return array(
                         'status'=>409,
-                        'results'=>$response->err,
-                        'isValid'=>false
+                        'results'=>null,
+                        'isValid'=>false,
+                        'error'=>$response->error
                     );
                 } else {
                     return array(

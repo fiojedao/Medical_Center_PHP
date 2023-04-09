@@ -60,5 +60,14 @@ class userauth extends BaseController {
         $response = $instance->login($object);
         $this->response($response);
     }
+
+    public function logout(){
+        $this->autorize();
+        $instance = (new UserAuthModel());
+        $object = $this->getObj();
+        $response = $instance->logout($object);
+        //echo json_encode($response);
+        $this->response($response);
+    }
 }
 ?>

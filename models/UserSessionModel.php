@@ -19,16 +19,14 @@ class UserSessionModel extends BaseModel {
      */
     public function get($id){
         try {
-
             $vResultado = $this->find_by_id($id);
-            
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
 
-        /**
+    /**
      * get
      *
      * @param mixed $id
@@ -45,11 +43,26 @@ class UserSessionModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+
+    /**
+     * get
+     *
+     * @param mixed $id
+     * @return $vResultado
+     */
+    public function removeToken($user_email, $token){
+        try {
+            $SQL = "DELETE FROM user_sessions WHERE user_email = '$user_email' AND session_token = '$token'";
+            $resp = $this->customSQL($SQL);
+            return $resp == 1 || $resp > 1;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
     
     function getUserByUserEmail($useremail) {
         try {
-            $vResultado = $this->find_by_email($useremail);
-			return $vResultado;
+			return  $this->find_by_email($useremail);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -73,7 +86,6 @@ class UserSessionModel extends BaseModel {
             $vResultado = $this->createObj_Last($tuplas, $values);
 
             return $vResultado;
-           
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}

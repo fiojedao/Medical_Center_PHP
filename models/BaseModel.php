@@ -235,16 +235,27 @@ abstract class BaseModel {
         try {
             $this->enlace->connect();
             $valor = is_numeric($param) ? $param:"'$param'";
-			if($valor != ""){
+			if(isset($valor) || $valor > 0){
                 $sql = "DELETE FROM $tabla WHERE $campoId=$valor";
-            
-                if($valor != ""){
-                    $vresultado = $this->enlace->executeSQL_DML($sql);
-
-                    return $vresultado;
-                }
+                return $this->enlace->executeSQL_DML($sql);
             }
             return null;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+
+    
+    /**
+     * customSQL
+     *
+     * @param  mixed $sql
+     * @return
+     */
+    public function customSQL($sql) {
+        try {
+            $this->enlace->connect();
+            return $this->enlace->executeSQL_DML($sql);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
