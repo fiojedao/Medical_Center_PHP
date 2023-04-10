@@ -53,5 +53,41 @@ class diseases extends BaseController {
         $response = $instance->update($object);
         $this->response($response);
     }
+ 
+    /**
+     * getByUser
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function getByUser($param){
+        $instance = new DiseaseModel();
+        $response = $instance->getByUser($param);
+        $this->response($response);
+    }
+    
+    /**
+     * updateBbyUser
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function  updateByUser($param){
+        $instance = new DiseaseModel();
+        $response = $instance->updateBbyUser($param);
+        $this->response($response);
+    }
+    
+    /**
+     * deleteByUser
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function deleteByUser($param){
+        $instance = new DiseaseModel();
+        $response = $instance->deleteByUser($param);
+        $this->response($response);
+    }
 }
 ?>

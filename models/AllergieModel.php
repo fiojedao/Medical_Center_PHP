@@ -98,5 +98,72 @@ class AllergieModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+    
+    /**
+     * getByUser
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function getByUser($id){
+        try {
+            //Consulta sql
+			$vSql = " SELECT mra.allergies_code_id, a.name, u.user_id 
+            FROM allergies AS a INNER JOIN medical_record_allergies AS mra 
+            ON mra.allergies_code_id=a.code_id INNER JOIN users AS u 
+            ON u.user_id=mra.user_id WHERE u.user_id=$id;";
+
+			 $vResultado = $this->customGet($vSql);
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+     
+    /**
+     * updateByUser
+     *
+     * @param  mixed $objeto
+     * @param  mixed $id
+     * @return void
+     */
+    public function updateByUser($objeto, $id) {
+        try {
+			$update = "name ='$objeto->name',
+            updated_date = CURRENT_TIMESTAMP()";
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->doctor_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+        
+    /**
+     * deleteByUser
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deleteByUser($id){
+        try {
+            $table= "medical_record_allergies";
+			$field =  "user_id";
+
+            if($this->delectById( $table, $field ,$id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+
 }
+
 ?>

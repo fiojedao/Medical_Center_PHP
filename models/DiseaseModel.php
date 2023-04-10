@@ -95,5 +95,70 @@ class DiseaseModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+    
+    /**
+     * getByUser
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function getByUser($id){
+        try {
+            //Consulta sql
+			$vSql = "SELECT mrd.diseases_code_id, d.name, u.user_id  FROM diseases AS d 
+            INNER JOIN medical_record_diseases AS mrd ON mrd.diseases_code_id=d.code_id 
+            INNER JOIN users AS u ON u.user_id=mrd.user_id WHERE u.user_id= $id;";
+
+			 $vResultado = $this->customGet($vSql);
+			return $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+            
+    /**
+     * updateByUser
+     *
+     * @param  mixed $objeto
+     * @param  mixed $id
+     * @return void
+     */
+    public function updateByUser($objeto, $id) {
+        try {
+			$update = "name ='$objeto->name',
+            updated_date = CURRENT_TIMESTAMP()";
+            $vResultado = null;
+
+            if($this->updateById($update,$objeto->doctor_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+         
+    /**
+     * deleteByUser
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deleteByUser($id){
+        try {
+            $table= "medical_record_diseases";
+			$field =  "user_id";
+
+            if($this->delectById( $table, $field ,$id) > 0){
+                 $vResultado = $this->find_by_id($objeto->id);
+            }
+
+            return  $vResultado;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
+
 }
 ?>

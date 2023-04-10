@@ -53,5 +53,43 @@ class allergies extends BaseController {
         $response = $instance->update($object);
         $this->response($response);
     }
+    
+    /**
+     * getByUser
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function getByUser($param){
+        $instance = new AllergieModel();
+        $response = $instance->getByUser($param);
+        $this->response($response);
+    }
+    
+    /**
+     * updateByUser
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function  updateByUser($param){
+        $instance = new AllergieModel();
+        $response = $instance->updateBbyUser($param);
+        $this->response($response);
+    }
+    
+    /**
+     * deleteByUser
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function deleteByUser($param){
+        $instance = new AllergieModel();
+        $response = $instance->deleteByUser($param);
+        $this->response($response);
+    }
+
+    
 }
 ?>
