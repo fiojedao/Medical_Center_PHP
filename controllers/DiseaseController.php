@@ -8,7 +8,7 @@ class diseases extends BaseController {
      * @return
      */
     public function index(){
-        $this->autorize();
+        //$this->autorize();
         $instance = new DiseaseModel();
         $response = $instance->all();
         $this->response($response);
@@ -21,7 +21,7 @@ class diseases extends BaseController {
      * @return
      */
     public function get($param){
-        $this->autorize();
+        //$this->autorize();
         $instance = new DiseaseModel();
         $response = $instance->get($param);
         $this->response($response);
@@ -33,7 +33,7 @@ class diseases extends BaseController {
      * @return
      */
     public function create(){
-        $this->autorize();
+        //$this->autorize();
         $instance = (new DiseaseModel());
         $object = $this->getObj();
         $response = $instance->create($object);
@@ -47,7 +47,7 @@ class diseases extends BaseController {
      * @return
      */
     public function update(){
-        $this->autorize();
+        //$this->autorize();
         $instance = (new DiseaseModel());
         $object = $this->getObj();
         $response = $instance->update($object);
