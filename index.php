@@ -3,9 +3,12 @@
     ini_set('display_errors',1);
     ini_set("log_errors",1);
     ini_set("error_log","C:/xampp/htdocs/medical_center_api/php_error_log");
+    /*Encabezada de las solicitudes*/
+    /*CORS*/
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: *");
-    header("Access-Control-Allow-Methods: *");
+    header("Access-Control-Allow-Methods: *");  
+
     /* Requerimientos */
     date_default_timezone_set('America/Costa_Rica');
     require_once "controllers/BaseController.php";

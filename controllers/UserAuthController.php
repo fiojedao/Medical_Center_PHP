@@ -8,7 +8,7 @@ class userauth extends BaseController {
      * @return
      */
     public function index(){
-        $this->autorize();
+        //$this->autorize();
         $instance = new UserModel();
         $response = $instance->all();
         $this->response($response);
@@ -21,8 +21,8 @@ class userauth extends BaseController {
      * @return
      */
     public function get($param){
-        $this->autorize();
-        $instance = new UserModel();
+        //$this->autorize();
+        $instance = new UserAuthModel();
         $response = $instance->get($param);
         $this->response($response);
     }
@@ -33,10 +33,9 @@ class userauth extends BaseController {
      * @return
      */
     public function create(){
-        $this->autorize();
-        $instance = (new UserModel());
-        $object = $this->getObj();
-        $response = $instance->create($object);
+        //$this->autorize();
+        $instance = new UserAuthModel();
+        $response = $instance->login($this->getObj());
         $this->response($response);
     }
         
@@ -47,22 +46,15 @@ class userauth extends BaseController {
      * @return
      */
     public function update(){
-        $this->autorize();
-        $instance = (new UserModel());
+        //$this->autorize();
+        $instance = (new UserAuthModel());
         $object = $this->getObj();
         $response = $instance->update($object);
         $this->response($response);
     }
 
-    public function login(){
-        $instance = (new UserAuthModel());
-        $object = $this->getObj();
-        $response = $instance->login($object);
-        $this->response($response);
-    }
-
     public function logout(){
-        $this->autorize();
+        //$this->autorize();
         $instance = (new UserAuthModel());
         $object = $this->getObj();
         $response = $instance->logout($object);

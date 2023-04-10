@@ -14,4 +14,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 # QSA : añade la cadena de la consulta a la URL que sustituye.
 RewriteRule ^ index.php [QSA,L]
 
+# Permitir solicitudes CORS desde cualquier origen
+
+
 
