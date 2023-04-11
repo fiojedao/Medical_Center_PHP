@@ -65,8 +65,8 @@ class DiseaseModel extends BaseModel {
     public function create($objeto) {
         try {
             $code_id = $this->getId();
-            $tuplas = "code_id, name";
-            $values = "'$code_id','$objeto->name'";
+            $tuplas = "code_id, name, id_category";
+            $values = "'$code_id','$objeto->name', '$objeto->id_category'";
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
@@ -86,7 +86,7 @@ class DiseaseModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-			$update =  "name='$objeto->name', updated_date = CURRENT_TIMESTAMP()";
+			$update =  "name='$objeto->name', id_category = '$objeto->id_category', updated_date = CURRENT_TIMESTAMP()";
             $vResultado = null;
 
             if($this->updateById($update,$objeto->code_id) > 0){
