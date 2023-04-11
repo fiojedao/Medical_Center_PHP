@@ -24,37 +24,37 @@ class AllergieModel extends BaseModel {
             die ( $e->getMessage () );
         }
     }
-    
+        
     /**
      * all
      *
-     * @return $vResultado
+     * @return void
      */
     public function all(){
         try {
-			$vResultado = $this->find_all();
-			return $vResultado;
+            $vSql = "SELECT a.code_id, a.name, ac.name as category, ac.category_id  from allergy_category as ac  inner join allergies as a  on ac.category_id=a.id_category;";
+            $resp = $this->customGet($vSql);
+            return $resp;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-    
+  
     /**
      * get
      *
-     * @param mixed $id
-     * @return $vResultado
+     * @param  mixed $id
+     * @return void
      */
     public function get($id){
         try {
             $vResultado = $this->find_by_id($id);
-        
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
-		}
+        }
     }
-
+        
     /**
      * create
      *
@@ -118,7 +118,7 @@ class AllergieModel extends BaseModel {
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-    }
+}
      
     /**
      * updateByUser

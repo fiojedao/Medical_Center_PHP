@@ -24,25 +24,28 @@ class DiseaseModel extends BaseModel {
         }
     }
     
+      
     /**
      * all
      *
-     * @return $vResultado
+     * @return void
      */
     public function all(){
         try {
-			$vResultado = $this->find_all();
-			return $vResultado;
+            $vSql = " SELECT d.code_id, d.name, dc.name as category, dc.category_id  from disease_category as dc  inner join diseases as d  on dc.category_id=d.id_category;";
+            $resp = $this->customGet($vSql);
+            return $resp;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
     
+      
     /**
      * get
      *
-     * @param mixed $id
-     * @return $vResultado
+     * @param  mixed $id
+     * @return void
      */
     public function get($id){
         try {
@@ -50,7 +53,7 @@ class DiseaseModel extends BaseModel {
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
-		}
+        }
     }
 
     /**

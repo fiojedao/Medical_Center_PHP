@@ -1,6 +1,5 @@
 <?php
 abstract class BaseModel {
-    //Listar en el API
     private $tabla;
     private $campoId;
     private $campoEmail;
@@ -78,7 +77,7 @@ abstract class BaseModel {
      * find_by_email
      *
      * @param mixed $param
-     * @return
+     * @return "$obj";
      */
     public function find_by_email($param) {
         try {
@@ -86,7 +85,7 @@ abstract class BaseModel {
             $campoEmail = $this->campoEmail;
             $this->enlace->connect();
 
-            $vSql = "SELECT * FROM $tabla WHERE $campoEmail='$param';";
+            $vSql = "SELECT * FROM $tabla WHERE $campoEmail = $param;";
 
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
 
@@ -110,7 +109,7 @@ abstract class BaseModel {
 
             $vResultado = null;
 
-            $sql =  "INSERT INTO $tabla($keystabla) VALUES($valuestabla);";
+            $sql =  "INSERT INTO $tabla($keystabla) VALUES($valuestabla)";
 
             $vResultado = $this->enlace->executeSQL_DML($sql);
 
@@ -223,13 +222,14 @@ abstract class BaseModel {
 		}
     }
     
+        
     /**
      * delectById
      *
-     * @param mixed $tabla
-     * @param mixed $campoId
-     * @param mixed $param
-     * @return 
+     * @param  mixed $tabla
+     * @param  mixed $campoId
+     * @param  mixed $param
+     * @return void
      */
     public function delectById($tabla,$campoId,$param) {
         try {
@@ -260,5 +260,29 @@ abstract class BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+
+
+
+    public function autorize(){   
+        try {
+            
+            $token = null;
+            $headers = apache_request_headers();
+            if(isset($headers['Authentication'])){
+              $matches = array();
+              preg_match('/Bearer\s(\S+)/', $headers['Authentication'], $matches);
+              if(isset($matches[1])){
+                $token = $matches[1];
+                return true;
+              }
+            } 
+            return false;
+                   
+        } catch (Exception $e) {
+            return false;
+        }
+    }
+
+
 }
 ?>
