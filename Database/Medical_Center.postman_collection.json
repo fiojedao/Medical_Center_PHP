@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "601c8d90-89a3-4987-b98e-a8c5e1d3d047",
+		"_postman_id": "e941be62-fe6f-4526-9249-fb5051857fdc",
 		"name": "Medical_Center",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "4359992"
+		"_exporter_id": "25549730"
 	},
 	"item": [
 		{
@@ -521,7 +521,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Felix\",\r\n    \"username\":\"fojeda\",\r\n    \"email\":\"fojeda@prueba.com\",\r\n    \"password\":\"Uno23456\",\r\n    \"lastname_one\":\"Ojeda\",\r\n    \"lastname_two\":\"Ortiz\",\r\n    \"genre\":\"m\",\r\n    \"address\":\"Alajuela\",\r\n    \"date_of_birth\":\"1996/06/17\",\r\n    \"contact\":\"69566313\",\r\n    \"emergency_contact\":\"88888888\",\r\n    \"blood_type\":\"O+\",\r\n    \"user_type_id\":0\r\n}",
+							"raw": "{\r\n    \"name\":\"Felix\",\r\n    \"username\":\"fojeda\",\r\n    \"number_id\": \"109760738\",\r\n    \"email\":\"fojeda@prueba.com\",\r\n    \"password\":\"Uno23456\",\r\n    \"lastname_one\":\"Ojeda\",\r\n    \"lastname_two\":\"Ortiz\",\r\n    \"genre\":\"m\",\r\n    \"address\":\"Alajuela\",\r\n    \"date_of_birth\":\"1996/06/17\",\r\n    \"contact\":\"69566313\",\r\n    \"emergency_contact\":\"88888888\",\r\n    \"blood_type\":\"O+\",\r\n    \"user_type_id\":0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -655,6 +655,45 @@
 								"login"
 							]
 						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Allergy Category",
+			"item": [
+				{
+					"name": "Allergy Category Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/allergy/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"allergy",
+								"category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Disease Category",
+			"item": [
+				{
+					"name": "Disease Category Get",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

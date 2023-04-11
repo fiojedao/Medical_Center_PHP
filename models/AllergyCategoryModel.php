@@ -1,6 +1,6 @@
 <?php
 
-class AllergieCategoryModel extends BaseModel {
+class AllergyCategoryModel extends BaseModel {
     
     /**
      * __construct
@@ -8,7 +8,7 @@ class AllergieCategoryModel extends BaseModel {
      * @return 
      */
     public function __construct() {
-        parent::__construct('disease_category', 'category_id', new MySqlConnect());
+        parent::__construct('allergy_category', 'category_id', new MySqlConnect());
     }
     
     /**
@@ -18,7 +18,7 @@ class AllergieCategoryModel extends BaseModel {
      */
     private function getId(){
         try {
-            $id = "DC-".$this->generateId(8);
+            $id = "AC-".$this->generateId(8);
             return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );

@@ -17,7 +17,7 @@
 
     //Agregar todos los modelos
     require_once "models/AllergieModel.php";
-    require_once "models/DiseaseModel.php";
+    require_once "models/DiseasesModel.php";
     require_once "models/DoctorsModel.php";
     require_once "models/MedicalRecordModel.php";
     require_once "models/MedicalSpecialitiesModel.php";
@@ -27,6 +27,9 @@
     require_once "models/UserAuthModel.php";
     require_once "models/AppointmentsModel.php";
     require_once "models/AppointmentsTimesModel.php";
+    require_once "models/AllergyCategoryModel.php";
+    require_once "models/DiseasesCategoryModel.php";
+    
 
 
     //Agregar todos los controladores
@@ -40,6 +43,8 @@
     require_once "controllers/UserSesionController.php";
     require_once "controllers/AppointmentsController.php";
     require_once "controllers/AppointmentsTimeController.php";
+    require_once "controllers/AllergyCategoryController.php";
+    require_once "controllers/DiseasesCategoryController.php";
     
     require_once "controllers/RoutesController.php";
     $index=new RoutesController();
