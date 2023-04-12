@@ -31,7 +31,15 @@ class AppointmentsModel extends BaseModel {
      */
     public function all(){
         try {
-			$vResultado = $this->find_all();
+            $sql = "SELECT apnt.id, 
+            apnt.description, 
+            apnt.consulting_room, 
+            apnt.status, 
+            apnt_t.init_datetime, 
+            apnt_t.end_datetime FROM appointments AS apnt
+            INNER JOIN appointments_times AS apnt_t
+            ON apnt_t.appointments_id = apnt.id;";
+			$vResultado = $this->customGet($sql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

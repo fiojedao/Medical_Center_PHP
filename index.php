@@ -39,6 +39,7 @@
     require_once "controllers/MedicaRecordCotroller.php";
     require_once "controllers/MedicationController.php";
     require_once "controllers/UserController.php";
+    require_once "controllers/DoctorsController.php";
     require_once "controllers/UserAuthController.php";
     require_once "controllers/UserSesionController.php";
     require_once "controllers/AppointmentsController.php";
