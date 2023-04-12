@@ -30,7 +30,7 @@ class MedicationModel extends BaseModel {
      *
      * @return $vResultado
      */
-    public function all(){
+   public function all(){
         try {
 			$vResultado = $this->find_all();
 			return $vResultado;
@@ -38,6 +38,16 @@ class MedicationModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+
+   /* public function all(){
+        try {
+            $vSql = " select name, description, dose from medications;";
+            $resp = $this->customGet($vSql);
+            return $resp;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }*/
     
     /**
      * get
