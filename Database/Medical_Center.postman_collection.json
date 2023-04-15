@@ -1,703 +1,969 @@
+// 20230414202924
+// https://api.postman.com/collections/25549730-e941be62-fe6f-4526-9249-fb5051857fdc?access_key=PMAT-01GY1BVPEAEAT60NHW4R85Z3C4
+
 {
-	"info": {
+	"collection": {
+	  "info": {
 		"_postman_id": "e941be62-fe6f-4526-9249-fb5051857fdc",
 		"name": "Medical_Center",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "25549730"
-	},
-	"item": [
+		"updatedAt": "2023-04-15T01:46:44.000Z",
+		"uid": "25549730-e941be62-fe6f-4526-9249-fb5051857fdc"
+	  },
+	  "item": [
 		{
-			"name": "Allergies",
-			"item": [
-				{
-					"name": "Allergies-Create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{  \r\n    \"name\": \"test#56255\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/allergies",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"allergies"
-							]
-						}
-					},
-					"response": []
+		  "name": "Allergies",
+		  "item": [
+			{
+			  "name": "Allergies-Create",
+			  "id": "6566a36e-e9d9-4010-869e-c76b7532c09c",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "POST",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{  \r\n    \"name\": \"test#56255\"\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "Allergies-Get-Id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/allergies/A001",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"allergies",
-								"A001"
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/allergies",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"allergies"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-6566a36e-e9d9-4010-869e-c76b7532c09c"
+			},
+			{
+			  "name": "Allergies-Get-Id",
+			  "id": "b4ec1978-d03f-4eb7-beea-529a7a47bdfa",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "Allergies-Put",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"code_id\": \"A001\",\r\n    \"name\": \"Prueba Updatev22\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/allergies/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"allergies",
-								""
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/allergies/A001",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"allergies",
+					"A001"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-b4ec1978-d03f-4eb7-beea-529a7a47bdfa"
+			},
+			{
+			  "name": "Allergies-Put",
+			  "id": "fca4369c-0d80-436e-811a-c7b4c2e243d6",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "PUT",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{\r\n    \"code_id\": \"A001\",\r\n    \"name\": \"Prueba Updatev22\",\r\n    \"id_category\": \"\"\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "Allergies-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/allergies",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"allergies"
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/allergies/",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"allergies",
+					""
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-fca4369c-0d80-436e-811a-c7b4c2e243d6"
+			},
+			{
+			  "name": "Allergies-Get-All",
+			  "id": "dfb863a6-c614-4ca2-b5bd-a2adf3b39568",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/allergies",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"allergies"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-dfb863a6-c614-4ca2-b5bd-a2adf3b39568"
+			}
+		  ],
+		  "id": "2c42d57f-bbf7-4b0c-874c-d87813fc7a0e",
+		  "uid": "25549730-2c42d57f-bbf7-4b0c-874c-d87813fc7a0e"
 		},
 		{
-			"name": "Disease",
-			"item": [
-				{
-					"name": "Disease-Create",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{  \r\n    \"name\": \"test#56255\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/diseases",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"diseases"
-							]
-						}
-					},
-					"response": []
+		  "name": "Disease",
+		  "item": [
+			{
+			  "name": "Disease-Create",
+			  "id": "22687615-c5b8-4d00-91f6-03bea0ff89e9",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "POST",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{  \r\n    \"name\": \"test#56255\"\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "Disease-Get-Id",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/diseases/A001",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"diseases",
-								"A001"
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/diseases",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"diseases"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-22687615-c5b8-4d00-91f6-03bea0ff89e9"
+			},
+			{
+			  "name": "Disease-Get-Id",
+			  "id": "bc4e1764-b80f-4286-9687-39b3b739efa8",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "Disease-Put",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"code_id\": \"A001\",\r\n    \"name\": \"Prueba Updatev22\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/diseases/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"diseases",
-								""
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/diseases/A001",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"diseases",
+					"A001"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-bc4e1764-b80f-4286-9687-39b3b739efa8"
+			},
+			{
+			  "name": "Disease-Put",
+			  "id": "762a6893-950c-45c5-b4da-c0d6650f8315",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "PUT",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{\r\n    \"code_id\": \"A001\",\r\n    \"name\": \"Prueba Updatev22\"\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "Disease-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/diseases/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"diseases",
-								""
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/diseases/",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"diseases",
+					""
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-762a6893-950c-45c5-b4da-c0d6650f8315"
+			},
+			{
+			  "name": "Disease-Get-All",
+			  "id": "4da387ce-0b47-4e67-aa5d-e50e1e9168d7",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/diseases/",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"diseases",
+					""
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-4da387ce-0b47-4e67-aa5d-e50e1e9168d7"
+			}
+		  ],
+		  "id": "c32d0f44-0f06-44bd-a17a-f4e90ef73908",
+		  "uid": "25549730-c32d0f44-0f06-44bd-a17a-f4e90ef73908"
 		},
 		{
-			"name": "Appointments Times",
-			"item": [
-				{
-					"name": "appointmentstimes-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/appointmentstimes",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"appointmentstimes"
-							]
-						}
-					},
-					"response": []
+		  "name": "Appointments Times",
+		  "item": [
+			{
+			  "name": "appointmentstimes-Get-All",
+			  "id": "46f0dbe2-1086-4243-81bc-a8a79a4b9125",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/appointmentstimes",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"appointmentstimes"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-46f0dbe2-1086-4243-81bc-a8a79a4b9125"
+			}
+		  ],
+		  "id": "a2cad22f-0057-4009-9218-b17f67a75ed2",
+		  "uid": "25549730-a2cad22f-0057-4009-9218-b17f67a75ed2"
 		},
 		{
-			"name": "Doctors",
-			"item": [
-				{
-					"name": "doctors-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/doctors",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"doctors"
-							]
-						}
-					},
-					"response": []
+		  "name": "Doctors",
+		  "item": [
+			{
+			  "name": "doctors-Get-All",
+			  "id": "fbf09e0b-9b43-45b3-9a8b-2efac6f4bcc3",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/doctors",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"doctors"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-fbf09e0b-9b43-45b3-9a8b-2efac6f4bcc3"
+			}
+		  ],
+		  "id": "6e83121e-efe9-4452-a040-3a22f6688739",
+		  "uid": "25549730-6e83121e-efe9-4452-a040-3a22f6688739"
 		},
 		{
-			"name": "General Consult",
-			"item": [
-				{
-					"name": "generalconsult-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/generalconsult",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"generalconsult"
-							]
-						}
-					},
-					"response": []
+		  "name": "General Consult",
+		  "item": [
+			{
+			  "name": "generalconsult-Get-All",
+			  "id": "c0964444-c289-4c4b-bae9-866f55bd6104",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/generalconsult",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"generalconsult"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-c0964444-c289-4c4b-bae9-866f55bd6104"
+			}
+		  ],
+		  "id": "4c242385-7fbc-451a-badc-c0055d31cfa9",
+		  "uid": "25549730-4c242385-7fbc-451a-badc-c0055d31cfa9"
 		},
 		{
-			"name": "Medical Specialities",
-			"item": [
-				{
-					"name": "medicalspecialities-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/medicalspecialities",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"medicalspecialities"
-							]
-						}
-					},
-					"response": []
+		  "name": "Medical Specialities",
+		  "item": [
+			{
+			  "name": "medicalspecialities-Get-All",
+			  "id": "1e1bb364-cdef-40a5-bf8b-d9be5884e637",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/medicalspecialities",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"medicalspecialities"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-1e1bb364-cdef-40a5-bf8b-d9be5884e637"
+			}
+		  ],
+		  "id": "19bf5d60-b1cf-4f67-979f-89874d9ac3d7",
+		  "uid": "25549730-19bf5d60-b1cf-4f67-979f-89874d9ac3d7"
 		},
 		{
-			"name": "Medical Record",
-			"item": [
-				{
-					"name": "medicalrecord-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/medicalrecord",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"medicalrecord"
-							]
-						}
-					},
-					"response": []
+		  "name": "Medical Record",
+		  "item": [
+			{
+			  "name": "medicalrecord-Get-All",
+			  "id": "58dcac1f-0fd7-4fba-b63e-90e03e48d2fa",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/medicalrecord",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"medicalrecord"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-58dcac1f-0fd7-4fba-b63e-90e03e48d2fa"
+			},
+			{
+			  "name": "medicalrecord-Get-Id",
+			  "id": "4c79192d-5dcc-4895-8fd0-dd63370938b4",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/medicalrecord/10",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"medicalrecord",
+					"10"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-4c79192d-5dcc-4895-8fd0-dd63370938b4"
+			},
+			{
+			  "name": "medicalrecord-Post",
+			  "id": "4fd36255-79d1-4f01-90e4-46c643943d42",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "POST",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{\r\n    \"user_id\": \"u00010\",\r\n    \"doctor_id\": \"DTR011\"\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "medicalrecord-Get-Id",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/medicalrecord/10",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"medicalrecord",
-								"10"
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/medicalrecord",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"medicalrecord"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-4fd36255-79d1-4f01-90e4-46c643943d42"
+			}
+		  ],
+		  "id": "ac598b4d-37a8-4818-9cb8-3045d5c910ec",
+		  "uid": "25549730-ac598b4d-37a8-4818-9cb8-3045d5c910ec"
+		},
+		{
+		  "name": "Medication",
+		  "item": [
+			{
+			  "name": "medication-Get-All",
+			  "id": "21234f2d-ebaf-40ea-b6e1-08e16dcc9933",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/medication",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"medication"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-21234f2d-ebaf-40ea-b6e1-08e16dcc9933"
+			}
+		  ],
+		  "id": "8d135742-e609-4cfc-8d95-b2469beef13e",
+		  "uid": "25549730-8d135742-e609-4cfc-8d95-b2469beef13e"
+		},
+		{
+		  "name": "Medication User",
+		  "item": [
+			{
+			  "name": "medicationuser-Get-All",
+			  "id": "43ba2d55-5a4a-45da-ae1d-0e8dd8c2ccfc",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/medicationuser",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"medicationuser"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-43ba2d55-5a4a-45da-ae1d-0e8dd8c2ccfc"
+			}
+		  ],
+		  "id": "f87e4bdd-7d7c-4a38-b34a-5715a31f6d1e",
+		  "uid": "25549730-f87e4bdd-7d7c-4a38-b34a-5715a31f6d1e"
+		},
+		{
+		  "name": "Stock",
+		  "item": [
+			{
+			  "name": "stock-Get-All",
+			  "id": "38d26f1b-07d2-4559-809d-0fc80a163450",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/stock",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"stock"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-38d26f1b-07d2-4559-809d-0fc80a163450"
+			}
+		  ],
+		  "id": "7e9352db-f921-4d38-916b-7689a3eef329",
+		  "uid": "25549730-7e9352db-f921-4d38-916b-7689a3eef329"
+		},
+		{
+		  "name": "User",
+		  "item": [
+			{
+			  "name": "user-Get-All",
+			  "id": "06a897a5-4cb4-4ce9-9a99-f45a1037f570",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/user",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"user"
+				  ]
+				}
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-06a897a5-4cb4-4ce9-9a99-f45a1037f570"
+			},
+			{
+			  "name": "Create User",
+			  "id": "0a67f1b1-b42b-4dc7-8e42-8b77d70e8175",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "POST",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{\r\n    \"name\":\"Felix\",\r\n    \"username\":\"fojeda\",\r\n    \"number_id\": \"109760738\",\r\n    \"email\":\"fojeda@prueba.com\",\r\n    \"password\":\"Uno23456\",\r\n    \"lastname_one\":\"Ojeda\",\r\n    \"lastname_two\":\"Ortiz\",\r\n    \"genre\":\"m\",\r\n    \"address\":\"Alajuela\",\r\n    \"date_of_birth\":\"1996/06/17\",\r\n    \"contact\":\"69566313\",\r\n    \"emergency_contact\":\"88888888\",\r\n    \"blood_type\":\"O+\",\r\n    \"user_type_id\":0\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "medicalrecord-Post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": \"u00010\",\r\n    \"doctor_id\": \"DTR011\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/medicalrecord",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"medicalrecord"
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/user/create",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"user",
+					"create"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-0a67f1b1-b42b-4dc7-8e42-8b77d70e8175"
+			}
+		  ],
+		  "id": "fa755559-3035-4bd5-b74e-e7feed35b464",
+		  "uid": "25549730-fa755559-3035-4bd5-b74e-e7feed35b464"
 		},
 		{
-			"name": "Medication",
-			"item": [
-				{
-					"name": "medication-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/medication",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"medication"
-							]
-						}
-					},
-					"response": []
+		  "name": "User Session",
+		  "item": [
+			{
+			  "name": "usersession-Get-All",
+			  "id": "b2fea302-3930-4a11-b480-5717503e0fac",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/usersession",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"usersession"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-b2fea302-3930-4a11-b480-5717503e0fac"
+			}
+		  ],
+		  "id": "684f698e-faf4-4edc-a7bb-9ec19b2f2456",
+		  "uid": "25549730-684f698e-faf4-4edc-a7bb-9ec19b2f2456"
 		},
 		{
-			"name": "Medication User",
-			"item": [
-				{
-					"name": "medicationuser-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/medicationuser",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"medicationuser"
-							]
-						}
-					},
-					"response": []
+		  "name": "Appointments",
+		  "item": [
+			{
+			  "name": "appointments-Get-All",
+			  "id": "60e38a98-bbf7-4167-8638-f250b4c8e142",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/appointments",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"appointments"
+				  ]
 				}
-			]
-		},
-		{
-			"name": "Stock",
-			"item": [
-				{
-					"name": "stock-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/stock",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"stock"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User",
-			"item": [
-				{
-					"name": "user-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/user",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"user"
-							]
-						}
-					},
-					"response": []
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-60e38a98-bbf7-4167-8638-f250b4c8e142"
+			},
+			{
+			  "name": "appointments-Post",
+			  "id": "8598b87f-7a41-4452-b257-c74b94ec46d1",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "POST",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{\r\n    \"user_id\": \"u00008\",\r\n    \"doctor_id\": \"DTR007\",\r\n    \"date\": \"2023-02-01 00:00:00\" ,\r\n    \"description\": \"Prueba cita v4\",\r\n    \"consulting_room\": \"Sala 8\",\r\n    \"status\": \"T\",\r\n    \"init_datetime\": \"2022-01-01 00:00:00\",\r\n    \"end_datetime\": \"2022-01-01 00:00:00\"\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "Create User",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Felix\",\r\n    \"username\":\"fojeda\",\r\n    \"number_id\": \"109760738\",\r\n    \"email\":\"fojeda@prueba.com\",\r\n    \"password\":\"Uno23456\",\r\n    \"lastname_one\":\"Ojeda\",\r\n    \"lastname_two\":\"Ortiz\",\r\n    \"genre\":\"m\",\r\n    \"address\":\"Alajuela\",\r\n    \"date_of_birth\":\"1996/06/17\",\r\n    \"contact\":\"69566313\",\r\n    \"emergency_contact\":\"88888888\",\r\n    \"blood_type\":\"O+\",\r\n    \"user_type_id\":0\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/user/create",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"user",
-								"create"
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/appointments",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"appointments"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-8598b87f-7a41-4452-b257-c74b94ec46d1"
+			}
+		  ],
+		  "id": "c7cdd80f-db95-4dd7-baed-3bb5be74e02d",
+		  "uid": "25549730-c7cdd80f-db95-4dd7-baed-3bb5be74e02d"
 		},
 		{
-			"name": "User Session",
-			"item": [
-				{
-					"name": "usersession-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/usersession",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"usersession"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Appointments",
-			"item": [
-				{
-					"name": "appointments-Get-All",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/appointments",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"appointments"
-							]
-						}
-					},
-					"response": []
+		  "name": "UserAuth",
+		  "item": [
+			{
+			  "name": "Authenticate",
+			  "id": "7d0f9cc9-1a7e-4286-9596-c3428a8dd910",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "POST",
+				"header": [
+				  
+				],
+				"body": {
+				  "mode": "raw",
+				  "raw": "{\r\n    \"useremail\":\"fojeda@prueba.com\",\r\n    \"password\": \"Uno23456\"\r\n}",
+				  "options": {
+					"raw": {
+					  "language": "json"
+					}
+				  }
 				},
-				{
-					"name": "appointments-Post",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"user_id\": \"u00008\",\r\n    \"doctor_id\": \"DTR007\",\r\n    \"date\": \"2023-02-01 00:00:00\" ,\r\n    \"description\": \"Prueba cita v4\",\r\n    \"consulting_room\": \"Sala 8\",\r\n    \"status\": \"T\",\r\n    \"init_datetime\": \"2022-01-01 00:00:00\",\r\n    \"end_datetime\": \"2022-01-01 00:00:00\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/appointments",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"appointments"
-							]
-						}
-					},
-					"response": []
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/userauth/login",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"userauth",
+					"login"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-7d0f9cc9-1a7e-4286-9596-c3428a8dd910"
+			}
+		  ],
+		  "id": "c6205832-ca6c-4581-bc12-483e00fbfbc5",
+		  "uid": "25549730-c6205832-ca6c-4581-bc12-483e00fbfbc5"
 		},
 		{
-			"name": "UserAuth",
-			"item": [
-				{
-					"name": "Authenticate",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"useremail\":\"fojeda@prueba.com\",\r\n    \"password\": \"Uno23456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/userauth/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"userauth",
-								"login"
-							]
-						}
-					},
-					"response": []
+		  "name": "Allergy Category",
+		  "item": [
+			{
+			  "name": "Allergy Category Get",
+			  "id": "4b45fd1d-48e7-4a42-bbeb-e7d8bdece710",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				],
+				"url": {
+				  "raw": "http://localhost:81/medical_center_api/allergy/category",
+				  "protocol": "http",
+				  "host": [
+					"localhost"
+				  ],
+				  "port": "81",
+				  "path": [
+					"medical_center_api",
+					"allergy",
+					"category"
+				  ]
 				}
-			]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-4b45fd1d-48e7-4a42-bbeb-e7d8bdece710"
+			}
+		  ],
+		  "id": "400c1a30-2e70-4ea7-9055-55963c7de8f3",
+		  "uid": "25549730-400c1a30-2e70-4ea7-9055-55963c7de8f3"
 		},
 		{
-			"name": "Allergy Category",
-			"item": [
-				{
-					"name": "Allergy Category Get",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:81/medical_center_api/allergy/category",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "81",
-							"path": [
-								"medical_center_api",
-								"allergy",
-								"category"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Disease Category",
-			"item": [
-				{
-					"name": "Disease Category Get",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			]
+		  "name": "Disease Category",
+		  "item": [
+			{
+			  "name": "Disease Category Get",
+			  "id": "cf58ea29-6185-4aee-ac89-1a9a2db56d04",
+			  "protocolProfileBehavior": {
+				"disableBodyPruning": true
+			  },
+			  "request": {
+				"method": "GET",
+				"header": [
+				  
+				]
+			  },
+			  "response": [
+				
+			  ],
+			  "uid": "25549730-cf58ea29-6185-4aee-ac89-1a9a2db56d04"
+			}
+		  ],
+		  "id": "9fe217f8-b305-408d-9249-2f61cec3c6d3",
+		  "uid": "25549730-9fe217f8-b305-408d-9249-2f61cec3c6d3"
 		}
-	]
-}
+	  ]
+	}
+  }
