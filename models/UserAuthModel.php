@@ -47,13 +47,13 @@ class UserAuthModel extends BaseModel {
      * @param  mixed $password
      * @return
      */
-    public function login($useremail, $password) {
+    public function login($obj) {
         $data = null;
         $jwt_token = null;
 
-        $resp = $this->find_by_login($useremail);
+        $resp = $this->find_by_login($obj->useremail);
         $user = $resp[0];
-        if(is_object($user) && isset($user) && !empty($user) && password_verify($password, $user->password)){
+        if(is_object($user) && isset($user) && !empty($user) && password_verify($obj->password, $user->password)){
             $data=[
                 'id'=>$user->username,
                 'email'=>$user->email,

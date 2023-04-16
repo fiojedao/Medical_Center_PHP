@@ -45,7 +45,7 @@ class userauth extends BaseController {
         //$this->autorize();
         $instance = (new UserAuthModel());
         $object = $this->getObj();
-        $response = $instance->login($object->useremail, $object->password);
+        $response = $instance->login($object);
         $this->response($response);
     }
 
