@@ -1,6 +1,6 @@
 <?php
 
-class diseases extends BaseController {
+class  diseasescategory extends BaseController {
         
     /**
      * index
@@ -9,7 +9,7 @@ class diseases extends BaseController {
      */
     public function index(){
         //$this->autorize();
-        $instance = new DiseaseModel();
+        $instance = new DiseasesCategoryModel();
         $response = $instance->all();
         $this->response($response);
     }
@@ -22,7 +22,7 @@ class diseases extends BaseController {
      */
     public function get($param){
         //$this->autorize();
-        $instance = new DiseaseModel();
+        $instance = new  DiseasesCategoryModel();
         $response = $instance->get($param);
         $this->response($response);
     }
@@ -34,7 +34,7 @@ class diseases extends BaseController {
      */
     public function create(){
         //$this->autorize();
-        $instance = (new DiseaseModel());
+        $instance = new DiseasesCategoryModel();
         $object = $this->getObj();
         $response = $instance->create($object);
         $this->response($response);
@@ -48,12 +48,12 @@ class diseases extends BaseController {
      */
     public function update(){
         //$this->autorize();
-        $instance = (new DiseaseModel());
+        $instance = new  DiseasesCategoryModel();
         $object = $this->getObj();
         $response = $instance->update($object);
         $this->response($response);
     }
- 
+    
     /**
      * getByUser
      *
@@ -61,19 +61,19 @@ class diseases extends BaseController {
      * @return void
      */
     public function getByUser($param){
-        $instance = new DiseaseModel();
+        $instance = new DiseasesCategoryModel();
         $response = $instance->getByUser($param);
         $this->response($response);
     }
     
     /**
-     * updateBbyUser
+     * updateByUser
      *
      * @param  mixed $param
      * @return void
      */
     public function  updateByUser($param){
-        $instance = new DiseaseModel();
+        $instance = new  DiseasesCategoryModel();
         $response = $instance->updateBbyUser($param);
         $this->response($response);
     }
@@ -85,9 +85,11 @@ class diseases extends BaseController {
      * @return void
      */
     public function deleteByUser($param){
-        $instance = new DiseaseModel();
+        $instance = new DiseasesCategoryModel();
         $response = $instance->deleteByUser($param);
         $this->response($response);
     }
+
+    
 }
 ?>

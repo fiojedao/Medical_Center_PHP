@@ -29,6 +29,7 @@ CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id VARCHAR(20) NOT NULL,
   name VARCHAR(45) NOT NULL,
+  number_id VARCHAR(20) NOT NULL,
   lastname_one VARCHAR(45) NOT NULL,
   lastname_two VARCHAR(45) NOT NULL,
   genre VARCHAR(20) NOT NULL,
@@ -44,11 +45,10 @@ CREATE TABLE users (
 
 -- Tabla para gestionar la autenticación de los usuarios
 CREATE TABLE user_sessions (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id VARCHAR(20) NOT NULL,
   user_name VARCHAR(100) NOT NULL,
   user_email VARCHAR(100) NOT NULL,
-  session_token VARCHAR(100) NOT NULL,
+  session_token VARCHAR(255) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id, user_name, user_email) REFERENCES users_auth(user_id, username, email)
@@ -87,22 +87,48 @@ CREATE TABLE doctors (
 
 
 -- Tabla para gestionar las enfermedades
-CREATE TABLE diseases (
-  code_id VARCHAR(20) NOT NULL,
+
+CREATE TABLE disease_category (
+  category_id VARCHAR(20) NOT NULL,
   name VARCHAR(100) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (category_id)
+);
+
+
+-- Tabla para gestionar las enfermedades
+CREATE TABLE diseases (
+  code_id VARCHAR(20) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  id_category VARCHAR(20) NOT NULL,
+  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT id_categoryD FOREIGN KEY (id_category) REFERENCES  disease_category (category_id),
   PRIMARY KEY (code_id)
 );
+
+-- Tabla para gestionar las categorias de alergias
+CREATE TABLE allergy_category (
+  category_id VARCHAR(20) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (category_id)
+);
+
 
 -- Tabla para gestionar las alergias
 CREATE TABLE allergies (
   code_id VARCHAR(20) NOT NULL,
   name VARCHAR(100) NOT NULL,
+  id_category VARCHAR(20) NOT NULL,
   created_date DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT id_categoryA FOREIGN KEY (id_category) REFERENCES  allergy_category (category_id),
   PRIMARY KEY (code_id)
 );
+
 
 -- Tabla para gestionar los registros médicos
 CREATE TABLE medical_records (
@@ -262,51 +288,73 @@ CREATE INDEX idx_appointments_medical_records_id ON appointments (medical_record
 
 -- INSERT
 
-INSERT INTO allergies (code_id, name, created_date, updated_date)
-VALUES
-('A001', 'Pollen', '2022-01-01 00:00:00', '2022-01-01 00:00:00'),
-('A002', 'Dust mites', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
-('A003', 'Pet dander', '2022-01-03 00:00:00', '2022-01-03 00:00:00'),
-('A004', 'Mold', '2022-01-04 00:00:00', '2022-01-04 00:00:00'),
-('A005', 'Food', '2022-01-05 00:00:00', '2022-01-05 00:00:00'),
-('A006', 'Insect bites', '2022-01-06 00:00:00', '2022-01-06 00:00:00'),
-('A007', 'Latex', '2022-01-07 00:00:00', '2022-01-07 00:00:00'),
-('A008', 'Medication', '2022-01-08 00:00:00', '2022-01-08 00:00:00'),
-('A009', 'Chemicals', '2022-01-09 00:00:00', '2022-01-09 00:00:00'),
-('A010', 'Smoke', '2022-01-10 00:00:00', '2022-01-10 00:00:00'),
-('A011', 'Cold air', '2022-01-11 00:00:00', '2022-01-11 00:00:00'),
-('A012', 'Exercise', '2022-01-12 00:00:00', '2022-01-12 00:00:00'),
-('A013', 'Stress', '2022-01-13 00:00:00', '2022-01-13 00:00:00'),
-('A014', 'Alcohol', '2022-01-14 00:00:00', '2022-01-14 00:00:00'),
-('A015', 'Caffeine', '2022-01-15 00:00:00', '2022-01-15 00:00:00'),
-('A016', 'Chocolate', '2022-01-16 00:00:00', '2022-01-16 00:00:00'),
-('A017', 'Eggs', '2022-01-17 00:00:00', '2022-01-17 00:00:00'),
-('A018', 'Fish', '2022-01-18 00:00:00', '2022-01-18 00:00:00'),
-('A019', 'Milk', '2022-01-19 00:00:00', '2022-01-19 00:00:00'),
-('A020', 'Nuts', '2022-01-20 00:00:00', '2022-01-20 00:00:00');
 
-INSERT INTO diseases (code_id, name, created_date, updated_date)
+INSERT INTO  allergy_category ( category_id, name, created_date, updated_date)
 VALUES
-('D001', 'Cancer', '2022-01-01 00:00:00', '2022-01-01 00:00:00'),
-('D002', 'Diabetes', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
-('D003', 'Heart disease', '2022-01-03 00:00:00', '2022-01-03 00:00:00'),
-('D004', 'Stroke', '2022-01-04 00:00:00', '2022-01-04 00:00:00'),
-('D005', 'Alzheimers', '2022-01-05 00:00:00', '2022-01-05 00:00:00'),
-('D006', 'Parkinsons', '2022-01-06 00:00:00', '2022-01-06 00:00:00'),
-('D007', 'Arthritis', '2022-01-07 00:00:00', '2022-01-07 00:00:00'),
-('D008', 'Depression', '2022-01-08 00:00:00', '2022-01-08 00:00:00'),
-('D009', 'Anxiety', '2022-01-09 00:00:00', '2022-01-09 00:00:00'),
-('D010', 'Obesity', '2022-01-10 00:00:00', '2022-01-10 00:00:00'),
-('D011', 'Asthma', '2022-01-11 00:00:00', '2022-01-11 00:00:00'),
-('D012', 'COPD', '2022-01-12 00:00:00', '2022-01-12 00:00:00'),
-('D013', 'HIV/AIDS', '2022-01-13 00:00:00', '2022-01-13 00:00:00'),
-('D014', 'Hepatitis', '2022-01-14 00:00:00', '2022-01-14 00:00:00'),
-('D015', 'Malaria', '2022-01-15 00:00:00', '2022-01-15 00:00:00'),
-('D016', 'Tuberculosis', '2022-01-16 00:00:00', '2022-01-16 00:00:00'),
-('D017', 'Measles', '2022-01-17 00:00:00', '2022-01-17 00:00:00'),
-('D018', 'Flu', '2022-01-18 00:00:00', '2022-01-18 00:00:00'),
-('D019', 'COVID-19', '2022-01-19 00:00:00', '2022-01-19 00:00:00'),
-('D020', 'High blood pressure', '2022-01-20 00:00:00','2022-01-19 00:00:00');
+('CA001', 'Respiratoria', '2022-01-01 00:00:00', '2022-01-01 00:00:00'),
+('CA002', 'Cutanea', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('CA003', 'Medicacion', '2022-01-03 00:00:00', '2022-01-03 00:00:00');
+
+
+INSERT INTO allergies (code_id, name, id_category ,created_date, updated_date)
+VALUES
+('A001', 'Pollen','CA001' ,'2022-01-01 00:00:00', '2022-01-01 00:00:00'),
+('A002', 'Dust mites','CA001', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('A003', 'Pet dander', 'CA001', '2022-01-03 00:00:00', '2022-01-03 00:00:00'),
+('A004', 'Mold','CA001' , '2022-01-04 00:00:00', '2022-01-04 00:00:00'),
+('A005', 'Food', 'CA001','2022-01-05 00:00:00', '2022-01-05 00:00:00'),
+('A006', 'Insect bites', 'CA001', '2022-01-06 00:00:00', '2022-01-06 00:00:00'),
+('A007', 'Latex', 'CA002', '2022-01-07 00:00:00', '2022-01-07 00:00:00'),
+('A008', 'aspirin', 'CA003', '2022-01-08 00:00:00', '2022-01-08 00:00:00'),
+('A009', 'Chemicals', 'CA002', '2022-01-09 00:00:00', '2022-01-09 00:00:00'),
+('A010', 'Smoke', 'CA001',  '2022-01-10 00:00:00', '2022-01-10 00:00:00'),
+('A011', 'insulin', 'CA003',  '2022-01-11 00:00:00', '2022-01-11 00:00:00'),
+('A012', 'Exercise', 'CA001', '2022-01-12 00:00:00', '2022-01-12 00:00:00'),
+('A013', 'Stress', 'CA001', '2022-01-13 00:00:00', '2022-01-13 00:00:00'),
+('A014', 'penicillin', 'CA003', '2022-01-14 00:00:00', '2022-01-14 00:00:00'),
+('A015', 'Caffeine', 'CA001',  '2022-01-15 00:00:00', '2022-01-15 00:00:00'),
+('A016', 'Chocolate', 'CA001', '2022-01-16 00:00:00', '2022-01-16 00:00:00'),
+('A017', 'Eggs', 'CA001', '2022-01-17 00:00:00', '2022-01-17 00:00:00'),
+('A018', 'Fish', 'CA001',  '2022-01-18 00:00:00', '2022-01-18 00:00:00'),
+('A019', 'Milk', 'CA001',  '2022-01-19 00:00:00', '2022-01-19 00:00:00'),
+('A020', 'Nuts', 'CA001',  '2022-01-20 00:00:00', '2022-01-20 00:00:00');
+
+INSERT INTO  disease_category ( category_id, name, created_date, updated_date)
+VALUES
+('CD001', ' crónicas', '2022-01-01 00:00:00', '2022-01-01 00:00:00'),
+('CD002', 'autoinmunitarias', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('CD003', 'genéticas', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('CD004', 'mentales', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('CD005', 'respiratorias', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('CD006', 'gastrointestinales', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('CD007', 'cardiovasculares', '2022-01-03 00:00:00', '2022-01-03 00:00:00'),
+('CD008', 'neoplastica', '2022-01-03 00:00:00', '2022-01-03 00:00:00');
+
+
+
+
+INSERT INTO diseases (code_id, name, id_category, created_date, updated_date)
+VALUES
+('D001', 'Cancer', 'CD008', '2022-01-01 00:00:00', '2022-01-01 00:00:00'),
+('D002', 'Diabetes', 'CD001', '2022-01-02 00:00:00', '2022-01-02 00:00:00'),
+('D003', 'Heart disease', 'CD007', '2022-01-03 00:00:00', '2022-01-03 00:00:00'),
+('D005', 'Alzheimers', 'CD004', '2022-01-05 00:00:00', '2022-01-05 00:00:00'),
+('D006', 'Parkinsons', 'CD001', '2022-01-06 00:00:00', '2022-01-06 00:00:00'),
+('D007', 'Arthritis', 'CD002', '2022-01-07 00:00:00', '2022-01-07 00:00:00'),
+('D008', 'Depression', 'CD004', '2022-01-08 00:00:00', '2022-01-08 00:00:00'),
+('D009', 'Anxiety', 'CD004', '2022-01-09 00:00:00', '2022-01-09 00:00:00'),
+('D010', 'Obesity','CD001', '2022-01-10 00:00:00', '2022-01-10 00:00:00'),
+('D011', 'Asthma', 'CD001','2022-01-11 00:00:00', '2022-01-11 00:00:00'),
+('D012', 'COPD', 'CD001', '2022-01-12 00:00:00', '2022-01-12 00:00:00'),
+('D013', 'HIV/AIDS', 'CD001', '2022-01-13 00:00:00', '2022-01-13 00:00:00'),
+('D014', 'Hepatitis', 'CD001','2022-01-14 00:00:00', '2022-01-14 00:00:00'),
+('D015', 'Malaria', 'CD001', '2022-01-15 00:00:00', '2022-01-15 00:00:00'),
+('D016', 'Tuberculosis', 'CD001', '2022-01-16 00:00:00', '2022-01-16 00:00:00'),
+('D017', 'Measles','CD001', '2022-01-17 00:00:00', '2022-01-17 00:00:00'),
+('D018', 'Flu', 'CD001', '2022-01-18 00:00:00', '2022-01-18 00:00:00'),
+('D019', 'COVID-19', 'CD002', '2022-01-19 00:00:00', '2022-01-19 00:00:00'),
+('D020', 'High blood pressure','CD001', '2022-01-20 00:00:00','2022-01-19 00:00:00');
+
 
 INSERT INTO medical_specialities (code_id, name, description, created_date, updated_date)
 VALUES
@@ -503,20 +551,22 @@ VALUES
 ('u00008', 6, 'A005', '2022-09-06 13:15:00', '2022-09-06 13:15:00'),
 ('u00009', 6, 'A002', '2022-09-07 16:30:00', '2022-09-07 16:30:00');
 
+select* from medical_record_allergies;
+
 /*select* from medical_record_diseases;*/
 /*Revisar campos user_id, medical_record_id,*/
 INSERT INTO medical_record_diseases (user_id, medical_record_id, diseases_code_id, created_date, updated_date)
 VALUES 
 ('u00001', 1, 'D001', '2022-09-01 10:30:00', '2022-09-01 10:30:00'),
 ('u00002', 2, 'D002', '2022-09-02 09:15:00', '2022-09-02 09:15:00'),
-('u00003', 2, 'D004', '2022-09-02 10:00:00', '2022-09-02 10:00:00'),
-('u00004', 3, 'D005', '2022-09-03 14:20:00', '2022-09-03 14:20:00'),
-('u00005', 3, 'D012', '2022-09-03 15:30:00', '2022-09-03 15:30:00'),
-('u00006', 4, 'D011', '2022-09-04 08:45:00', '2022-09-04 08:45:00'),
-('u00007', 5, 'D013', '2022-09-05 11:00:00', '2022-09-05 11:00:00'),
-('u00008', 6, 'D015', '2022-09-06 13:15:00', '2022-09-06 13:15:00'),
-('u00009', 7, 'D020', '2022-09-07 16:30:00', '2022-09-07 16:30:00'),
-('u00010', 8, 'D012', '2022-09-07 16:30:00', '2022-09-07 16:30:00');
+('u00003', 2, 'D005', '2022-09-02 10:00:00', '2022-09-02 10:00:00'),
+('u00004', 3, 'D006', '2022-09-03 14:20:00', '2022-09-03 14:20:00'),
+('u00005', 3, 'D008', '2022-09-03 15:30:00', '2022-09-03 15:30:00'),
+('u00006', 4, 'D010', '2022-09-04 08:45:00', '2022-09-04 08:45:00'),
+('u00007', 5, 'D011', '2022-09-05 11:00:00', '2022-09-05 11:00:00'),
+('u00008', 6, 'D014', '2022-09-06 13:15:00', '2022-09-06 13:15:00'),
+('u00009', 7, 'D016', '2022-09-07 16:30:00', '2022-09-07 16:30:00'),
+('u00010', 8, 'D019', '2022-09-07 16:30:00', '2022-09-07 16:30:00');
 
 /*select* from stock;*/
 INSERT INTO stock (medications_code, lot, expiration_date, description, entry_date, amount, created_date, updated_date)
@@ -596,22 +646,6 @@ VALUES
 ('Administrativo', 'Administrativo', 'Este tipo de usuario se encarga de llevar a cabo tareas administrativas en el centro médico, como la gestión de citas, facturación, gestión de seguros, etc.', '2023-03-18 17:00:00', '2023-03-18 17:00:00'),
 ('Clínico', 'Clínico', 'Es un profesional de la salud que atiende a pacientes en un entorno clínico y se encarga de realizar evaluaciones, diagnósticos, tratamientos y seguimiento de pacientes.', '2023-03-18 18:00:00', '2023-03-18 18:00:00');
 
-/*
-Select * from users;
-Revisar campos user_id, user_name
-INSERT INTO user_sessions (user_id, user_name, user_email, session_token, created_date, updated_date) 
-VALUES 
-('u00001', 'Juan Pérez García', 'j.perez@example.com', 'J1' , '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00002', 'María González Hernández', 'm.gonzalez@example.com', 'M2' , '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00003', 'Pedro Ramírez Sánchez', 'p.ramirez@example.com', 'P3', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00004', 'Ana Martínez Jiménez', 'a.admin@example.com', 'A4', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00005', 'Jorge Gómez Gutiérrez','r.recepcion@example.com', 'J5', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00006', 'Luisa Díaz López', 'l.diaz@example.com', 'L13', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00007', 'Alberto Castro Fernández', 'a.castro@example.com','A13', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00008', 'Carmen Álvarez Cruz', 'c.alvarez@example.com', 'C13', '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00009', 'Raúl Hernández Ortiz', 'r.hernandezn@example.com', 'R13' , '2023-03-18 12:00:00', '2023-03-18 12:00:00'),
-('u00010', 'Isabel Torres Ruiz', 'i.torres@example.com', 'I13', '2023-03-18 12:00:00', '2023-03-18 12:00:00');
-*/
 
 INSERT INTO doctors (doctor_id,name,medical_specialities_code,created_date,updated_date)
 VALUES
@@ -644,40 +678,6 @@ VALUES('u00001','DTR001',NOW(),NOW()),
 ('u00002','DTR005',NOW(),NOW()),
 ('u00006','DTR006',NOW(),NOW());
 
-INSERT INTO medical_record_allergies (user_id,medical_record_id,allergies_code_id)
-VALUES
-('u00001',1,'A001'),
-('u00001',2,'A002'),
-('u00001',3,'A003'),
-('u00002',4,'A004'),
-('u00002',5,'A005'),
-('u00003',6,'A006'),
-('u00004',7,'A007'),
-('u00004',8,'A008'),
-('u00004',9,'A009'),
-('u00004',10,'A010'),
-('u00005',11,'A001'),
-('u00005',12,'A002'),
-('u00002',13,'A001'),
-('u00006',14,'A002');
-
-INSERT INTO medical_record_diseases (user_id,medical_record_id,diseases_code_id)
-VALUES
-('u00001',1,'D001'),
-('u00001',2,'D002'),
-('u00001',3,'D003'),
-('u00002',4,'D004'),
-('u00002',5,'D005'),
-('u00003',6,'D006'),
-('u00004',7,'D007'),
-('u00004',8,'D008'),
-('u00004',9,'D009'),
-('u00004',10,'D010'),
-('u00005',11,'D001'),
-('u00005',12,'D002'),
-('u00002',13,'D001'),
-('u00006',14,'D002');
-
 /*
 select* from share_files;
 select* from medical_records;
@@ -696,4 +696,6 @@ VALUES
 (9, 'u00002', '2022-01-09 00:00:00', '2022-01-09 00:00:00'),
 (10, 'u00001', '2022-01-10 00:00:00', '2022-01-10 00:00:00');
 
+https://blue-resonance-27090.postman.co/workspace/New-Team-Workspace~1680c7c0-9950-4fd5-8bd5-1dfbd3951b2c/collection/25549730-e941be62-fe6f-4526-9249-fb5051857fdc?action=share&creator=25549730
 
+https://api.postman.com/collections/25549730-e941be62-fe6f-4526-9249-fb5051857fdc?access_key=PMAT-01GY1BVPEAEAT60NHW4R85Z3C4

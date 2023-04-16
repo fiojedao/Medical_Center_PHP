@@ -104,6 +104,16 @@
 				{
 					"name": "Allergies-Get-All",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IlUtMzY4ODVhM2I0Mjk5ZDgyYyIsImVtYWlsIjoiZm9qZWRhQHBydWViYS5jb20iLCJyb2wiOiIzIiwidGltZSI6IjA4LTA0LTIwMjMgMDg6MjI6MTkifQ.R1gOC14928ip-yS8Ai_lY2sGe7wIZDtk0W5HR-STsnk",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -271,9 +281,16 @@
 			"item": [
 				{
 					"name": "doctors-Get-All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "http://localhost:81/medical_center_api/doctors",
 							"protocol": "http",
@@ -284,6 +301,27 @@
 							"path": [
 								"medical_center_api",
 								"doctors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doctors-Get-By-Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/doctors/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"doctors",
+								""
 							]
 						}
 					},
@@ -349,6 +387,56 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/medicalrecord",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"medicalrecord"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "medicalrecord-Get-Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/medicalrecord/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"medicalrecord",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "medicalrecord-Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"u00010\",\r\n    \"doctor_id\": \"DTR011\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:81/medical_center_api/medicalrecord",
 							"protocol": "http",
@@ -463,6 +551,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "dgeged",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Felix\",\r\n    \"username\":\"fojeda\",\r\n    \"number_id\":\"109760738\",\r\n    \"email\":\"fojeda@prueba.com\",\r\n    \"password\":\"Uno23456\",\r\n    \"lastname_one\":\"Ojeda\",\r\n    \"lastname_two\":\"Ortiz\",\r\n    \"genre\":\"m\",\r\n    \"address\":\"Alajuela\",\r\n    \"date_of_birth\":\"1996/06/17\",\r\n    \"contact\":\"69566313\",\r\n    \"emergency_contact\":\"88888888\",\r\n    \"blood_type\":\"O+\",\r\n    \"user_type_id\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/user/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -485,6 +613,190 @@
 								"medical_center_api",
 								"usersession"
 							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "appointments-Get-All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointments-Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"u00008\",\r\n    \"doctor_id\": \"DTR007\",\r\n    \"date\": \"2023-02-01 00:00:00\" ,\r\n    \"description\": \"Prueba cita v4\",\r\n    \"consulting_room\": \"Sala 8\",\r\n    \"status\": \"T\",\r\n    \"init_datetime\": \"2022-01-01 00:00:00\",\r\n    \"end_datetime\": \"2022-01-01 00:00:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserAuth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IlUtMzY4ODVhM2I0Mjk5ZDgyYyIsImVtYWlsIjoiZm9qZWRhQHBydWViYS5jb20iLCJyb2wiOiIzIiwidGltZSI6IjA4LTA0LTIwMjMgMDg6MjI6MTkifQ.R1gOC14928ip-yS8Ai_lY2sGe7wIZDtk0W5HR-STsnk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Uno23456\",\r\n    \"useremail\":\"fojeda@prueba.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:81/medical_center_api/userauth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"userauth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IlUtMzY4ODVhM2I0Mjk5ZDgyYyIsImVtYWlsIjoiZm9qZWRhQHBydWViYS5jb20iLCJyb2wiOiIzIn0.HsY0DLEe1CTGmkL0namqe_7_HxcAyV0fpkXUi3-14W8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"useremail\":\"fojeda@prueba.com\",\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IlUtMzY4ODVhM2I0Mjk5ZDgyYyIsImVtYWlsIjoiZm9qZWRhQHBydWViYS5jb20iLCJyb2wiOiIzIn0.HsY0DLEe1CTGmkL0namqe_7_HxcAyV0fpkXUi3-14W8\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/userauth/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"userauth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Allergy Category",
+			"item": [
+				{
+					"name": "Allergy Category Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/allergy/category",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"allergy",
+								"category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Disease Category",
+			"item": [
+				{
+					"name": "Disease Category Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
 						}
 					},
 					"response": []

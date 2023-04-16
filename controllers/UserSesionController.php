@@ -8,6 +8,7 @@ class usersession extends BaseController {
      * @return
      */
     public function index(){
+        //$this->autorize();
         $instance = new UserSessionModel();
         $response = $instance->all();
         $this->response($response);
@@ -20,6 +21,7 @@ class usersession extends BaseController {
      * @return
      */
     public function get($param){
+        //$this->autorize();
         $instance = new UserSessionModel();
         $response = $instance->get($param);
         $this->response($response);
@@ -31,6 +33,7 @@ class usersession extends BaseController {
      * @return
      */
     public function create(){
+        //$this->autorize();
         $instance = (new UserSessionModel());
         $object = $this->getObj();
         $response = $instance->create($object);
@@ -44,6 +47,7 @@ class usersession extends BaseController {
      * @return
      */
     public function update(){
+        //$this->autorize();
         $instance = (new UserSessionModel());
         $object = $this->getObj();
         $response = $instance->update($object);

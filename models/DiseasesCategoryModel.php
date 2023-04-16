@@ -1,6 +1,6 @@
 <?php
 
-class MedicationModel extends BaseModel {  
+class DiseasesCategoryModel extends BaseModel {
     
     /**
      * __construct
@@ -8,7 +8,7 @@ class MedicationModel extends BaseModel {
      * @return 
      */
     public function __construct() {
-        parent::__construct('medications', 'code', new MySqlConnect());
+        parent::__construct('disease_category', 'category_id', new MySqlConnect());
     }
     
     /**
@@ -18,7 +18,7 @@ class MedicationModel extends BaseModel {
      */
     private function getId(){
         try {
-            $id = "M-".$this->generateId(8);
+            $id = "DC-".$this->generateId(8);
             return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
@@ -30,7 +30,7 @@ class MedicationModel extends BaseModel {
      *
      * @return $vResultado
      */
-   public function all(){
+    public function all(){
         try {
 			$vResultado = $this->find_all();
 			return $vResultado;
@@ -38,16 +38,6 @@ class MedicationModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
-   /* public function all(){
-        try {
-            $vSql = " select name, description, dose from medications;";
-            $resp = $this->customGet($vSql);
-            return $resp;
-		} catch ( Exception $e ) {
-			die ( $e->getMessage () );
-		}
-    }*/
     
     /**
      * get
@@ -57,9 +47,8 @@ class MedicationModel extends BaseModel {
      */
     public function get($id){
         try {
-
             $vResultado = $this->find_by_id($id);
-            
+        
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -70,51 +59,44 @@ class MedicationModel extends BaseModel {
      * create
      *
      * @param mixed $objeto
-     * @return 
+     * @return $vResultado
      */
     public function create($objeto) {
         try {
-            $code = $this->getId();
-            $tuplas = "code, name, description, dose, type ";
-
-            $values = "'$code','$objeto->name','$objeto->description' ,'$objeto->dose' ,'$objeto->type'";
-
+            $code_id = $this->getId();
+            $tuplas = "category_id, name";
+            $values = "'$category_id','$objeto->name'";
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
-                $vResultado =  $this->find_by_id($code);
+                $vResultado = $this->find_by_id($code_id);
             }
 
-            return $vResultado;        
+            return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
-		}  
+		}
     }
-        
+    
+    
     /**
      * update
      *
      * @param mixed $objeto
-     * @return 
+     * @return $vResultado
      */
     public function update($objeto) {
         try {
-			$update = " name ='$objeto->name',
-             description='$objeto->description',
-             dose='$objeto->dose',
-             type='$objeto->type',
-             updated_date = CURRENT_TIMESTAMP()";
+			$update =  "name='$objeto->name', updated_date = CURRENT_TIMESTAMP()";
             $vResultado = null;
 
-            if($this->updateById($update,$objeto->code) > 0){
-                 $vResultado = $this->find_by_id($objeto->code);
+            if($this->updateById($update,$objeto->code_id) > 0){
+                 $vResultado = $this->find_by_id($objeto->code_id);
             }
-
             return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-   
 }
 ?>

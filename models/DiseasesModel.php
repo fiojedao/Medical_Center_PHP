@@ -1,14 +1,13 @@
 <?php
 
-class AllergieModel extends BaseModel {
-    
+class DiseaseModel extends BaseModel {  
     /**
      * __construct
      *
      * @return 
      */
     public function __construct() {
-        parent::__construct('allergies', 'code_id', new MySqlConnect());
+        parent::__construct('diseases', 'code_id', new MySqlConnect());
     }
     
     /**
@@ -18,13 +17,14 @@ class AllergieModel extends BaseModel {
      */
     private function getId(){
         try {
-            $id = "AL-".$this->generateId(8);
+            $id = "D-".$this->generateId(8);
             return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
         }
     }
-        
+    
+      
     /**
      * all
      *
@@ -32,14 +32,15 @@ class AllergieModel extends BaseModel {
      */
     public function all(){
         try {
-            $vSql = "SELECT a.code_id, a.name, ac.name as category, ac.category_id  from allergy_category as ac  inner join allergies as a  on ac.category_id=a.id_category;";
+            $vSql = " SELECT d.code_id, d.name, dc.name as category, dc.category_id  from disease_category as dc  inner join diseases as d  on dc.category_id=d.id_category;";
             $resp = $this->customGet($vSql);
             return $resp;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-  
+    
+      
     /**
      * get
      *
@@ -54,12 +55,12 @@ class AllergieModel extends BaseModel {
 			die ( $e->getMessage () );
         }
     }
-        
+
     /**
      * create
      *
      * @param mixed $objeto
-     * @return $vResultado
+     * @return
      */
     public function create($objeto) {
         try {
@@ -69,21 +70,19 @@ class AllergieModel extends BaseModel {
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
-                $vResultado = $this->find_by_id($code_id);
+                $vResultado =  $this->find_by_id($code_id);
             }
-
             return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-    
-    
+       
     /**
      * update
      *
      * @param mixed $objeto
-     * @return $vResultado
+     * @return 
      */
     public function update($objeto) {
         try {
@@ -93,6 +92,7 @@ class AllergieModel extends BaseModel {
             if($this->updateById($update,$objeto->code_id) > 0){
                  $vResultado = $this->find_by_id($objeto->code_id);
             }
+
             return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -108,18 +108,17 @@ class AllergieModel extends BaseModel {
     public function getByUser($id){
         try {
             //Consulta sql
-			$vSql = " SELECT mra.allergies_code_id, a.name, u.user_id 
-            FROM allergies AS a INNER JOIN medical_record_allergies AS mra 
-            ON mra.allergies_code_id=a.code_id INNER JOIN users AS u 
-            ON u.user_id=mra.user_id WHERE u.user_id=$id;";
+			$vSql = "SELECT mrd.diseases_code_id, d.name, u.user_id  FROM diseases AS d 
+            INNER JOIN medical_record_diseases AS mrd ON mrd.diseases_code_id=d.code_id 
+            INNER JOIN users AS u ON u.user_id=mrd.user_id WHERE u.user_id= $id;";
 
 			 $vResultado = $this->customGet($vSql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-}
-     
+    }
+            
     /**
      * updateByUser
      *
@@ -142,7 +141,7 @@ class AllergieModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-        
+         
     /**
      * deleteByUser
      *
@@ -151,7 +150,7 @@ class AllergieModel extends BaseModel {
      */
     public function deleteByUser($id){
         try {
-            $table= "medical_record_allergies";
+            $table= "medical_record_diseases";
 			$field =  "user_id";
 
             if($this->delectById( $table, $field ,$id) > 0){
@@ -165,5 +164,4 @@ class AllergieModel extends BaseModel {
     }
 
 }
-
 ?>

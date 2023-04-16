@@ -8,6 +8,7 @@ class user extends BaseController {
      * @return
      */
     public function index(){
+        //$this->autorize();
         $instance = new UserModel();
         $response = $instance->all();
         $this->response($response);
@@ -20,6 +21,7 @@ class user extends BaseController {
      * @return
      */
     public function get($param){
+        //$this->autorize();
         $instance = new UserModel();
         $response = $instance->get($param);
         $this->response($response);
@@ -31,6 +33,8 @@ class user extends BaseController {
      * @return
      */
     public function create(){
+        //quitar comment "//" para crear cuenta
+        ////$this->autorize();
         $instance = (new UserModel());
         $object = $this->getObj();
         $response = $instance->create($object);
@@ -44,6 +48,7 @@ class user extends BaseController {
      * @return
      */
     public function update(){
+        //$this->autorize();
         $instance = (new UserModel());
         $object = $this->getObj();
         $response = $instance->update($object);

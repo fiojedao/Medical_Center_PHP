@@ -1,6 +1,5 @@
 <?php
 abstract class BaseModel {
-    //Listar en el API
     private $tabla;
     private $campoId;
     private $campoEmail;
@@ -78,7 +77,7 @@ abstract class BaseModel {
      * find_by_email
      *
      * @param mixed $param
-     * @return
+     * @return "$obj";
      */
     public function find_by_email($param) {
         try {
@@ -86,9 +85,31 @@ abstract class BaseModel {
             $campoEmail = $this->campoEmail;
             $this->enlace->connect();
 
-            $vSql = "SELECT * FROM $tabla WHERE $campoEmail='$param';";
+            $vSql = "SELECT * FROM $tabla WHERE $campoEmail = '$param';";
 
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
+
+            return $vResultado;
+        } catch ( Exception $e ) {
+            die ( $e->getMessage () );
+        }
+    }
+
+    public function find_by_login($param) {
+        try {
+            $this->enlace->connect();
+
+            $vSql = "SELECT uat.username,
+                        uat.password,
+                        uat.email,
+                        ut.name AS rol_name,
+                        ut.type AS rol_type
+                    FROM users_auth uat
+                    INNER JOIN user_types ut
+                    ON uat.user_type_id = ut.id
+                    WHERE uat.email = '$param' or uat.username = '$param'";
+
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
 
             return $vResultado;
         } catch ( Exception $e ) {
@@ -110,7 +131,7 @@ abstract class BaseModel {
 
             $vResultado = null;
 
-            $sql =  "INSERT INTO $tabla($keystabla) VALUES($valuestabla);";
+            $sql =  "INSERT INTO $tabla($keystabla) VALUES($valuestabla)";
 
             $vResultado = $this->enlace->executeSQL_DML($sql);
 
@@ -181,10 +202,7 @@ abstract class BaseModel {
     public function customGet($sql) {
         try {
             $this->enlace->connect();
-
-			$cResults = $this->enlace->ExecuteSQL($sql);
-
-            return $cResults;
+            return $this->enlace->ExecuteSQL($sql);
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -226,26 +244,22 @@ abstract class BaseModel {
 		}
     }
     
+        
     /**
      * delectById
      *
-     * @param mixed $tabla
-     * @param mixed $campoId
-     * @param mixed $param
-     * @return 
+     * @param  mixed $tabla
+     * @param  mixed $campoId
+     * @param  mixed $param
+     * @return void
      */
     public function delectById($tabla,$campoId,$param) {
         try {
             $this->enlace->connect();
             $valor = is_numeric($param) ? $param:"'$param'";
-			if($valor != ""){
+			if(isset($valor) || $valor > 0){
                 $sql = "DELETE FROM $tabla WHERE $campoId=$valor";
-            
-                if($valor != ""){
-                    $vresultado = $this->enlace->executeSQL_DML($sql);
-
-                    return $vresultado;
-                }
+                return $this->enlace->executeSQL_DML($sql);
             }
             return null;
 		} catch ( Exception $e ) {
@@ -253,7 +267,21 @@ abstract class BaseModel {
 		}
     }
 
-
+    
+    /**
+     * customSQL
+     *
+     * @param  mixed $sql
+     * @return
+     */
+    public function customSQL($sql) {
+        try {
+            $this->enlace->connect();
+            return $this->enlace->executeSQL_DML($sql);
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+    }
 
     public function autorize(){   
         try {
@@ -275,6 +303,6 @@ abstract class BaseModel {
         }
     }
 
-    
+
 }
 ?>

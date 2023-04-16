@@ -1,13 +1,14 @@
 <?php
 
-class DiseaseModel extends BaseModel {  
+class AllergyCategoryModel extends BaseModel {
+    
     /**
      * __construct
      *
      * @return 
      */
     public function __construct() {
-        parent::__construct('diseases', 'code_id', new MySqlConnect());
+        parent::__construct('allergy_category', 'category_id', new MySqlConnect());
     }
     
     /**
@@ -17,7 +18,7 @@ class DiseaseModel extends BaseModel {
      */
     private function getId(){
         try {
-            $id = "D-".$this->generateId(8);
+            $id = "AC-".$this->generateId(8);
             return $id;
         } catch (Exception $e) {
             die ( $e->getMessage () );
@@ -47,6 +48,7 @@ class DiseaseModel extends BaseModel {
     public function get($id){
         try {
             $vResultado = $this->find_by_id($id);
+        
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -57,29 +59,31 @@ class DiseaseModel extends BaseModel {
      * create
      *
      * @param mixed $objeto
-     * @return
+     * @return $vResultado
      */
     public function create($objeto) {
         try {
             $code_id = $this->getId();
-            $tuplas = "code_id, name";
-            $values = "'$code_id','$objeto->name'";
+            $tuplas = "category_id, name";
+            $values = "'$category_id','$objeto->name'";
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
-                $vResultado =  $this->find_by_id($code_id);
+                $vResultado = $this->find_by_id($code_id);
             }
+
             return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
     }
-       
+    
+    
     /**
      * update
      *
      * @param mixed $objeto
-     * @return 
+     * @return $vResultado
      */
     public function update($objeto) {
         try {
@@ -89,7 +93,6 @@ class DiseaseModel extends BaseModel {
             if($this->updateById($update,$objeto->code_id) > 0){
                  $vResultado = $this->find_by_id($objeto->code_id);
             }
-
             return  $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
