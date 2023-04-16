@@ -28,18 +28,6 @@ class userauth extends BaseController {
     }
         
     /**
-     * create
-     *
-     * @return
-     */
-    public function create(){
-        //$this->autorize();
-        $instance = new UserAuthModel();
-        $response = $instance->login($this->getObj());
-        $this->response($response);
-    }
-        
-    /**
      * update
      *
      * @param mixed $param
@@ -50,6 +38,14 @@ class userauth extends BaseController {
         $instance = (new UserAuthModel());
         $object = $this->getObj();
         $response = $instance->update($object);
+        $this->response($response);
+    }
+
+    public function login(){
+        //$this->autorize();
+        $instance = (new UserAuthModel());
+        $object = $this->getObj();
+        $response = $instance->login($object);
         $this->response($response);
     }
 

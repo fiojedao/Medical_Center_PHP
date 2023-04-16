@@ -31,7 +31,6 @@
     require_once "models/DiseasesCategoryModel.php";
     
 
-
     //Agregar todos los controladores
     require_once "controllers/AllergiesController.php";
     require_once "controllers/DiseaseController.php";

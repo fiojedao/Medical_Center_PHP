@@ -39,19 +39,27 @@ class UserAuthModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
-    public function login($objeto) {
+    
+    /**
+     * login
+     *
+     * @param  mixed $useremail
+     * @param  mixed $password
+     * @return
+     */
+    public function login($obj) {
         $data = null;
         $jwt_token = null;
 
-        $user = $this->find_by_email($objeto->useremail)[0];
-        $locatedate = date("d-m-Y h:i:s");
-        if(is_object($user) && isset($user) && !empty($user) && password_verify($objeto->password, $user->password)){
+        $resp = $this->find_by_login($obj->useremail);
+        $user = $resp[0];
+        if(is_object($user) && isset($user) && !empty($user) && password_verify($obj->password, $user->password)){
             $data=[
-                'id'=>$user->user_id,
+                'id'=>$user->username,
                 'email'=>$user->email,
-                'rol'=>$user->user_type_id,
-                'time'=>$locatedate
+                'rol'=>$user->rol_name,
+                'rol_type'=>$user->rol_type,
+                'time'=>date("d-m-Y h:i:s")
             ];
             $jwt_token = JWT::encode($data,$this->secret_key,'HS256');
             $this->createSession($jwt_token,$user);

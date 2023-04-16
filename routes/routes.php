@@ -41,7 +41,7 @@ if(count($routesArray)>1 && isset($_SERVER['REQUEST_METHOD'])){
                 default:
                     $action="index";
                     break;
-            }   
+            }  
             if(count($routesArray)==3){
                 $param=$routesArray[3];
                 switch ($_SERVER['REQUEST_METHOD']) {
@@ -59,10 +59,10 @@ if(count($routesArray)>1 && isset($_SERVER['REQUEST_METHOD'])){
                         break;
                 }   
                 
-               
+                
             }else{
                 $response->$action();
-            }       
+            } 
         }
         
         if(count($routesArray)==4){

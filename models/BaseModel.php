@@ -85,9 +85,31 @@ abstract class BaseModel {
             $campoEmail = $this->campoEmail;
             $this->enlace->connect();
 
-            $vSql = "SELECT * FROM $tabla WHERE $campoEmail = $param;";
+            $vSql = "SELECT * FROM $tabla WHERE $campoEmail = '$param';";
 
             $vResultado = $this->enlace->ExecuteSQL( $vSql);
+
+            return $vResultado;
+        } catch ( Exception $e ) {
+            die ( $e->getMessage () );
+        }
+    }
+
+    public function find_by_login($param) {
+        try {
+            $this->enlace->connect();
+
+            $vSql = "SELECT uat.username,
+                        uat.password,
+                        uat.email,
+                        ut.name AS rol_name,
+                        ut.type AS rol_type
+                    FROM users_auth uat
+                    INNER JOIN user_types ut
+                    ON uat.user_type_id = ut.id
+                    WHERE uat.email = '$param' or uat.username = '$param'";
+
+            $vResultado = $this->enlace->ExecuteSQL($vSql);
 
             return $vResultado;
         } catch ( Exception $e ) {
@@ -260,8 +282,6 @@ abstract class BaseModel {
 			die ( $e->getMessage () );
 		}
     }
-
-
 
     public function autorize(){   
         try {
