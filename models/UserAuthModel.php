@@ -55,8 +55,8 @@ class UserAuthModel extends BaseModel {
         $user = $resp[0];
         if(is_object($user) && isset($user) && !empty($user) && password_verify($obj->password, $user->password)){
             $data=[
-                'id'=>$user->username,
-                'email'=>$user->email,
+                'id'=>$user->user_id,
+                'email'=>$user->user_email,
                 'rol'=>$user->rol_name,
                 'rol_type'=>$user->rol_type,
                 'time'=>date("d-m-Y h:i:s")
@@ -71,15 +71,15 @@ class UserAuthModel extends BaseModel {
     private function createSession($token, $userAuth) {
         try {
             $sessionm = new UserSessionModel();
-            $exist = $sessionm->getUserByUserEmail($userAuth->email);
+            $exist = $sessionm->getUserByUserEmail($userAuth->user_email);
 
             if(is_array($exist) && is_object($exist[0]) && isset($exist[0])) return;
 
             $obj = new stdClass();
 
             $obj->user_id=$userAuth->user_id;
-            $obj->user_name=$userAuth->username;
-            $obj->user_email=$userAuth->email;
+            $obj->user_name=$userAuth->user_name;
+            $obj->user_email=$userAuth->user_email;
             $obj->session_token=$token;
             $sessionm->create($obj);
         } catch ( Exception $e ) {
