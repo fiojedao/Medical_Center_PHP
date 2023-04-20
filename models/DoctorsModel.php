@@ -31,7 +31,15 @@ class DoctorsModel extends BaseModel {
      */
     public function all(){
         try {
-			$vResultado = $this->find_all();
+            $sql = "SELECT 
+            dts.doctor_id,
+            dts.medical_specialities_code as specialities_code, 
+            dts.name, 
+            mst.name as specialitie, 
+            mst.description 
+            FROM doctors dts
+            INNER JOIN medical_specialities mst ON mst.code_id = dts.medical_specialities_code;";
+			$vResultado = $this->customGet($sql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -47,7 +55,17 @@ class DoctorsModel extends BaseModel {
     public function get($id){
         try {
 
-            $vResultado = $this->find_by_id($id);
+            $sql = "SELECT 
+            dts.doctor_id,
+            dts.medical_specialities_code as specialities_code, 
+            dts.name, 
+            mst.name as specialitie, 
+            mst.description 
+            FROM doctors dts
+            INNER JOIN medical_specialities mst ON mst.code_id = dts.medical_specialities_code
+            WHERE dts.doctor_id = '$id';";
+
+            $vResultado = $this->customGet($sql);
             
 			return $vResultado;
 		} catch ( Exception $e ) {

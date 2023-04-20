@@ -99,15 +99,16 @@ abstract class BaseModel {
         try {
             $this->enlace->connect();
 
-            $vSql = "SELECT uat.username,
+            $vSql = "SELECT uat.user_id,
+                        uat.username AS user_name,
                         uat.password,
-                        uat.email,
+                        uat.email AS user_email,
                         ut.name AS rol_name,
                         ut.type AS rol_type
                     FROM users_auth uat
                     INNER JOIN user_types ut
                     ON uat.user_type_id = ut.id
-                    WHERE uat.email = '$param' or uat.username = '$param'";
+                    WHERE uat.email ='$param'";
 
             $vResultado = $this->enlace->ExecuteSQL($vSql);
 
