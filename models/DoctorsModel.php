@@ -33,9 +33,9 @@ class DoctorsModel extends BaseModel {
         try {
             $sql = "SELECT 
             dts.doctor_id,
-            dts.medical_specialities_code as specialities_code, 
+            dts.medical_specialities_code, 
             dts.name, 
-            mst.name as specialitie, 
+            mst.name as speciality, 
             mst.description 
             FROM doctors dts
             INNER JOIN medical_specialities mst ON mst.code_id = dts.medical_specialities_code;";
@@ -57,9 +57,9 @@ class DoctorsModel extends BaseModel {
 
             $sql = "SELECT 
             dts.doctor_id,
-            dts.medical_specialities_code as specialities_code, 
+            dts.medical_specialities_code, 
             dts.name, 
-            mst.name as specialitie, 
+            mst.name as speciality, 
             mst.description 
             FROM doctors dts
             INNER JOIN medical_specialities mst ON mst.code_id = dts.medical_specialities_code
@@ -88,7 +88,7 @@ class DoctorsModel extends BaseModel {
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
-                $vResultado =  $this->find_by_id($code_id);
+                $vResultado =  $this->find_by_id( $code_id);
             }
 
             return $vResultado;
@@ -106,7 +106,7 @@ class DoctorsModel extends BaseModel {
             $vResultado = null;
 
             if($this->updateById($update,$objeto->doctor_id) > 0){
-                 $vResultado = $this->find_by_id($objeto->id);
+                 $vResultado = $this->find_by_id($objeto->doctor_id);
             }
 
             return  $vResultado;
