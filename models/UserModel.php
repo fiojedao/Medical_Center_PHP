@@ -64,12 +64,11 @@ class UserModel extends BaseModel {
     public function create($objeto) {
         try {
             $response = null;
-            $user_id = $this->getId();
             $userauth = new UserAuthModel();
             $obj_userauth = new stdClass();
             $user_type_id = isset($objeto->user_type_id)&&($objeto->user_type_id!=null)?$objeto->user_type_id:3;
 
-            $obj_userauth->user_id=$user_id;
+            $obj_userauth->user_id=$objeto->user_id;
             $obj_userauth->username=$objeto->username;
             $obj_userauth->password=$objeto->password;
             $obj_userauth->email=$objeto->email;
@@ -77,13 +76,12 @@ class UserModel extends BaseModel {
 
             $respoonseAuth = $userauth->create($obj_userauth);
             if($respoonseAuth->isValid){
-                $tuplas = "user_id,name,lastname_one,lastname_two,number_id,genre,address,date_of_birth,contact,emergency_contact,blood_type";
+                $tuplas = "user_id,name,lastname_one,lastname_two,genre,address,date_of_birth,contact,emergency_contact,blood_type";
 
-                $values = "'$user_id',
+                $values = "'$objeto->user_id',
                 '$objeto->name',
                 '$objeto->lastname_one',
                 '$objeto->lastname_two',
-                '$objeto->number_id',
                 '$objeto->genre ',
                 '$objeto->address',
                 '$objeto->date_of_birth',
