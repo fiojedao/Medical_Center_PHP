@@ -8,22 +8,9 @@ class UserModel extends BaseModel {
      * @return 
      */
     public function __construct() {
-        parent::__construct('users', 'id', new MySqlConnect());
+        parent::__construct('users', 'user_id', new MySqlConnect());
     }
 
-    /**
-     * getId
-     *
-     * @return $id
-     */
-    private function getId(){
-        try {
-            $id = "U-".$this->generateId(8);
-            return $id;
-        } catch (Exception $e) {
-            die ( $e->getMessage () );
-        }
-    }
     /**
      * all
      *
@@ -49,7 +36,7 @@ class UserModel extends BaseModel {
 
             $vResultado = $this->find_by_id($id);
             
-			return $vResultado;
+			return $vResultado[0];
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -108,16 +95,23 @@ class UserModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-			$update = "name='$objeto-> name',  lastname_one='$objeto->lastname_one',
-            lastname_two='$objeto->lastname_two ', genre='$objeto->genre', address='$objeto->address',
-            date_of_birth='$objeto->date_of_birth', contact='$objeto->contact', emergency_contact'$objeto->emergency_contact',
-            blood_type='$objeto->blood_type',  updated_date = CURRENT_TIMESTAMP()";
+			$update = "
+            name='$objeto->name', 
+            lastname_one='$objeto->lastname_one',
+            lastname_two='$objeto->lastname_two', 
+            genre='$objeto->genre', 
+            address='$objeto->address',
+            date_of_birth='$objeto->date_of_birth',
+            contact='$objeto->contact', 
+            emergency_contact='$objeto->emergency_contact',
+            blood_type='$objeto->blood_type', 
+            updated_date=CURRENT_TIMESTAMP()";
 
             $vResultado = null;
 
             if($this->updateById($update,$objeto->user_id) > 0){
-                 $vResultado = $this->find_by_id($objeto->id);
-            }
+                $vResultado = $this->find_by_id($objeto->user_id);
+           }
 
             return  $vResultado;
 		} catch ( Exception $e ) {

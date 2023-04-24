@@ -86,7 +86,11 @@ class DiseaseModel extends BaseModel {
      */
     public function update($objeto) {
         try {
-			$update =  "name='$objeto->name', id_category = '$objeto->id_category', updated_date = CURRENT_TIMESTAMP()";
+			$update =  "
+            name='$objeto->name', 
+            id_category='$objeto->id_category',
+            updated_date=CURRENT_TIMESTAMP()";
+            
             $vResultado = null;
 
             if($this->updateById($update,$objeto->code_id) > 0){
