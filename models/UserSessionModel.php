@@ -48,7 +48,7 @@ class UserSessionModel extends BaseModel {
      * get
      *
      * @param mixed $id
-     * @return $vResultado
+     * @return true
      */
     public function removeToken($user_email, $token){
         try {

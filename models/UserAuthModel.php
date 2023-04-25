@@ -52,6 +52,13 @@ class UserAuthModel extends BaseModel {
         $jwt_token = null;
 
         $resp = $this->find_by_login($obj->useremail);
+
+        if(!is_array($resp) || empty($resp) || !password_verify($obj->password, $resp[0]->password)){
+            $obj = new stdClass();
+            $obj->message = "Correo o contraseña invalidos";
+            $obj->login = false;
+            return $obj;
+        }
         $user = $resp[0];
         if(is_object($user) && isset($user) && !empty($user) && password_verify($obj->password, $user->password)){
             $data=[
@@ -64,8 +71,10 @@ class UserAuthModel extends BaseModel {
             $jwt_token = JWT::encode($data,$this->secret_key,'HS256');
             $this->createSession($jwt_token,$user);
         }
-
-        return $jwt_token;
+        $obj = new stdClass();
+        $obj->token = $jwt_token;
+        $obj->login = true;
+        return $obj;
     }
 
     private function createSession($token, $userAuth) {
@@ -98,8 +107,10 @@ class UserAuthModel extends BaseModel {
 		}
     }
 
-    public function verifyToken($token){
-        return (new UserSessionModel())->getToken($token);
+    public function verifyToken($obj){
+        $vResultado = new stdClass();
+        $vResultado->isValid = (new UserSessionModel())->getToken($obj->token);
+        return $vResultado;
     }
 
     /**

@@ -198,7 +198,7 @@ abstract class BaseModel {
      * customGet
      *
      * @param mixed $sql
-     * @return "$obj";
+     * @return ArrayObject
      */
     public function customGet($sql) {
         try {

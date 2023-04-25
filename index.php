@@ -19,6 +19,7 @@
     require_once "models/AllergieModel.php";
     require_once "models/DiseasesModel.php";
     require_once "models/DoctorsModel.php";
+    require_once "models/AppointmentsDoctorModel.php";
     require_once "models/MedicalRecordModel.php";
     require_once "models/MedicalSpecialitiesModel.php";
     require_once "models/MedicationModel.php";

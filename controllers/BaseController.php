@@ -9,7 +9,7 @@ abstract class BaseController {
      */
     public function response($response){
         header("Content-Type: application/json");
-        $json=isset($response) && !empty($response)?$this->body(200, $response):$this->body(400, $response);
+        $json=isset($response) && !empty($response) ?$this->body(200, $response):$this->body(400, $response);
         echo json_encode($json,http_response_code($json["status"]));
     }
     

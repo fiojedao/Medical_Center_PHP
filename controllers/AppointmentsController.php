@@ -28,6 +28,19 @@ class appointments extends BaseController {
     }
         
     /**
+     * get
+     *
+     * @param mixed $param
+     * @return
+     */
+    public function getbydoctor($param){
+        //$this->autorize();
+        $instance = new AppointmentsModel();
+        $response = $instance->getbydoctor($param);
+        $this->response($response);
+    }
+        
+    /**
      * create
      *
      * @return
@@ -51,6 +64,20 @@ class appointments extends BaseController {
         $instance = (new AppointmentsModel());
         $object = $this->getObj();
         $response = $instance->update($object);
+        $this->response($response);
+    }
+        
+    /**
+     * delete
+     *
+     * @param mixed $param
+     * @return
+     */
+    public function delete(){
+        //$this->autorize();
+        $instance = (new AppointmentsModel());
+        $object = $this->getObj();
+        $response = $instance->removeAppointment($object);
         $this->response($response);
     }
 }
