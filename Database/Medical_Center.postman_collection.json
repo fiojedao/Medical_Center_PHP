@@ -143,7 +143,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{  \r\n    \"name\": \"test#56255\"\r\n}",
+							"raw": "{  \r\n    \"name\": \"test#56255\",\r\n    \"id_category\": \"CD008\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -312,7 +312,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:81/medical_center_api/doctors/",
+							"raw": "http://localhost:81/medical_center_api/doctors/DTR011",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -321,7 +321,7 @@
 							"path": [
 								"medical_center_api",
 								"doctors",
-								""
+								"DTR011"
 							]
 						}
 					},
@@ -591,6 +591,56 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "user-Get-By-Email",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/user/U-b67f9727023c9374",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"user",
+								"U-b67f9727023c9374"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": \"U-b67f9727023c9374\",\r\n    \"name\":\"Felix\",\r\n    \"username\":\"fojeda\",\r\n    \"number_id\":\"109760738\",\r\n    \"email\":\"fojeda@prueba.com\",\r\n    \"password\":\"Uno23456\",\r\n    \"lastname_one\":\"Ojeda\",\r\n    \"lastname_two\":\"Ortiz\",\r\n    \"genre\":\"m\",\r\n    \"address\":\"testv3\",\r\n    \"date_of_birth\":\"1996/06/17\",\r\n    \"contact\":\"69566313\",\r\n    \"emergency_contact\":\"88888888\",\r\n    \"blood_type\":\"O+\",\r\n    \"user_type_id\":0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"user"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -666,6 +716,78 @@
 							"path": [
 								"medical_center_api",
 								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointments-Get-By-DoctorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/appointments/getbydoctor/DTR012",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"appointments",
+								"getbydoctor",
+								"DTR012"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointments-Post Remove",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/appointments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "appointments-GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/appointments/34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"appointments",
+								"34"
 							]
 						}
 					},
@@ -754,6 +876,36 @@
 								"medical_center_api",
 								"userauth",
 								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "IsAuthenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IlUtMzJkM2E3MzlkNjkxYmZjNSIsImVtYWlsIjoiYWRtaW5AcHJ1ZWJhLmNvbSIsInJvbCI6IkFkbWluaXN0cmFkb3IiLCJyb2xfdHlwZSI6IlN0YWZmIiwidGltZSI6IjI1LTA0LTIwMjMgMTI6MTk6NTMifQ.ER2kckQ6uHJeS7WVr2_lBTEhle6WKEG-LmFuwp80H4k\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:81/medical_center_api/userauth/isauthenticate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "81",
+							"path": [
+								"medical_center_api",
+								"userauth",
+								"isauthenticate"
 							]
 						}
 					},
