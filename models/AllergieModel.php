@@ -108,17 +108,32 @@ class AllergieModel extends BaseModel {
     public function getByUser($id){
         try {
             //Consulta sql
-			$vSql = " SELECT mra.allergies_code_id, a.name, u.user_id 
-            FROM allergies AS a INNER JOIN medical_record_allergies AS mra 
-            ON mra.allergies_code_id=a.code_id INNER JOIN users AS u 
-            ON u.user_id=mra.user_id WHERE u.user_id=$id;";
-
+            $vSql = "SELECT DISTINCT a.name, m.allergies_code_id FROM allergies as a , medical_record_allergies as m where a.code_id= m.allergies_code_id and m.user_id=$id;";
 			 $vResultado = $this->customGet($vSql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
+    }
+
+    /**
+ * getDontByUser
+ *
+ * @param  mixed $id
+ * @return void
+ */
+public function getDontByUser($id){
+    try {
+        //Consulta sql
+        $vSql = "SELECT a.name, a.code_id, ac.name as category, ac.category_id from allergy_category as ac, allergies as a where ac.category_id=a.id_category and NOT EXISTS (SELECT DISTINCT  m.medical_record_id FROM  medical_record_allergies as m where a.code_id=m.allergies_code_id and m.user_id=$id);";
+
+         $vResultado = $this->customGet($vSql);
+        return $vResultado;
+    } catch ( Exception $e ) {
+        die ( $e->getMessage () );
+    }
 }
+
      
     /**
      * updateByUser

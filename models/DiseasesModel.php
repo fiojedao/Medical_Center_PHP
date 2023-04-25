@@ -112,9 +112,7 @@ class DiseaseModel extends BaseModel {
     public function getByUser($id){
         try {
             //Consulta sql
-			$vSql = "SELECT mrd.diseases_code_id, d.name, u.user_id  FROM diseases AS d 
-            INNER JOIN medical_record_diseases AS mrd ON mrd.diseases_code_id=d.code_id 
-            INNER JOIN users AS u ON u.user_id=mrd.user_id WHERE u.user_id= $id;";
+			$vSql = "SELECT DISTINCT d.name, m.diseases_code_id FROM diseases as d , medical_record_diseases as m where d.code_id= m.diseases_code_id and m.user_id=$id;";
 
 			 $vResultado = $this->customGet($vSql);
 			return $vResultado;
@@ -122,6 +120,24 @@ class DiseaseModel extends BaseModel {
 			die ( $e->getMessage () );
 		}
     }
+
+/**
+ * getDontByUser
+ *
+ * @param  mixed $id
+ * @return void
+ */
+public function getDontByUser($id){
+    try {
+        //Consulta sql
+        $vSql = "SELECT d.name, d.code_id, dc.name as category, dc.category_id from disease_category as dc, diseases as d where dc.category_id=d.id_category and NOT EXISTS (SELECT DISTINCT  m.medical_record_id FROM  medical_record_diseases as m where d.code_id=m.diseases_code_id and m.user_id=$id);";
+
+         $vResultado = $this->customGet($vSql);
+        return $vResultado;
+    } catch ( Exception $e ) {
+        die ( $e->getMessage () );
+    }
+}
             
     /**
      * updateByUser

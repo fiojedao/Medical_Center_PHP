@@ -65,6 +65,18 @@ class allergies extends BaseController {
         $response = $instance->getByUser($param);
         $this->response($response);
     }
+
+    /**
+     * getDontByUser
+     *
+     * @param  mixed $param
+     * @return void
+     */
+    public function getDontByUser($param){
+        $instance = new AllergieModel();
+        $response = $instance-> getDontByUser($param);
+        $this->response($response);
+    }
     
     /**
      * updateByUser
