@@ -84,7 +84,7 @@ class DoctorsModel extends BaseModel {
         try {
             $code_id = $this->getId();
             $tuplas = "doctor_id, name,  medical_specialities_code";
-            $values = "'$code_id','$objeto->name, '$objeto->medical_specialities_code''";
+            $values = "'$code_id','$objeto->name', '$objeto->medical_specialities_code''";
             $vResultado = null;
 
             if($this->createObj($tuplas, $values) > 0){
