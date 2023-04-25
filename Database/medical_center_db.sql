@@ -252,6 +252,7 @@ CREATE TABLE general_consult (
 CREATE TABLE appointments_times (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   appointments_id INT NOT NULL,
+  description VARCHAR(255) NOT NULL,
   init_datetime DATETIME NOT NULL,
   end_datetime DATETIME NOT NULL,
   created_date DATETIME NULL DEFAULT CURRENT_TIMESTAMP(),
