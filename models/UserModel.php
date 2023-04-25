@@ -18,7 +18,10 @@ class UserModel extends BaseModel {
      */
     public function all(){
         try {
-			$vResultado = $this->find_all();
+            $sql = "SELECT u.id, u.user_id, u.name, u.lastname_one, u.lastname_two, u.genre, u.address, u.date_of_birth, u.contact, u.emergency_contact, u.blood_type,
+                    ua.username, ua.email, ua.user_type_id FROM users u
+                    INNER JOIN users_auth ua ON u.user_id = ua.user_id and user_type_id != 4;";
+			$vResultado = $this->customGet($sql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

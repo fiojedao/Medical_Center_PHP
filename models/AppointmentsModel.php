@@ -54,7 +54,15 @@ class AppointmentsModel extends BaseModel {
      */
     public function get($id){
         try {
-            $vResultado = $this->find_by_id($id);
+            $sql = "SELECT appt.id, appt.date, appt.description, appt.medical_records_id, appt.consulting_room, appt.status,
+            appt_t.init_datetime, appt_t.end_datetime, d.name as doctorname, ms.name as specialitie
+            FROM appointments appt
+            INNER JOIN appointments_times appt_t ON appt_t.appointments_id = appt.id
+            INNER JOIN appointment_doctors appt_d ON appt_d.appointment_id = appt.id
+            INNER JOIN doctors d ON d.doctor_id = appt_d.doctor_id
+            INNER JOIN medical_specialities ms ON ms.code_id = d.medical_specialities_code
+            where appt.id = $id;";
+			$vResultado = $this->customGet($sql);
 			return $vResultado;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
